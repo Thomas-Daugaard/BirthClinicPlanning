@@ -26,16 +26,12 @@ namespace BirthClinicPlanningDB.Repositories
             return context.appointments.SingleOrDefault(a=>a.AppointmentsID==id);
         }
 
-        public void AddAppointment(DateTime date, Parents parents, params Clinician[] clinician)
+        public void AddAppointment(DateTime date, Parents parents, List<Clinician> clinicians)
         {
             var newappointment = new Appointments();
             newappointment.AppointmentTimeDate = date;
             newappointment.parents = parents;
-
-            foreach (var item in clinician)
-            {
-             newappointment.clinicians.Add(item);   
-            }
+            newappointment.clinicians = clinicians;
 
             context.appointments.Add(newappointment);
         }
