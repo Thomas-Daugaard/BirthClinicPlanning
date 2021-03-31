@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BirthClinicPlanningDB.Repositories;
+using BirthClinicPlanningDB.Repositories.RepositoryInterfaces;
 
 namespace BirthClinicPlanningDB
 {

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BirthClinicPlanningDB.Repositories
+namespace BirthClinicPlanningDB.Repositories.RepositoryInterfaces
 {
     public interface IRepository<TEntity> where TEntity : class
     {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BirthClinicPlanningDB.Models;
+using BirthClinicPlanningDB.Repositories.RepositoryInterfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace BirthClinicPlanningDB.Repositories

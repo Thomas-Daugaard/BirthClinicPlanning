@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BirthClinicPlanningDB.Domain_objects;
 using BirthClinicPlanningDB.Models;
 
-namespace BirthClinicPlanningDB.Repositories
+namespace BirthClinicPlanningDB.Repositories.RepositoryInterfaces
 {
     public interface IFourHourRestRoomRepository : IRepository<FourHoursRestRoom>
     {
