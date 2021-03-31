@@ -14,19 +14,29 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
         <Button Grid.Row="0" Grid.Column="0"
-                Content="Ok"
+                Content="Rest Rooms"
                 Margin="5"
                 Padding="5"
-                MinWidth="70"
-                IsDefault="True"
-                Command="{Binding CloseDialogCommand}" 
-                CommandParameter="true"/>
+                MinWidth="110"/>
 
         <Button Grid.Row="0" Grid.Column="1"
-                Content="Cancel"
-                MinWidth="70"
+                Content="Maternity Rooms"
+                Margin="5"
+                Padding="5"
+                MinWidth="110"/>
+
+        <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                 MinHeight="200"
+                 ItemsSource="{Binding Rooms}"/>
+
+        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                Content="Back"
+                MaxWidth="70"
                 Margin="5"
                 Padding="5"
                 IsCancel="True"/>

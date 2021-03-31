@@ -19,6 +19,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0"
@@ -40,6 +41,7 @@
                 Name="SeeAvailRoomsBtn"
                 Content="See Rooms Status"
                 Padding="5"
+                Command="{Binding StatusRoomsCommand}"
                 />
 
         <Label Grid.Row="3" Grid.Column="0"
@@ -52,27 +54,32 @@
         <DataGrid Name="DataGrid"
                   Grid.Row="4"
                   ItemsSource="{Binding Appointments}"
-                  AutoGenerateColumns="False">
+                  SelectedIndex="{Binding AppointmentIndex}"
+                  AutoGenerateColumns="False"
+                  IsSynchronizedWithCurrentItem="True">
+
+            <DataGrid.InputBindings>
+                <MouseBinding
+                    MouseAction="LeftDoubleClick"
+                    Command="{Binding SelectAppointmentCommand}"/>
+            </DataGrid.InputBindings>
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Room ID" Binding="{Binding RoomID}" MaxWidth="60" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Fathers CPR" Binding="{Binding DadCPR}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Mothers CPR" Binding="{Binding MomCPR}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Fathers CPR" Binding="{Binding Parents.DadCPR}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Mothers CPR" Binding="{Binding Parents.MomCPR}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Booked on" Binding="{Binding DisplayDate}" IsReadOnly="True"/>
                 <DataGridTemplateColumn Header="Clinicians" MinWidth="120">
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <ComboBox ItemsSource="{Binding Clinicians, Mode=OneWay}"
-                                      DisplayMemberPath="Display">
+                                      DisplayMemberPath="Display"
+                                      SelectedIndex="0">
                             </ComboBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
-                    
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-            
-        
-
     </Grid>
 </Window>

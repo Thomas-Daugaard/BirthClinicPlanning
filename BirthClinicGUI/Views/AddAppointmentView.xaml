@@ -32,8 +32,6 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
 
@@ -67,24 +65,32 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0"
-                       Content="Fathers name:"
+                       Content="First name:"
                        Margin="5"/>
 
                 <TextBox Grid.Row="0" Grid.Column="1"
-                         Text="{Binding Appointment.DadName}"
+                         Text="{Binding Appointment.Parents.DadFirstName}"
                          MinWidth="120"
                          Margin="5"/>
 
                 <Label Grid.Row="1" Grid.Column="0"
-                       Content="Fathers CPR:"
+                       Content="Last name:"
                        Margin="5"/>
 
                 <TextBox Grid.Row="1" Grid.Column="1"
-                         Text="{Binding Appointment.DadCPR}"
+                         Text="{Binding Appointment.Parents.DadLastName}"
+                         MinWidth="120"
+                         Margin="5"/>
+
+                <Label Grid.Row="2" Grid.Column="0"
+                       Content="Fathers CPR:"
+                       Margin="5"/>
+
+                <TextBox Grid.Row="2" Grid.Column="1"
+                         Text="{Binding Appointment.Parents.DadCPR}"
                          MinWidth="100"
                          Margin="5"/>
 
@@ -101,24 +107,32 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0"
-                       Content="Mothers name:"
+                       Content="First name:"
                        Margin="5"/>
 
                 <TextBox Grid.Row="0" Grid.Column="1"
-                         Text="{Binding Appointment.MomName}"
+                         Text="{Binding Appointment.Parents.MomFirstName}"
                          MinWidth="120"
                          Margin="5"/>
 
                 <Label Grid.Row="1" Grid.Column="0"
-                       Content="Mothers CPR:*"
+                       Content="Last name:"
                        Margin="5"/>
 
                 <TextBox Grid.Row="1" Grid.Column="1"
-                         Text="{Binding Appointment.MomCPR}"
+                         Text="{Binding Appointment.Parents.MomLastName}"
+                         MinWidth="120"
+                         Margin="5"/>
+
+                <Label Grid.Row="2" Grid.Column="0"
+                       Content="CPR:*"
+                       Margin="5"/>
+
+                <TextBox Grid.Row="2" Grid.Column="1"
+                         Text="{Binding Appointment.Parents.MomCPR}"
                          MinWidth="100"
                          Margin="5"/>
 
