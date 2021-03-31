@@ -14,5 +14,6 @@ namespace BirthClinicGUI.Models
         public string DadCPR { get; set; }
         public string DadFirstName { get; set; }
         public string DadLastName { get; set; }
+        public Child Child { get; set; }
     }
 }

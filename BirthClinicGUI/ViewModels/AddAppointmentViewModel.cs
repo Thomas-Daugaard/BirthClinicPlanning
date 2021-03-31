@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using BirthClinicGUI.Models;
+using BirthClinicPlanningDB.Domain_objects;
 using BirthClinicPlanningDB.Models;
 using BirthClinicPlanningDB.Repositories;
 using BirthClinicPlanningDB.Repositories.RepositoryInterfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
+using Clinician = BirthClinicPlanningDB.Domain_objects.Clinician;
 
 namespace BirthClinicGUI.ViewModels
 {
@@ -20,7 +22,7 @@ namespace BirthClinicGUI.ViewModels
     {
         private IAppointmentRepository appointmentRepository;
         public Appointment Appointment { get; set; }
-        public ObservableCollection<Clinician> Clinicians { get; set; }
+        public ObservableCollection<BirthClinicGUI.Models.Clinician> Clinicians { get; set; }
         public string ClinicianFirstName { get; set; }
         public string ClinicianLastName { get; set; }
         public int ClinicianID { get; set; }
@@ -34,9 +36,31 @@ namespace BirthClinicGUI.ViewModels
 
         public void OnDialogClosed()
         {
-            Appointment.Clinicians = Clinicians;
+            List<Clinician> clinitiansList = new List<Clinician>();
 
-            appointmentRepository.AddAppointment(Appointment.Date, new Parents { }
+            foreach (var clinician in Clinicians)
+            {
+                clinitiansList.Add( new Clinician() {FirstName = clinician.FirstName, LastName = clinician.LastName, StaffID = clinician.ID});
+            }
+            
+            //Appointment.Clinicians = Clinicians;
+
+            appointmentRepository.AddAppointment(date: Appointment.Date, new BirthClinicPlanningDB.Models.Parents()
+            {
+                Child = new BirthClinicPlanningDB.Models.Child()
+                {
+                    Length = Appointment.Parents.Child.Length,
+                    Weight = Appointment.Parents.Child.Weight,
+                    BirthDateTime = Appointment.Parents.Child.BirthDate
+                },
+                DadCPR = Appointment.Parents.DadCPR,
+                MomCPR = Appointment.Parents.MomCPR,
+                DadFirstName = Appointment.Parents.DadFirstName,
+                DadLastName = Appointment.Parents.DadLastName,
+                MomFirstName = Appointment.Parents.MomFirstName,
+                MomLastName = Appointment.Parents.MomLastName,
+            }, clinitiansList
+            );
 
             //((App) Application.Current).Appointment = Appointment;
         }
@@ -44,7 +68,7 @@ namespace BirthClinicGUI.ViewModels
         public void OnDialogOpened(IDialogParameters parameters)
         {
             Appointment = new Appointment() {BirthInProgess = false, Date = DateTime.Now.Date};
-            Clinicians = new ObservableCollection<Clinician>();
+            Clinicians = new ObservableCollection<BirthClinicGUI.Models.Clinician>();
         }
 
         public string Title { get; }
@@ -92,7 +116,7 @@ namespace BirthClinicGUI.ViewModels
 
             else
             {
-                Clinicians.Add(new Clinician() { ID = ClinicianID, FirstName = ClinicianFirstName, LastName = ClinicianLastName});
+                Clinicians.Add(new BirthClinicGUI.Models.Clinician() { ID = ClinicianID, FirstName = ClinicianFirstName, LastName = ClinicianLastName});
                 MessageBox.Show("Clinician " + ClinicianFirstName + " " + ClinicianLastName + " added", "Clinician added", MessageBoxButton.OK);
             }
         }
