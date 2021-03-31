@@ -16,6 +16,7 @@ namespace BirthClinicPlanningDB.Models
         public int MothersCPR { get; set; }
         public string FathersName { get; set; }
         public string FathersCPR { get; set; }
+
         [ForeignKey("ChildID")]
         public Child Child { get; set; }
     }
