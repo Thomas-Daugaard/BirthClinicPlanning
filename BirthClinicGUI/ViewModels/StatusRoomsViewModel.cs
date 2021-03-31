@@ -13,15 +13,17 @@ using Prism.Services.Dialogs;
 
 namespace BirthClinicGUI.ViewModels
 {
-    class StatusRoomsViewModel : BindableBase, IDialogAware
+    public class StatusRoomsViewModel : BindableBase, IDialogAware
     {
-        public enum Types
+        private IDialogService _dialog;
+        public StatusRoomsViewModel()
         {
-            RestRoom,
-            MaternityRoom
         }
 
-        public Types RoomType { get; set; }
+        public StatusRoomsViewModel(IDialogService dialog)
+        {
+            _dialog = dialog;
+        }
 
         public bool CanCloseDialog()
         {
@@ -35,8 +37,6 @@ namespace BirthClinicGUI.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            RoomType = Types.MaternityRoom;
-
             RestRooms = new ObservableCollection<RestRoom>()
             {
                 new RestRoom()
@@ -65,6 +65,41 @@ namespace BirthClinicGUI.ViewModels
                     Occupied = true
                 }
             };
+            MaternityIndex = 0;
+            RestRoomIndex = 0;
+            CurrentRestRoom = RestRooms[RestRoomIndex];
+
+            MaternityRooms = new ObservableCollection<MaternityRoom>()
+            {
+                new MaternityRoom()
+                {
+                    RoomID = 1,
+                    Child = new Child()
+                    {
+                        BirthDate = DateTime.Parse("28/03/2018"),
+                        FirstName = "Lukas",
+                        LastName = "Meldgaard",
+                        Length = 56,
+                        Weight = 3590
+
+                    },
+
+                    Parents = new Parents()
+                    {
+                        DadCPR = "250485-1234",
+                        MomCPR = "010186-1234",
+                        MomFirstName = "Jennifer",
+                        MomLastName = "Meldgaard",
+                        DadFirstName = "Thomas",
+                        DadLastName = "Daugaard"
+                    },
+
+                    Occupied = true
+                }
+            };
+            MaternityIndex = 0;
+            MaternityIndex = 0;
+            CurrentMaternityRoom = MaternityRooms[MaternityIndex];
         }
 
         private ICommand _restRoomCommand;
@@ -79,7 +114,6 @@ namespace BirthClinicGUI.ViewModels
 
         private void RestRoomCommandExecute()
         {
-            RoomType = Types.RestRoom;
         }
 
         private ICommand _maternityRoomCommand;
@@ -94,7 +128,7 @@ namespace BirthClinicGUI.ViewModels
 
         private void MaternityRoomCommandExecute()
         {
-            RoomType = Types.MaternityRoom;
+            
         }
 
         public string Title { get; }
@@ -108,12 +142,56 @@ namespace BirthClinicGUI.ViewModels
             set => SetProperty(ref _restrooms, value);
         }
 
+        public RestRoom CurrentRestRoom { get; set; }
+
         private ObservableCollection<MaternityRoom> _maternityrooms;
 
         public ObservableCollection<MaternityRoom> MaternityRooms
         {
             get => _maternityrooms;
             set => SetProperty(ref _maternityrooms, value);
+        }
+        public MaternityRoom CurrentMaternityRoom { get; set; }
+
+        private DelegateCommand<string> _selectRoomCommand;
+
+        public DelegateCommand<string> SelectRoomCommand
+        {
+            get
+            {
+                return _selectRoomCommand ?? (_selectRoomCommand = new DelegateCommand<string>(SelectRoomCommandExecute));
+            }
+        }
+
+        private void SelectRoomCommandExecute(string roomType)
+        {
+            if (roomType == "RestRooms")
+            {
+                CurrentRestRoom = RestRooms[RestRoomIndex];
+                _dialog.ShowDialog("RestRoomView", r => { });
+            }
+
+            else if (roomType == "MaternityRooms")
+            {
+                CurrentMaternityRoom = MaternityRooms[MaternityIndex];
+                _dialog.ShowDialog("MaternityRoomView", r => { });
+            }
+        }
+
+        private int _restRoomIndex;
+
+        public int RestRoomIndex
+        {
+            get => _restRoomIndex;
+            set => _restRoomIndex = value;
+        }
+
+        private int _maternityRoomIndex;
+
+        public int MaternityIndex
+        {
+            get => _maternityRoomIndex;
+            set => _maternityRoomIndex = value;
         }
     }
 }

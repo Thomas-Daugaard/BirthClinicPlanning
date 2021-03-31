@@ -14,11 +14,11 @@ namespace BirthClinicGUI.Models
         public Child Child { get; set; }
     }
 
-    class RestRoom : Room
+    public class RestRoom : Room
     {
     }
 
-    class MaternityRoom : Room
+    public class MaternityRoom : Room
     {
     }
 }

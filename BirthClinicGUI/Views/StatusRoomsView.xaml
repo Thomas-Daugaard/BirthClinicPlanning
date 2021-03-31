@@ -18,28 +18,60 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Grid.Column="0"
+        <Label Grid.Row="0" Grid.Column="0"
                 Content="Rest Rooms"
                 Margin="5"
                 Padding="5"
                 MinWidth="110"/>
 
-        <Button Grid.Row="0" Grid.Column="1"
+        <Label Grid.Row="0" Grid.Column="1"
                 Content="Maternity Rooms"
                 Margin="5"
                 Padding="5"
                 MinWidth="110"/>
 
-        <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                 MinHeight="200"
-                 ItemsSource="{Binding Rooms}"/>
+        <DataGrid Grid.Row="1" Grid.Column="0" MinHeight="100" Margin="10" MaxWidth="90"
+                  ItemsSource="{Binding RestRooms}"
+                  AutoGenerateColumns="False"
+                  SelectedIndex="{Binding RestRoomIndex}"
+                  IsSynchronizedWithCurrentItem="True">
 
-        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                Content="Back"
-                MaxWidth="70"
-                Margin="5"
-                Padding="5"
-                IsCancel="True"/>
+            <DataGrid.InputBindings>
+                <MouseBinding
+                    MouseAction="LeftDoubleClick"
+                    Command="{Binding SelectRoomCommand}"
+                    CommandParameter="RestRooms"/>
+            </DataGrid.InputBindings>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Room ID" Binding="{Binding RoomID}" MinWidth="80" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid Grid.Row="1" Grid.Column="1" MinHeight="100" Margin="10" MaxWidth="90"
+                  ItemsSource="{Binding MaternityRooms}"
+                  AutoGenerateColumns="False"
+                  SelectedIndex="{Binding MaternityIndex}"
+                  IsSynchronizedWithCurrentItem="True">
+
+            <DataGrid.InputBindings>
+                <MouseBinding
+                    MouseAction="LeftDoubleClick"
+                    Command="{Binding SelectRoomCommand}"
+                    CommandParameter="MaternityRooms"/>
+            </DataGrid.InputBindings>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Room ID" Binding="{Binding RoomID}" MinWidth="80" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                    Content="Back"
+                    MaxWidth="70"
+                    Margin="5"
+                    Padding="5"
+                    IsCancel="True"/>
 
     </Grid>
 </UserControl>

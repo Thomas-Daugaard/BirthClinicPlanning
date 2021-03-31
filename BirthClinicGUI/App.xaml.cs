@@ -24,6 +24,8 @@ namespace BirthClinicGUI
             containerRegistry.RegisterDialog<AddAppointmentView, AddAppointmentViewModel>();
             containerRegistry.RegisterDialog<SpecificAppointmentView, SpecificAppointmentViewModel>();
             containerRegistry.RegisterDialog<StatusRoomsView, StatusRoomsViewModel>();
+            containerRegistry.RegisterDialog<RestRoomView, StatusRoomsViewModel>();
+            containerRegistry.RegisterDialog<MaternityRoomView, StatusRoomsViewModel>();
         }
 
         protected override Window CreateShell()
