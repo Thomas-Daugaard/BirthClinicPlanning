@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BirthClinicPlanningDB.Repositories.RepositoryInterfaces;
 
 namespace BirthClinicPlanningDB
 {
     public interface IDataAccessActions: IDisposable
     {
-        //Repository interface 1
-        //Repository interface 2 etc..
+        IAppointmentRepository Appointments { get; }
+
+        IFourHourRestRoomRepository RestRooms { get; }
+
+        IMaternityRoomRepository MaternityRooms { get; }
 
         int Complete();
     }

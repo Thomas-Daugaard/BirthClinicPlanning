@@ -11,7 +11,6 @@ namespace BirthClinicPlanningDB
     public class DataAccessActions: IDataAccessActions
     {
         private readonly Context _context;
-
         public IAppointmentRepository Appointments { get; private set; }
         public IFourHourRestRoomRepository RestRooms { get; private set; }
         public IMaternityRoomRepository MaternityRooms { get; private set; }
