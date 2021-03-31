@@ -9,6 +9,7 @@ namespace BirthClinicPlanningDB.Repositories
 {
     public interface IAppointmentRepository: IRepository<Appointments>
     {
-        List<Appointments> getAllAppointments();
+        public List<Appointments> getAllAppointments();
+        public Appointments getSingleAppointment(int id);
     }
 }

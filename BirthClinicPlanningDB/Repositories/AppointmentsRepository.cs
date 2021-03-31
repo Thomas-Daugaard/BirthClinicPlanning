@@ -19,6 +19,11 @@ namespace BirthClinicPlanningDB.Repositories
             return context.appointments.ToList();
         }
 
+        public Appointments getSingleAppointment(int id)
+        {
+            return context.appointments.SingleOrDefault(a=>a.AppointmentsID==id);
+        }
+
         public Context context
         {
             get { return Context as Context; }
