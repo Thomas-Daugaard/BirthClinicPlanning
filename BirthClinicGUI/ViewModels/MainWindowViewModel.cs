@@ -87,6 +87,8 @@ namespace BirthClinicGUI.ViewModels
                 {
                     Appointments.Add(((App) Application.Current).Appointment);
                     // call update method on EF core rep in release version
+
+                    
                 }
             });
         }
