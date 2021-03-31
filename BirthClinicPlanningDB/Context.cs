@@ -21,7 +21,7 @@ namespace BirthClinicPlanningDB
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Appointments> appointMents { get; set; }
+        public DbSet<Appointments> appointments { get; set; }
         public DbSet<Birth> births { get; set; }
         public DbSet<BirthClinic> birthClinics { get; set; }
         public DbSet<BirthRoom> birthRooms { get; set; }
