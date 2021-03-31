@@ -59,7 +59,7 @@ namespace BirthClinicGUI.ViewModels
             else if (parameter?.ToLower() == "false")
                 result = ButtonResult.Cancel;
 
-            if (Appointment.MomCPR == "" || Appointment.RoomID == 0 || Clinicians.Count == 0)
+            if (Appointment.Parents.MomCPR == "" || Appointment.RoomID == 0 || Clinicians.Count == 0)
                 MessageBox.Show("Please fill out all required fields", "Error", MessageBoxButton.OK,
                     MessageBoxImage.Error);
             else
