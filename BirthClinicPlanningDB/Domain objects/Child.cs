@@ -15,6 +15,7 @@ namespace BirthClinicPlanningDB.Models
         public int Weight { get; set; }
         public int Length { get; set; }
         public DateTime BirthDateTime { get; set; }
+
         [ForeignKey("ParentsID")]
         public Parents Parents { get; set; }
     }
