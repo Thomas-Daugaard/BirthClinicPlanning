@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BirthClinicPlanningDB.Domain_objects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,6 +16,8 @@ namespace BirthClinicPlanningDB.Models
         public string Date { get; set; }
         [ForeignKey("ParentsID")]
         public Parents CurrentParents { get; set; }
+        [ForeignKey("AppointmentsID")]
+        public List<Appointments> FourHourRestRoomSchedule { get; set; }
 
     }
 }

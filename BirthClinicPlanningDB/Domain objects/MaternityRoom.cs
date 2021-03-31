@@ -15,5 +15,7 @@ namespace BirthClinicPlanningDB.Domain_objects
         public int MaternityRoomId { get; set; }
         [ForeignKey("ParentsID")]
         public Parents CurrentParrents { get; set; }
+        [ForeignKey("AppointmentsID")]
+        public List<Appointments> MaternatyRoomSchedule { get; set; }
     }
 }
