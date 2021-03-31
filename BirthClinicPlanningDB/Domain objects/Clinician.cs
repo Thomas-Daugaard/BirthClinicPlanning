@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BirthClinicPlanningDB.Domain_objects
 {
-    class Clinician
+    public class Clinician
     {
         [Key]
         public int StaffID { get; set; }

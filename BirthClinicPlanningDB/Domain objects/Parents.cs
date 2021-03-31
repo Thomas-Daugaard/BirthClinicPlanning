@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BirthClinicPlanningDB.Models
 {
-    class Parents
+    public class Parents
     {
         [Key]
         public int ParentsID { get; set; }

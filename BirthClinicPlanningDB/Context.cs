@@ -1,10 +1,15 @@
 ﻿using BirthClinicPlanningDB.Domain_objects;
+using BirthClinicPlanningDB.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BirthClinicPlanningDB
 {
-    class Context : DbContext
+    public class Context : DbContext
     {
+        public Context()
+        { }
+
+        public Context(DbContextOptions<Context> options): base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder ob)
         {
             ob.UseSqlServer(
@@ -16,6 +21,14 @@ namespace BirthClinicPlanningDB
             base.OnModelCreating(modelBuilder);
         }
 
-        private DbSet<BirthClinic> birthClinics { get; set; }
+        public DbSet<Appointments> appointments { get; set; }
+        public DbSet<Birth> births { get; set; }
+        public DbSet<BirthClinic> birthClinics { get; set; }
+        public DbSet<BirthRoom> birthRooms { get; set; }
+        public DbSet<Child> childs { get; set; }
+        public DbSet<Clinician> clinicians { get; set; }
+        public DbSet<FourHoursRestRoom> fourhourrestrooms { get; set; }
+        public DbSet<MaternityRoom> maternityrooms { get; set; }
+        public DbSet<Parents> parents { get; set; }
     }
 }

@@ -9,7 +9,7 @@ using BirthClinicPlanningDB.Models;
 
 namespace BirthClinicPlanningDB.Domain_objects
 {
-    class BirthClinic
+    public class BirthClinic
     {
         [Key]
         public int BirthClinicID { get; set; }
