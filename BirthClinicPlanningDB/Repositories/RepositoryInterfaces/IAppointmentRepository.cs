@@ -13,6 +13,6 @@ namespace BirthClinicPlanningDB.Repositories.RepositoryInterfaces
         public List<Appointments> getAllAppointments();
         public Appointments getSingleAppointment(int id);
 
-        public void AddAppointment(DateTime date,Parents parents, params Clinician[] clinician);
+        public void AddAppointment(DateTime date,Parents parents, List<Clinician> clinicians);
     }
 }
