@@ -16,10 +16,10 @@ namespace BirthClinicPlanningDB.Repositories
 
         public List<Appointments> getAllAppointments()
         {
-            return Context.appointments.ToList();
+            return context.appointments.ToList();
         }
 
-        public Context Context
+        public Context context
         {
             get { return Context as Context; }
         }
