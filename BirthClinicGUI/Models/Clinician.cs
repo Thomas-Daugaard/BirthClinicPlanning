@@ -9,8 +9,10 @@ namespace BirthClinicGUI.Models
     public class Clinician
     {
         public int ID { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
 
-        public string Display { get => $"{Name} - ID {ID}"; }
+        public string LastName { get; set; }
+
+        public string Display { get => $"{FirstName} {LastName} - ID {ID}"; }
     }
 }

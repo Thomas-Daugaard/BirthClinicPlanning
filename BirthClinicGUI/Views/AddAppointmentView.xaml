@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BirthClinicGUI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="400">
+             d:DesignHeight="450" d:DesignWidth="500">
+
     <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,86 +19,191 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0"
-               Content="Room ID:"
-               Margin="5"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Required fields*"></Label>
 
-        <TextBox Grid.Row="0" Grid.Column="1"
+        <GroupBox Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Margin="5" Header="Room information">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+
+                <Label Grid.Row="0" Grid.Column="0"
+                           Content="Room ID:*"
+                           Margin="5"/>
+
+                <TextBox Grid.Row="0" Grid.Column="1"
                  Text="{Binding Appointment.RoomID}"
                  MinWidth="100"
                  Margin="5"/>
 
-        <Label Grid.Row="1" Grid.Column="0"
-               Content="Fathers name:"
-               Margin="5"/>
+                <Label Grid.Row="1" Grid.Column="0"
+                       Content="Date:*"
+                       Margin="5"/>
 
-        <TextBox Grid.Row="1" Grid.Column="1"
-                 Text="{Binding Appointment.DadName}"
-                 MinWidth="100"
-                 Margin="5"/>
+                <TextBox Grid.Row="1" Grid.Column="1"
+                         Text="{Binding Appointment.DisplayDate}"
+                         MinWidth="100"
+                         Margin="5"/>
+            </Grid>
+        </GroupBox>
 
-        <Label Grid.Row="2" Grid.Column="0"
-               Content="Mothers name:"
-               Margin="5"/>
+        <GroupBox Grid.Row="1" Grid.Column="1" Margin="5" Header="Father information">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-        <TextBox Grid.Row="2" Grid.Column="1"
-                 Text="{Binding Appointment.MomName}"
-                 MinWidth="100"
-                 Margin="5"/>
+                <Label Grid.Row="0" Grid.Column="0"
+                       Content="Fathers name:"
+                       Margin="5"/>
 
-        <Label Grid.Row="3" Grid.Column="0"
-               Content="Date:"
-               Margin="5"/>
+                <TextBox Grid.Row="0" Grid.Column="1"
+                         Text="{Binding Appointment.DadName}"
+                         MinWidth="120"
+                         Margin="5"/>
 
-        <TextBox Grid.Row="3" Grid.Column="1"
-                 Text="{Binding Appointment.Date}"
-                 MinWidth="100"
-                 Margin="5"/>
+                <Label Grid.Row="1" Grid.Column="0"
+                       Content="Fathers CPR:"
+                       Margin="5"/>
 
-        <Separator Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
+                <TextBox Grid.Row="1" Grid.Column="1"
+                         Text="{Binding Appointment.DadCPR}"
+                         MinWidth="100"
+                         Margin="5"/>
 
-        <Label Grid.Row="5" Grid.Column="0"
-               Content="Clinician full name:"
-               Margin="5"/>
+            </Grid>
+        </GroupBox>
 
-        <TextBox Grid.Row="5" Grid.Column="1"
-                 Text="{Binding ClinicianName}"
-                 MinWidth="100"
-                 Margin="5"/>
+        <GroupBox Grid.Row="2" Grid.Column="1" Margin="5" Header="Mother Information">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-        <Label Grid.Row="6" Grid.Column="0"
-               Content="Clinician ID:"
-               Margin="5"/>
+                <Label Grid.Row="0" Grid.Column="0"
+                       Content="Mothers name:"
+                       Margin="5"/>
 
-        <TextBox Grid.Row="6" Grid.Column="1"
-                 Text="{Binding ClinicianID}"
-                 MinWidth="100"
-                 Margin="5"/>
+                <TextBox Grid.Row="0" Grid.Column="1"
+                         Text="{Binding Appointment.MomName}"
+                         MinWidth="120"
+                         Margin="5"/>
 
-        <Button Grid.Row="7" Grid.Column="0"
-                Command="{Binding AddClinician}"
-                Content="Add Clinitian"
-                Margin="5"/>
+                <Label Grid.Row="1" Grid.Column="0"
+                       Content="Mothers CPR:*"
+                       Margin="5"/>
 
-        <Separator Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"></Separator>
+                <TextBox Grid.Row="1" Grid.Column="1"
+                         Text="{Binding Appointment.MomCPR}"
+                         MinWidth="100"
+                         Margin="5"/>
 
-        <Button Grid.Row="9" Grid.Column="0"
+
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="2" Grid.Column="0" Margin="5" Header="Clinician Info (Please add at least 1 clinician)">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0"
+                       Content="Clinician First name:*"
+                       Margin="5"/>
+
+                <TextBox Grid.Row="0" Grid.Column="1"
+                         Text="{Binding ClinicianFirstName}"
+                         MinWidth="100"
+                         Margin="5"/>
+
+                <Label Grid.Row="1" Grid.Column="0"
+                       Content="Clinician Last name:*"
+                       Margin="5"/>
+
+                <TextBox Grid.Row="1" Grid.Column="1"
+                         Text="{Binding ClinicianLastName}"
+                         MinWidth="100"
+                         Margin="5"/>
+
+                <Label Grid.Row="2" Grid.Column="0"
+                       Content="Clinician ID:*"
+                       Margin="5"/>
+
+                <TextBox Grid.Row="2" Grid.Column="1"
+                         Text="{Binding ClinicianID}"
+                         MinWidth="100"
+                         Margin="5"/>
+
+                <Button Grid.Row="3" Grid.Column="0"
+                        Command="{Binding AddClinician}"
+                        Content="Add Clinitian"
+                        Margin="5"
+                        Padding="5"/>
+
+            </Grid>
+        </GroupBox>
+
+        <Separator Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
+
+        <GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" HorizontalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Row="0" Grid.Column="0"
                 Content="Ok"
                 Margin="5"
+                Padding="5"
+                MinWidth="70"
                 IsDefault="True"
                 Command="{Binding CloseDialogCommand}" 
                 CommandParameter="true"/>
 
-        <Button Grid.Row="9" Grid.Column="1"
+                <Button Grid.Row="0" Grid.Column="1"
                 Content="Cancel"
+                MinWidth="70"
                 Margin="5"
+                Padding="5"
                 IsCancel="True"/>
 
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>

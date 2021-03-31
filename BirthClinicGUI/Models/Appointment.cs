@@ -12,8 +12,10 @@ namespace BirthClinicGUI.Models
     {
         public int RoomID { get; set; }
         public DateTime Date { get; set; }
-        public string MomName { get; set; }
-        public string DadName { get; set; }
+        public string DisplayDate { get => Date.ToShortDateString(); set => Date = DateTime.Parse(value); }
+        public string MomCPR { get; set; }
+        public string DadCPR { get; set; }
+
         public bool BirthInProgess { get; set; }
 
         public ObservableCollection<Clinician> Clinicians { get; set; }

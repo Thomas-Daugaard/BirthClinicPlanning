@@ -17,7 +17,8 @@ namespace BirthClinicGUI.ViewModels
     {
         public Appointment Appointment { get; set; }
         public ObservableCollection<Clinician> Clinicians { get; set; }
-        public string ClinicianName { get; set; }
+        public string ClinicianFirstName { get; set; }
+        public string ClinicianLastName { get; set; }
         public int ClinicianID { get; set; }
 
         private bool _okButtonPressed = false;
@@ -35,7 +36,7 @@ namespace BirthClinicGUI.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            Appointment = new Appointment();
+            Appointment = new Appointment() {BirthInProgess = false, Date = DateTime.Now.Date};
             Clinicians = new ObservableCollection<Clinician>();
         }
 
@@ -58,7 +59,11 @@ namespace BirthClinicGUI.ViewModels
             else if (parameter?.ToLower() == "false")
                 result = ButtonResult.Cancel;
 
-            RequestClose(new DialogResult(result));
+            if (Appointment.MomCPR == "" || Appointment.RoomID == 0 || Clinicians.Count == 0)
+                MessageBox.Show("Please fill out all required fields", "Error", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            else
+                RequestClose(new DialogResult(result));
         }
 
         private ICommand _addClinician;
@@ -74,8 +79,15 @@ namespace BirthClinicGUI.ViewModels
 
         private void AddClinicianCanExcecute()
         {
-            Clinicians.Add(new Clinician(){ID = ClinicianID, Name = ClinicianName});
-            MessageBox.Show("Clinician " + ClinicianName + " added", "Clinician added", MessageBoxButton.OK);
+            if (ClinicianID == 0 || (ClinicianFirstName == "" || ClinicianLastName == ""))
+                MessageBox.Show("Please fill out all required fields", "Error", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+
+            else
+            {
+                Clinicians.Add(new Clinician() { ID = ClinicianID, FirstName = ClinicianFirstName, LastName = ClinicianLastName});
+                MessageBox.Show("Clinician " + ClinicianFirstName + " " + ClinicianLastName + " added", "Clinician added", MessageBoxButton.OK);
+            }
         }
     }
 }

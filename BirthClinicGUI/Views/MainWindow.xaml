@@ -8,7 +8,7 @@
         xmlns:viewModels="clr-namespace:BirthClinicGUI.ViewModels"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Title="Birth Clinic App" Height="400" Width="700">
+        Title="Birth Clinic App" Height="400" Width="500">
     <Grid HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -55,14 +55,14 @@
                   AutoGenerateColumns="False">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Room ID" Binding="{Binding RoomID}" MaxWidth="60"/>
-                <DataGridTextColumn Header="Fathers name" Binding="{Binding DadName}"/>
-                <DataGridTextColumn Header="Mothers name" Binding="{Binding MomName}"/>
-                <DataGridTextColumn Header="Booked on" Binding="{Binding Date}"/>
+                <DataGridTextColumn Header="Room ID" Binding="{Binding RoomID}" MaxWidth="60" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Fathers CPR" Binding="{Binding DadCPR}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Mothers CPR" Binding="{Binding MomCPR}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Booked on" Binding="{Binding DisplayDate}" IsReadOnly="True"/>
                 <DataGridTemplateColumn Header="Clinicians" MinWidth="120">
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <ComboBox ItemsSource="{Binding Clinicians}"
+                            <ComboBox ItemsSource="{Binding Clinicians, Mode=OneWay}"
                                       DisplayMemberPath="Display">
                             </ComboBox>
                         </DataTemplate>

@@ -40,16 +40,15 @@ namespace BirthClinicGUI.ViewModels
             {
                 new ()
                     {
-                        RoomID = 1, 
-                        DadName = "Thomas Mose Daugaard", 
-                        MomName = "Jennifer Meldgaard", 
-                        Date = DateTime.Now,
+                        DadCPR = "250485-1234",
+                        MomCPR = "010186-1234",
+                        Date = DateTime.Now.Date,
                         BirthInProgess = true,
                         Clinicians = new ObservableCollection<Clinician>()
                         {
-                            new () { ID = 1, Name = "Jørgen Hansen" },
-                            new () {ID = 2, Name = "Tove Andersen"},
-                            new () {ID = 3, Name = "Ole Damsgaard"}
+                            new () { ID = 1, FirstName = "Jørgen", LastName = "Hansen"},
+                            new () {ID = 2, FirstName = "Tove", LastName = "Andersen"},
+                            new () {ID = 3, FirstName = "Ole", LastName = "Damsgaard"}
                         }
                     }
             };
