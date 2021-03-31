@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using BirthClinicGUI.Models;
+using BirthClinicPlanningDB.Models;
+using BirthClinicPlanningDB.Repositories;
+using BirthClinicPlanningDB.Repositories.RepositoryInterfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -15,6 +18,7 @@ namespace BirthClinicGUI.ViewModels
 {
     class AddAppointmentViewModel : BindableBase, IDialogAware
     {
+        private IAppointmentRepository appointmentRepository;
         public Appointment Appointment { get; set; }
         public ObservableCollection<Clinician> Clinicians { get; set; }
         public string ClinicianFirstName { get; set; }
@@ -31,7 +35,10 @@ namespace BirthClinicGUI.ViewModels
         public void OnDialogClosed()
         {
             Appointment.Clinicians = Clinicians;
-            ((App) Application.Current).Appointment = Appointment;
+
+            appointmentRepository.AddAppointment(Appointment.Date, new Parents { }
+
+            //((App) Application.Current).Appointment = Appointment;
         }
 
         public void OnDialogOpened(IDialogParameters parameters)

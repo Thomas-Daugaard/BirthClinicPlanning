@@ -12,10 +12,14 @@ namespace BirthClinicPlanningDB.Models
     {
         [Key]
         public int ParentsID { get; set; }
-        public string MothersName { get; set; }
-        public int MothersCPR { get; set; }
-        public string FathersName { get; set; }
-        public string FathersCPR { get; set; }
+
+        public string MomCPR { get; set; }
+        public string MomFirstName { get; set; }
+        public string MomLastName { get; set; }
+        public string DadCPR { get; set; }
+        public string DadFirstName { get; set; }
+        public string DadLastName { get; set; }
+
         [ForeignKey("ChildID")]
         public Child Child { get; set; }
     }
