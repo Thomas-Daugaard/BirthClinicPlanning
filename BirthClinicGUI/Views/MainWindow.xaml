@@ -1,0 +1,78 @@
+﻿<Window x:Class="BirthClinicGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BirthClinicGUI"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:viewModels="clr-namespace:BirthClinicGUI.ViewModels"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        mc:Ignorable="d"
+        Title="Birth Clinic App" Height="400" Width="700">
+    <Grid HorizontalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0"
+                   Name="TitleText" 
+                   Content="Birth Clinic App"
+                   FontSize="20"
+                   Margin="20"
+                   HorizontalAlignment="Center"
+                   />
+
+        <Button Grid.Row="1" Grid.Column="0"
+                Name="AddAppointBtn"
+                Content="Add Appointment"
+                Padding="5"
+                Command="{Binding AddAppointmentCommand}"
+                />
+
+        <Button Grid.Row="2" Grid.Column="0"
+                Name="SeeAvailRoomsBtn"
+                Content="See Rooms Status"
+                Padding="5"
+                />
+
+        <Label Grid.Row="3" Grid.Column="0"
+                Name="SeeAppointBtn"
+                Content="Current Appointments:"
+                Padding="5"
+                Margin="10"
+                HorizontalAlignment="Center"/>
+
+        <DataGrid Name="DataGrid"
+                  Grid.Row="4"
+                  ItemsSource="{Binding Appointments}"
+                  AutoGenerateColumns="False">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Room ID" Binding="{Binding RoomID}" MaxWidth="60"/>
+                <DataGridTextColumn Header="Fathers name" Binding="{Binding DadName}"/>
+                <DataGridTextColumn Header="Mothers name" Binding="{Binding MomName}"/>
+                <DataGridTextColumn Header="Booked on" Binding="{Binding Date}"/>
+                <DataGridTemplateColumn Header="Clinicians" MinWidth="120">
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding Clinicians}"
+                                      DisplayMemberPath="Display">
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                    
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+            
+        
+
+    </Grid>
+</Window>
