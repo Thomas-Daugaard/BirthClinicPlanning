@@ -8,10 +8,10 @@ using BirthClinicPlanningDB.Models;
 
 namespace BirthClinicPlanningDB.Repositories
 {
-    public interface IBirthRoomRepository : IRepository<BirthRoom>
+    public interface IMaternityRoomRepository : IRepository<MaternityRoom>
     {
-        public List<BirthRoom> GetAllBirthsRooms();
+        public List<MaternityRoom> GetAllBirthsRooms();
 
-        public BirthRoom GetSingleBirthRoom(int id);
+        public MaternityRoom GetSingleBirthRoom(int id);
     }
 }

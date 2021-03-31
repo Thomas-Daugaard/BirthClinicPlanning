@@ -8,20 +8,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BirthClinicPlanningDB.Repositories
 {
-    public class BirthRoomRepository:Repository<BirthRoom>, IBirthRoomRepository
+    public class MaternityRoomRepository:Repository<MaternityRoom>, IMaternityRoomRepository
     {
-        public BirthRoomRepository(DbContext context) : base(context)
+        public MaternityRoomRepository(DbContext context) : base(context)
         {
         }
 
-        public List<BirthRoom> GetAllBirthsRooms()
+        public List<MaternityRoom> GetAllBirthsRooms()
         {
-            return context.birthRooms.ToList();
+            return context.maternityrooms.ToList();
         }
 
-        public BirthRoom GetSingleBirthRoom(int id)
+        public MaternityRoom GetSingleBirthRoom(int id)
         {
-            return context.birthRooms.SingleOrDefault(a => a.BirthRoomId == id);
+            return context.maternityrooms.SingleOrDefault(a => a.MaternityRoomId == id);
         }
 
         public Context context
