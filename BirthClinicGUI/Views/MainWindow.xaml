@@ -51,8 +51,7 @@
                 Margin="10"
                 HorizontalAlignment="Center"/>
 
-        <DataGrid Name="DataGrid"
-                  Grid.Row="4"
+        <DataGrid Grid.Row="4"
                   ItemsSource="{Binding Appointments}"
                   SelectedIndex="{Binding AppointmentIndex}"
                   AutoGenerateColumns="False"

@@ -21,7 +21,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Required fields*"></Label>
+        <Label Grid.Row="0" Grid.Column="0" Content="Required fields*"/>
 
         <GroupBox Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Margin="5" Header="Room information">
             <Grid>
