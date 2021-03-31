@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BirthClinicPlanningDB.Models
 {
-    class FourHoursRestRoom
+    public class FourHoursRestRoom
     {
         [Key]
         public int FourHourRestRoomId { get; set; }
