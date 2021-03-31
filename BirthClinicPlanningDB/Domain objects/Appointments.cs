@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace BirthClinicPlanningDB.Domain_objects
 {
-    class Clinician
+    public class Appointments
     {
         [Key]
-        public int StaffID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public int AppointmentsID { get; set; }
+        //ctor for DateTime (month, date, year, hour, minute, second)
+        public DateTime AppointmentTimeDate { get; set; }
+
     }
 }
