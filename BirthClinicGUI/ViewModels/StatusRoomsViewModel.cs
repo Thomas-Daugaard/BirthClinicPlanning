@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using BirthClinicGUI.Models;
+using BirthClinicPlanningDB.DomainObjects;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;

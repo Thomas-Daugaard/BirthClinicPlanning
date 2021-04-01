@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using BirthClinicGUI.Models;
+using BirthClinicPlanningDB.DomainObjects;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 
@@ -27,7 +27,6 @@ namespace BirthClinicGUI.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            Appointment = ((App) Application.Current).Appointment;
         }
 
         public string Title { get; }

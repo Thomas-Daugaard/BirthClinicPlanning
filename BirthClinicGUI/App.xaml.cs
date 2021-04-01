@@ -5,7 +5,6 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using BirthClinicGUI.Models;
 using BirthClinicGUI.ViewModels;
 using BirthClinicGUI.Views;
 using Prism.Ioc;
@@ -32,7 +31,5 @@ namespace BirthClinicGUI
         {
             return Container.Resolve<MainWindow>();
         }
-
-        public Appointment Appointment { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace BirthClinicPlanningDB
     {
         IAppointmentRepository Appointments { get; }
 
-        IFourHourRestRoomRepository RestRooms { get; }
+        IRestRoomRepository RestRooms { get; }
 
         IMaternityRoomRepository MaternityRooms { get; }
 

@@ -8,11 +8,10 @@ using BirthClinicPlanningDB.DomainObjects;
 
 namespace BirthClinicPlanningDB.Repositories.RepositoryInterfaces
 {
-    public interface IAppointmentRepository: IRepository<Appointment>
+    public interface IRestRoomRepository : IRepository<RestRoom>
     {
-        public ObservableCollection<Appointment> getAllAppointments();
-        public Appointment getSingleAppointment(int id);
+        public ObservableCollection<RestRoom> GetAllRestRoom();
 
-        public void AddAppointment(Appointment appointment);
+        public RestRoom GetSingleRestRoom(int id);
     }
 }

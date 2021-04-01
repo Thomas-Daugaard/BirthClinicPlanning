@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Input;
-using BirthClinicGUI.Models;
+using BirthClinicPlanningDB.DomainObjects;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -85,7 +85,6 @@ namespace BirthClinicGUI.ViewModels
             {
                 if (r.Result == ButtonResult.OK)
                 {
-                    Appointments.Add(((App) Application.Current).Appointment);
                     // call update method on EF core rep in release version
                 }
             });
@@ -105,7 +104,6 @@ namespace BirthClinicGUI.ViewModels
 
         private void SelectAppointmentCommandExecute()
         {
-            ((App) Application.Current).Appointment = Appointments[AppointmentIndex];
             _dialog.ShowDialog("SpecificAppointmentView", r =>
             {
             });

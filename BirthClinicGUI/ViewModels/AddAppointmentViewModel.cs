@@ -8,7 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using BirthClinicGUI.Models;
+using BirthClinicPlanningDB;
+using BirthClinicPlanningDB.DomainObjects;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -23,7 +24,9 @@ namespace BirthClinicGUI.ViewModels
         public string ClinicianLastName { get; set; }
         public int ClinicianID { get; set; }
 
-        private bool _okButtonPressed = false;
+        private bool _okButtonPressed;
+
+        private IDataAccessActions access = new DataAccessActions(new Context());
 
         public bool CanCloseDialog()
         {
@@ -34,7 +37,8 @@ namespace BirthClinicGUI.ViewModels
         {
             Appointment.Clinicians = Clinicians;
             Appointment.Child.BirthDate = Appointment.Date;
-            ((App) Application.Current).Appointment = Appointment;
+            access.Appointments.AddAppointment(Appointment);
+            access.Complete();
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
@@ -88,7 +92,7 @@ namespace BirthClinicGUI.ViewModels
 
             else
             {
-                Clinicians.Add(new Clinician() { ID = ClinicianID, FirstName = ClinicianFirstName, LastName = ClinicianLastName});
+                Clinicians.Add(new Clinician() {FirstName = ClinicianFirstName, LastName = ClinicianLastName});
                 MessageBox.Show("Clinician " + ClinicianFirstName + " " + ClinicianLastName + " added", "Clinician added", MessageBoxButton.OK);
             }
         }

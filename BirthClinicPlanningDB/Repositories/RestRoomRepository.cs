@@ -10,20 +10,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BirthClinicPlanningDB.Repositories
 {
-    public class MaternityRoomRepository:Repository<MaternityRoom>, IMaternityRoomRepository
+    public class RestRoomRepository: Repository<RestRoom>, IRestRoomRepository
     {
-        public MaternityRoomRepository(DbContext context) : base(context)
+        public RestRoomRepository(DbContext context) : base(context)
         {
         }
 
-        public ObservableCollection<MaternityRoom> GetAllBirthsRooms()
+        public ObservableCollection<RestRoom> GetAllRestRoom()
         {
-            return new ObservableCollection<MaternityRoom>(context.maternityrooms.ToList());
+            return new ObservableCollection<RestRoom>(context.Restrooms.ToList());
         }
 
-        public MaternityRoom GetSingleBirthRoom(int id)
+        public RestRoom GetSingleRestRoom(int id)
         {
-            return context.maternityrooms.SingleOrDefault(a => a.RoomID == id);
+            return context.Restrooms.SingleOrDefault(a => a.RoomID == id);
         }
 
         public Context context

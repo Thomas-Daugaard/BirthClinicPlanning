@@ -1,39 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BirthClinicPlanningDB.Domain_objects;
-using BirthClinicPlanningDB.Models;
+using BirthClinicPlanningDB.DomainObjects;
 using BirthClinicPlanningDB.Repositories.RepositoryInterfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace BirthClinicPlanningDB.Repositories
 {
-    public class AppointmentsRepository: Repository<Appointments>, IAppointmentRepository
+    public class AppointmentsRepository: Repository<Appointment>, IAppointmentRepository
     {
         public AppointmentsRepository(DbContext context) : base(context)
         {
         }
 
-        public List<Appointments> getAllAppointments()
+        public ObservableCollection<Appointment> getAllAppointments()
         {
-            return context.appointments.ToList();
+            return new ObservableCollection<Appointment>(context.Appointments.ToList());
         }
 
-        public Appointments getSingleAppointment(int id)
+        public Appointment getSingleAppointment(int id)
         {
-            return context.appointments.SingleOrDefault(a=>a.AppointmentsID==id);
+            return context.Appointments.SingleOrDefault(a => a.AppointmentID == id);
         }
 
-        public void AddAppointment(DateTime date, Parents parents, List<Clinician> clinicians)
+        public void AddAppointment(Appointment appointment)
         {
-            var newappointment = new Appointments();
-            newappointment.AppointmentTimeDate = date;
-            newappointment.parents = parents;
-            newappointment.clinicians = clinicians;
+            var newappointment = new Appointment();
+            newappointment.RoomID = appointment.RoomID;
+            newappointment.Date = appointment.Date;
+            newappointment.Parents = appointment.Parents;
+            newappointment.Clinicians = appointment.Clinicians;
 
-            context.appointments.Add(newappointment);
+            context.Appointments.Add(newappointment);
         }
 
         public Context context
