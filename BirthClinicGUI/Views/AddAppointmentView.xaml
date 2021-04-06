@@ -171,15 +171,6 @@
                          MinWidth="100"
                          Margin="5"/>
 
-                <Label Grid.Row="2" Grid.Column="0"
-                       Content="Clinician ID:*"
-                       Margin="5"/>
-
-                <TextBox Grid.Row="2" Grid.Column="1"
-                         Text="{Binding ClinicianID}"
-                         MinWidth="100"
-                         Margin="5"/>
-
                 <Button Grid.Row="3" Grid.Column="0"
                         Command="{Binding AddClinician}"
                         Content="Add Clinitian"

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Input;
+using BirthClinicPlanningDB;
 using BirthClinicPlanningDB.DomainObjects;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -18,6 +19,7 @@ namespace BirthClinicGUI.ViewModels
     {
         private IDialogService _dialog;
         private ObservableCollection<Appointment> _appointments;
+        private IDataAccessActions access = new DataAccessActions(new Context());
 
         private int _appointmentIndex;
         public int AppointmentIndex
@@ -39,31 +41,31 @@ namespace BirthClinicGUI.ViewModels
             _dialog = dialog;
 
             #if DEBUG
-            Appointments = new ObservableCollection<Appointment>()
+            Appointment appointment = new()
             {
-                new ()
-                    {
-                        Date = DateTime.Now.Date,
-                        BirthInProgess = true,
-                        RoomID = 1,
-                        Clinicians = new ObservableCollection<Clinician>()
-                        {
-                            new () { ID = 1, FirstName = "Jørgen", LastName = "Hansen"},
-                            new () {ID = 2, FirstName = "Tove", LastName = "Andersen"},
-                            new () {ID = 3, FirstName = "Ole", LastName = "Damsgaard"}
-                        },
-                        Parents = new Parents()
-                        {
-                            DadCPR = "250485-1234", 
-                            DadFirstName = "Thomas", 
-                            DadLastName = "Daugaard", 
-                            MomCPR = "010186-1234", 
-                            MomFirstName = "Jennifer", 
-                            MomLastName = "Meldgaard"
-                        }
-                        
-                    }
+                Date = DateTime.Now.Date,
+                BirthInProgess = true,
+                Clinicians = new ObservableCollection<Clinician>()
+                {
+                    new() {FirstName = "Jørgen", LastName = "Hansen"},
+                    new() {FirstName = "Tove", LastName = "Andersen"},
+                    new() {FirstName = "Ole", LastName = "Damsgaard"}
+                },
+                Parents = new Parents()
+                {
+                    DadCPR = "250485-1234",
+                    DadFirstName = "Thomas",
+                    DadLastName = "Daugaard",
+                    MomCPR = "010186-1234",
+                    MomFirstName = "Jennifer",
+                    MomLastName = "Meldgaard"
+                }
+
             };
+
+            access.Appointments.AddAppointment(appointment);
+            Appointments = access.Appointments.getAllAppointments();
+            access.Complete();
             AppointmentIndex = 0;
             #endif
         }
@@ -104,7 +106,8 @@ namespace BirthClinicGUI.ViewModels
 
         private void SelectAppointmentCommandExecute()
         {
-            _dialog.ShowDialog("SpecificAppointmentView", r =>
+            string id = Appointments[AppointmentIndex].AppointmentID.ToString();
+            _dialog.ShowDialog("SpecificAppointmentView", new DialogParameters($"Message={id}"), r =>
             {
             });
         }
@@ -126,7 +129,11 @@ namespace BirthClinicGUI.ViewModels
             {
                 if (r.Result == ButtonResult.OK)
                 {
-                    // call update method on EF core rep in release version
+                    if (r.Result == ButtonResult.OK)
+                    {
+                        Appointments = access.Appointments.getAllAppointments();
+                        access.Complete();
+                    }
                 }
             });
         }

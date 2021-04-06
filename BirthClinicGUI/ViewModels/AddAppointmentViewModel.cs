@@ -86,7 +86,7 @@ namespace BirthClinicGUI.ViewModels
 
         private void AddClinicianCanExcecute()
         {
-            if (ClinicianID == 0 || (ClinicianFirstName == "" || ClinicianLastName == ""))
+            if ((ClinicianFirstName == "" || ClinicianLastName == ""))
                 MessageBox.Show("Please fill out all required fields", "Error", MessageBoxButton.OK,
                     MessageBoxImage.Error);
 
