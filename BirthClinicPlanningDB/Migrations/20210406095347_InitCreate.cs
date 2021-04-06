@@ -58,10 +58,10 @@ namespace BirthClinicPlanningDB.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoomID = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DisplayDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BirthInProgess = table.Column<bool>(type: "bit", nullable: false),
                     ParentsID = table.Column<int>(type: "int", nullable: true),
-                    ChildID = table.Column<int>(type: "int", nullable: true)
+                    ChildID = table.Column<int>(type: "int", nullable: true),
+                    DisplayDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

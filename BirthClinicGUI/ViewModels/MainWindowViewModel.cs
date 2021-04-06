@@ -28,8 +28,6 @@ namespace BirthClinicGUI.ViewModels
             set => SetProperty(ref _appointmentIndex, value);
         }
 
-        public int CurrentClinitianIndex { get; set; }
-
         public ObservableCollection<Appointment> Appointments
         {
             get => _appointments;
@@ -59,11 +57,8 @@ namespace BirthClinicGUI.ViewModels
         {
             _dialog.ShowDialog("AddAppointmentView", r =>
             {
-                if (r.Result == ButtonResult.OK)
-                {
-                    Appointments = access.Appointments.getAllAppointments();
-                    access.Complete();
-                }
+                Appointments = access.Appointments.getAllAppointments();
+                access.Complete();
             });
         }
 
