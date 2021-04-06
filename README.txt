@@ -10,7 +10,13 @@ Step A:
 
 4) Set the "BirthClinicPlanningDB" project as your startup project. 
 
-4) In the package manager console, type: "update-database", to apply the included migration fil to the database. 
+5) Right click at the "BirthClinicGUI" project and choose "Unload project".
+
+6) In the package manager console, type: "update-database", to apply the included migration fil to the database. 
+
+7) Ensure that the tables has been created in your local database. 
+
+8) Right click at the unloaded "BirthClinicGUI" Project, and choose "Reload project with dependencies".
 
 
 ======================================   Now you are ready to run the application  =========================================
