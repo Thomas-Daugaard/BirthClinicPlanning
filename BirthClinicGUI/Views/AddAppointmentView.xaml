@@ -49,7 +49,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="1" Grid.Column="1"
-                         Text="{Binding Appointment.DisplayDate}"
+                         Text="{Binding Appointment.Date}"
                          MinWidth="100"
                          Margin="5"/>
             </Grid>

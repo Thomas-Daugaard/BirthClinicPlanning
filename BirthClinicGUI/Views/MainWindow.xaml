@@ -52,11 +52,11 @@
                 HorizontalAlignment="Center"/>
 
         <DataGrid Grid.Row="4"
-                  ItemsSource="{Binding Appointments, IsAsync=True}"
+                  ItemsSource="{Binding Appointments}"
                   SelectedIndex="{Binding AppointmentIndex}"
                   AutoGenerateColumns="False"
                   IsSynchronizedWithCurrentItem="True"
-                  >
+        >
 
             <DataGrid.InputBindings>
                 <MouseBinding

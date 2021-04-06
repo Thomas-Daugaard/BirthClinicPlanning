@@ -31,7 +31,7 @@ namespace BirthClinicGUI.ViewModels
         public ObservableCollection<Appointment> Appointments
         {
             get => _appointments;
-            set => _appointments = value;
+            set => SetProperty(ref _appointments, value);
         }
 
         public MainWindowViewModel(IDialogService dialog)
