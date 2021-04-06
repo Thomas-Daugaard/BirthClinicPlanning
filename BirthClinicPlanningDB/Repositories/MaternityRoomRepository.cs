@@ -16,12 +16,12 @@ namespace BirthClinicPlanningDB.Repositories
         {
         }
 
-        public ObservableCollection<MaternityRoom> GetAllBirthsRooms()
+        public ObservableCollection<MaternityRoom> GetAllMaternityRooms()
         {
             return new ObservableCollection<MaternityRoom>(context.maternityrooms.ToList());
         }
 
-        public MaternityRoom GetSingleBirthRoom(int id)
+        public MaternityRoom GetSingleMaternityRoom(int id)
         {
             return context.maternityrooms.SingleOrDefault(a => a.RoomID == id);
         }
