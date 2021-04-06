@@ -15,6 +15,7 @@ namespace BirthClinicPlanningDB
 
         IMaternityRoomRepository MaternityRooms { get; }
         IClinicianRepository Clinicians { get; }
+        IBirthRoomRepository BirthRooms { get; }
 
         int Complete();
     }

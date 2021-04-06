@@ -18,7 +18,11 @@ namespace BirthClinicPlanningDB.Repositories
 
         public ObservableCollection<RestRoom> GetAllRestRoom()
         {
-            return new ObservableCollection<RestRoom>(context.Restrooms.ToList());
+            return new ObservableCollection<RestRoom>(context.Restrooms
+                .Include(p => p.Parents)
+                .Include(c => c.Child)
+                .Include(cl => cl.Clinicians)
+                .ToList());
         }
 
         public RestRoom GetSingleRestRoom(int id)

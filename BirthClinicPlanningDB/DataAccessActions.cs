@@ -8,13 +8,14 @@ using BirthClinicPlanningDB.Repositories.RepositoryInterfaces;
 
 namespace BirthClinicPlanningDB
 {
-    public class DataAccessActions: IDataAccessActions
+    public class DataAccessActions : IDataAccessActions
     {
         private readonly Context _context;
         public IAppointmentRepository Appointments { get; private set; }
         public IRestRoomRepository RestRooms { get; private set; }
         public IMaternityRoomRepository MaternityRooms { get; private set; }
         public IClinicianRepository Clinicians { get; private set; }
+        public IBirthRoomRepository BirthRooms { get; private set; }
 
         //public repository object (by interface) decleration as property
 
@@ -24,6 +25,7 @@ namespace BirthClinicPlanningDB
             Appointments = new AppointmentsRepository(_context);
             RestRooms = new RestRoomRepository(_context);
             MaternityRooms = new MaternityRoomRepository(_context);
+            BirthRooms = new BirthRoomRepository(_context);
             Clinicians = new ClinicianRepository(_context);
 
             //Instantiate repository objects

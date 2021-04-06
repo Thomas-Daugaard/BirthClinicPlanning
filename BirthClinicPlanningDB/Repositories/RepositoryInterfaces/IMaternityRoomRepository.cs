@@ -10,8 +10,8 @@ namespace BirthClinicPlanningDB.Repositories.RepositoryInterfaces
 {
     public interface IMaternityRoomRepository : IRepository<MaternityRoom>
     {
-        public ObservableCollection<MaternityRoom> GetAllBirthsRooms();
+        public ObservableCollection<MaternityRoom> GetAllMaternityRooms();
 
-        public MaternityRoom GetSingleBirthRoom(int id);
+        public MaternityRoom GetSingleMaternityRoom(int id);
     }
 }

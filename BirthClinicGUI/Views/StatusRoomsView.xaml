@@ -10,6 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -24,8 +25,13 @@
                 Padding="5"
                 MinWidth="110"/>
 
-        <Label Grid.Row="0" Grid.Column="1"
+        <Label Grid.Row="0" Grid.Column="2"
                 Content="Maternity Rooms"
+                Margin="5"
+                Padding="5"
+                MinWidth="110"/>
+        <Label Grid.Row="0" Grid.Column="1"
+                Content="Birth Rooms"
                 Margin="5"
                 Padding="5"
                 MinWidth="110"/>
@@ -49,6 +55,25 @@
         </DataGrid>
 
         <DataGrid Grid.Row="1" Grid.Column="1" MinHeight="100" Margin="10" MaxWidth="90"
+                  ItemsSource="{Binding BirthRooms}"
+                  AutoGenerateColumns="False"
+                  SelectedIndex="{Binding BirthRoomIndex}"
+                  IsSynchronizedWithCurrentItem="True">
+
+            <DataGrid.InputBindings>
+                <MouseBinding
+                    MouseAction="LeftDoubleClick"
+                    Command="{Binding SelectRoomCommand}"
+                    CommandParameter="BirthRooms"/>
+            </DataGrid.InputBindings>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Room ID" Binding="{Binding RoomID}" MinWidth="80" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <DataGrid Grid.Row="1" Grid.Column="2" MinHeight="100" Margin="10" MaxWidth="90"
                   ItemsSource="{Binding MaternityRooms}"
                   AutoGenerateColumns="False"
                   SelectedIndex="{Binding MaternityIndex}"
@@ -66,7 +91,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
                     Content="Back"
                     MaxWidth="70"
                     Margin="5"
