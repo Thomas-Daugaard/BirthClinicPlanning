@@ -13,5 +13,7 @@ namespace BirthClinicPlanningDB.Repositories.RepositoryInterfaces
         public ObservableCollection<Clinician> GetAllClinicians();
 
         public Clinician GetSingleClinician(int id);
+
+        public void AddClinician(Clinician clinician);
     }
 }

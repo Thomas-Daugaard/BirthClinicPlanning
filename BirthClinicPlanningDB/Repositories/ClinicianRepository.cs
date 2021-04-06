@@ -28,5 +28,10 @@ namespace BirthClinicPlanningDB.Repositories
         {
             get { return Context as Context; }
         }
+
+        public void AddClinician(Clinician clinician)
+        {
+            context.Clinicians.Add(clinician);
+        }
     }
 }
