@@ -12,16 +12,10 @@ namespace BirthClinicPlanningDB.DomainObjects
     {
         [Key]
         public int AppointmentID { get; set; }
-        public int RoomID { get; set; }
+        public Room Room { get; set; }
         public DateTime Date { get; set; }
 
         public bool BirthInProgess { get; set; }
-
-        public Parents Parents { get; set; }
-
-        public Child Child { get; set; }
-
-        public ObservableCollection<Clinician> Clinicians { get; set; }
 
         public string DisplayDate { get => Date.ToShortDateString(); set => DateTime.Parse(value); }
     }
