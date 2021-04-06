@@ -151,37 +151,53 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-
                 <Label Grid.Row="0" Grid.Column="0"
-                       Content="Clinician First name:*"
+                       Content="Choose Clinician:"
                        Margin="5"/>
-
-                <TextBox Grid.Row="0" Grid.Column="1"
-                         Text="{Binding ClinicianFirstName}"
-                         MinWidth="100"
-                         Margin="5"/>
-
-                <Label Grid.Row="1" Grid.Column="0"
-                       Content="Clinician Last name:*"
-                       Margin="5"/>
-
-                <TextBox Grid.Row="1" Grid.Column="1"
-                         Text="{Binding ClinicianLastName}"
-                         MinWidth="100"
-                         Margin="5"/>
-
-                <Button Grid.Row="3" Grid.Column="0"
-                        Command="{Binding AddClinician}"
-                        Content="Add Clinitian"
-                        Margin="5"
-                        Padding="5"/>
-                <ComboBox Grid.Row="3" Grid.Column="1" 
+                <ComboBox Grid.Row="0" Grid.Column="1" 
                           Margin="5"
                           IsReadOnly="True"
                           ItemsSource="{Binding AllClinicians}"
                           DisplayMemberPath="Display"
                           SelectedIndex="0"/>
+                <Button Grid.Column="0" Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Margin="30,5,30,5"
+                        Content="Add to appointment"/>
+                <Label Grid.Row="2" Grid.Column="0" 
+                       Grid.ColumnSpan="2"
+                       Content="-------- Or --------"
+                       VerticalAlignment="Center"
+                       Margin="60,5,60,5"
+                       />
+
+                <Label Grid.Row="3" Grid.Column="0"
+                       Content="Clinician First name:*"
+                       Margin="5"/>
+
+                <TextBox Grid.Row="3" Grid.Column="1"
+                         Text="{Binding ClinicianFirstName}"
+                         MinWidth="100"
+                         Margin="5"/>
+
+                <Label Grid.Row="4" Grid.Column="0"
+                       Content="Clinician Last name:*"
+                       Margin="5"/>
+
+                <TextBox Grid.Row="4" Grid.Column="1"
+                         Text="{Binding ClinicianLastName}"
+                         MinWidth="100"
+                         Margin="5"/>
+
+                <Button Grid.Row="5" Grid.Column="0"
+                        Command="{Binding AddClinician}"
+                        Content="Add Clinitian"
+                        Margin="5"
+                        Padding="5"/>
+                
 
             </Grid>
         </GroupBox>
