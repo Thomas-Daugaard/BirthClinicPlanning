@@ -94,9 +94,9 @@ namespace BirthClinicGUI.ViewModels
 
             string message = "";
 
-            foreach (var person in Clinicians)
+            foreach (var staff in Clinicians)
             {
-                message += string.Join(", ", $"\n{person.FirstName} {person.LastName}");
+                message += string.Join(", ", $"\n{staff.FirstName} {staff.LastName}");
             }
 
             MessageBox.Show($"Currently added Clinicians:\n {message}", "Clinician added to appointment", MessageBoxButton.OK);
