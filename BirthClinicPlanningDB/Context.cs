@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using BirthClinicPlanningDB.DomainObjects;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +23,140 @@ namespace BirthClinicPlanningDB
         {
             base.OnModelCreating(modelBuilder);
 
-            //Seed(modelBuilder);
+            Seed(modelBuilder);
+        }
+
+        private void Seed(ModelBuilder modelBuilder)
+        {
+            var clinicians = new List<Clinician>
+            {
+                new Clinician
+                {
+                    ID = 1,
+                    FirstName = "Camilla",
+                    LastName = "Holmstoel"
+                },
+                new Clinician
+                {
+                    ID = 2,
+                    FirstName = "Thomas",
+                    LastName = "Daugaard"
+                },
+                new Clinician
+                {
+                    ID = 3,
+                    FirstName = "Emil",
+                    LastName = "Garder"
+                }
+            };
+
+            foreach (var clin in clinicians)
+            {
+                modelBuilder.Entity<Clinician>().HasData(clin);
+            }
+
+            var childs = new List<Child>
+            {
+                new Child
+                {
+                    ChildID = -1,
+                    FirstName = "Leif",
+                    LastName = "Knudsen",
+                    Weight = 3500,
+                    Length = 56,
+                    BirthDate = new DateTime(2020, 4,6)
+                },
+                new Child
+                {
+                    ChildID = -2,
+                    FirstName = "Viggo",
+                    LastName = "Mortensen",
+                    Weight = 3500,
+                    Length = 56,
+                    BirthDate = new DateTime(2020, 4,7)
+                },
+                new Child
+                {
+                    ChildID = -3,
+                    FirstName = "Pascal",
+                    LastName = "Pedersen",
+                    Weight = 3500,
+                    Length = 56,
+                    BirthDate = new DateTime(2020, 4,8)
+                }
+            };
+
+            foreach (var kid in childs)
+            {
+                modelBuilder.Entity<Child>().HasData(kid);
+            }
+
+            var parents = new List<Parents>
+            {
+                new Parents
+                {
+                    ParentsID = -1,
+                    MomCPR="2003928596",
+                    MomFirstName = "Camilla",
+                    MomLastName = "Thomsen",
+                    DadCPR = "2103898569",
+                    DadFirstName = "Lars",
+                    DadLastName = "Thomsen"
+                },
+                new Parents
+                {
+                    ParentsID = -2,
+                    MomCPR="2004928596",
+                    MomFirstName = "Tove",
+                    MomLastName = "Frederiksen",
+                    DadCPR = "2104898569",
+                    DadFirstName = "Knabe",
+                    DadLastName = "Frederiksen"
+                },
+                new Parents
+                {
+                    ParentsID = -3,
+                    MomCPR="2005928596",
+                    MomFirstName = "Hilda",
+                    MomLastName = "Gudrundsen",
+                    DadCPR = "2105898569",
+                    DadFirstName = "Per",
+                    DadLastName = "Gudrundsen"
+                }
+            };
+
+            foreach (var parent in parents)
+            {
+                modelBuilder.Entity<Parents>().HasData(parent);
+            }
+
+            var rooms = new List<Room>
+            {
+                new Room
+                {
+                    RoomID = -1,
+                    RoomNumber = 1,
+                    Occupied = false
+                },
+                new Room
+                {
+                    RoomID = -2,
+                    RoomNumber = 2,
+                    Occupied = false
+                },
+                new Room
+                {
+                    RoomID = -3,
+                    RoomNumber = 3,
+                    Occupied = false
+                }
+            };
+
+            foreach (var room in rooms)
+            {
+                modelBuilder.Entity<Room>().HasData(room);
+            }
+
         }
 
         public DbSet<Appointment> Appointments { get; set; }
