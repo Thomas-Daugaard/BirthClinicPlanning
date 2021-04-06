@@ -184,6 +184,7 @@
             <Grid>
                 <ListBox ItemsSource="{Binding Appointment.Clinicians}"
                          DisplayMemberPath="Display"
+                         IsSynchronizedWithCurrentItem="True"
                          Background="Gainsboro"/>
 
             </Grid>

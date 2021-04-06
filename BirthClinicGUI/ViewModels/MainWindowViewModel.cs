@@ -62,6 +62,27 @@ namespace BirthClinicGUI.ViewModels
             });
         }
 
+        private ICommand _delAppointmentCommand;
+
+        public ICommand DelAppointmentCommand
+        {
+            get
+            {
+                return _delAppointmentCommand ??
+                       (_delAppointmentCommand = new DelegateCommand(DelAppointmentCommandExecute));
+            }
+        }
+
+        private void DelAppointmentCommandExecute()
+        {
+            int id = Appointments[AppointmentIndex].AppointmentID;
+            access.Appointments.DelAppointment(id);
+            access.Complete();
+            Appointments = access.Appointments.getAllAppointments();
+            access.Complete();
+        }
+
+
         private ICommand _selectAppointmentCommand;
 
         public ICommand SelectAppointmentCommand

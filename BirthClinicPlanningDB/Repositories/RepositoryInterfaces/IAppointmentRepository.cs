@@ -14,5 +14,7 @@ namespace BirthClinicPlanningDB.Repositories.RepositoryInterfaces
         public Appointment getSingleAppointment(int id);
 
         public void AddAppointment(Appointment appointment);
+
+        public void DelAppointment(int id);
     }
 }
