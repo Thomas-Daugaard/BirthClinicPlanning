@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using BirthClinicGUI.ViewModels;
 using BirthClinicGUI.Views;
+using BirthClinicPlanningDB.DomainObjects;
 using Prism.Ioc;
 using Prism.Unity;
 
@@ -25,11 +26,14 @@ namespace BirthClinicGUI
             containerRegistry.RegisterDialog<StatusRoomsView, StatusRoomsViewModel>();
             containerRegistry.RegisterDialog<RestRoomView, StatusRoomsViewModel>();
             containerRegistry.RegisterDialog<MaternityRoomView, StatusRoomsViewModel>();
+            containerRegistry.RegisterDialog<BabyInformationView, BabyInformationViewModel>();
         }
 
         protected override Window CreateShell()
         {
             return Container.Resolve<MainWindow>();
         }
+
+        public Child Child { get; set; }
     }
 }
