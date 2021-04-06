@@ -39,35 +39,9 @@ namespace BirthClinicGUI.ViewModels
         public MainWindowViewModel(IDialogService dialog)
         {
             _dialog = dialog;
-
-            #if DEBUG
-            Appointment appointment = new()
-            {
-                Date = DateTime.Now.Date,
-                BirthInProgess = true,
-                Clinicians = new ObservableCollection<Clinician>()
-                {
-                    new() {FirstName = "Jørgen", LastName = "Hansen"},
-                    new() {FirstName = "Tove", LastName = "Andersen"},
-                    new() {FirstName = "Ole", LastName = "Damsgaard"}
-                },
-                Parents = new Parents()
-                {
-                    DadCPR = "250485-1234",
-                    DadFirstName = "Thomas",
-                    DadLastName = "Daugaard",
-                    MomCPR = "010186-1234",
-                    MomFirstName = "Jennifer",
-                    MomLastName = "Meldgaard"
-                }
-
-            };
-
-            access.Appointments.AddAppointment(appointment);
             Appointments = access.Appointments.getAllAppointments();
             access.Complete();
             AppointmentIndex = 0;
-            #endif
         }
 
         private ICommand _addAppointmentCommand;
@@ -87,7 +61,8 @@ namespace BirthClinicGUI.ViewModels
             {
                 if (r.Result == ButtonResult.OK)
                 {
-                    // call update method on EF core rep in release version
+                    Appointments = access.Appointments.getAllAppointments();
+                    access.Complete();
                 }
             });
         }
