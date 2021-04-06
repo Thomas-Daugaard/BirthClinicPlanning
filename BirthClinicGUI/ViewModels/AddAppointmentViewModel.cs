@@ -35,10 +35,13 @@ namespace BirthClinicGUI.ViewModels
 
         public void OnDialogClosed()
         {
-            Appointment.Clinicians = Clinicians;
-            Appointment.Child.BirthDate = Appointment.Date;
-            access.Appointments.AddAppointment(Appointment);
-            access.Complete();
+            if (_okButtonPressed)
+            {
+                Appointment.Clinicians = Clinicians;
+                Appointment.Child.BirthDate = Appointment.Date;
+                access.Appointments.AddAppointment(Appointment);
+                access.Complete();
+            }
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
