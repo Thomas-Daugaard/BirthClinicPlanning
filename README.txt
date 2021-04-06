@@ -8,6 +8,8 @@ Step A:
 
 3) Replace the connection string with you own connection string in the "OnConfiguring()" method, and save. 
 
+4) Set the "BirthClinicPlanningDB" project as your startup project. 
+
 4) In the package manager console, type: "update-database", to apply the included migration fil to the database. 
 
 
@@ -18,6 +20,6 @@ Step B:
 
 1) Set the "BirthClinicGUI" as you startup project. 
 
-2) Run the application by pushing the F5 button. 
+2) Run the application by pushing the "F5" button. The WPF application will now start. 
 
-3) The WPF application will now start. 
+3) 
