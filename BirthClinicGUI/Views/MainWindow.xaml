@@ -8,7 +8,7 @@
         xmlns:viewModels="clr-namespace:BirthClinicGUI.ViewModels"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Title="Birth Clinic App" Height="430" Width="500">
+        Title="Birth Clinic App" Height="430" Width="520">
     <Grid HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -75,7 +75,8 @@
             </DataGrid.InputBindings>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Room ID" Binding="{Binding Room.RoomNumber}" MaxWidth="60" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Room No." Binding="{Binding Room.RoomNumber}" MaxWidth="60" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Room Type" Binding="{Binding Room.RoomType}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Fathers CPR" Binding="{Binding Room.Parents.DadCPR}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Mothers CPR" Binding="{Binding Room.Parents.MomCPR}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Booked on" Binding="{Binding DisplayDate}" IsReadOnly="True"/>

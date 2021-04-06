@@ -12,5 +12,7 @@ namespace BirthClinicPlanningDB.DomainObjects
         public Parents Parents { get; set; }
         public Child Child { get; set; }
         public ObservableCollection<Clinician> Clinicians { get; set; }
+
+        [NotMapped] public string RoomType { get; }
     }
 }

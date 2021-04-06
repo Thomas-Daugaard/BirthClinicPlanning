@@ -21,6 +21,8 @@ namespace BirthClinicGUI.ViewModels
         public Appointment Appointment { get; set; }
         public int ClinicianIndex { get; set; }
         public ObservableCollection<Clinician> AllClinicians { get; set; }
+        public ObservableCollection<string> RoomType { get; set; }
+        public int RoomTypeIndex { get; set; }
 
         private bool _okButtonPressed;
 
@@ -35,6 +37,27 @@ namespace BirthClinicGUI.ViewModels
         {
             if (_okButtonPressed)
             {
+                Room roomToCopy = Appointment.Room;
+
+                switch (RoomType[RoomTypeIndex])
+                {
+                    case "Birth Room":
+                        Appointment.Room = new BirthRoom();
+                        break;
+                    case "Maternity Room":
+                        Appointment.Room = new MaternityRoom();
+                        break;
+                    case "Rest Room":
+                        Appointment.Room = new RestRoom();
+                        break;
+                }
+
+                Appointment.Room.Child = roomToCopy.Child;
+                Appointment.Room.Clinicians = roomToCopy.Clinicians;
+                Appointment.Room.Parents = roomToCopy.Parents;
+                Appointment.Room.Occupied = roomToCopy.Occupied;
+                Appointment.Room.RoomNumber = roomToCopy.RoomNumber;
+
                 Appointment.Room.Child.BirthDate = Appointment.Date;
                 access.Appointments.AddAppointment(Appointment);
                 access.Complete();
@@ -45,6 +68,7 @@ namespace BirthClinicGUI.ViewModels
         {
             Appointment = new Appointment() {BirthInProgess = false, Date = DateTime.Now.Date, Room = new BirthRoom() {Parents = new Parents(), Child = new Child(), Clinicians = new ObservableCollection<Clinician>()}};
             AllClinicians = access.Clinicians.GetAllClinicians();
+            RoomType = new ObservableCollection<string>() {"Birth Room", "Maternity Room", "Rest Room"};
         }
 
         public string Title { get; }
@@ -88,11 +112,11 @@ namespace BirthClinicGUI.ViewModels
         private void AddClinicianFromListExcecute()
         {
             Clinician clinician = AllClinicians[ClinicianIndex];
-            Clinicians.Add(clinician);
+            Appointment.Room.Clinicians.Add(clinician);
 
             string message = "";
 
-            foreach (var staff in Clinicians)
+            foreach (var staff in Appointment.Room.Clinicians)
             {
                 message += string.Join(", ", $"\n{staff.FirstName} {staff.LastName}");
             }

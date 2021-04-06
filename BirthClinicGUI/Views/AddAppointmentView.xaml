@@ -32,6 +32,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
 
@@ -45,10 +46,20 @@
                  Margin="5"/>
 
                 <Label Grid.Row="1" Grid.Column="0"
+                       Content="Room type:*"
+                       Margin="5"/>
+
+                <ComboBox Grid.Row="1" Grid.Column="1"
+                         ItemsSource="{Binding RoomType}"
+                         SelectedIndex="{Binding RoomTypeIndex}"
+                         MinWidth="100"
+                         Margin="5"/>
+
+                <Label Grid.Row="2" Grid.Column="0"
                        Content="Date:*"
                        Margin="5"/>
 
-                <TextBox Grid.Row="1" Grid.Column="1"
+                <TextBox Grid.Row="2" Grid.Column="1"
                          Text="{Binding Appointment.Date}"
                          MinWidth="100"
                          Margin="5"/>
