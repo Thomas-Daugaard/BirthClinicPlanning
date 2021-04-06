@@ -20,6 +20,8 @@ namespace BirthClinicGUI.ViewModels
         private IDialogService _dialog;
         private ObservableCollection<Appointment> _appointments;
         private IDataAccessActions access = new DataAccessActions(new Context());
+        public string ClinicianFirstName { get; set; }
+        public string ClinicianLastName { get; set; }
 
         private int _appointmentIndex;
         public int AppointmentIndex
@@ -78,6 +80,7 @@ namespace BirthClinicGUI.ViewModels
             int id = Appointments[AppointmentIndex].AppointmentID;
             access.Appointments.DelAppointment(id);
             access.Complete();
+
             Appointments = access.Appointments.getAllAppointments();
             access.Complete();
         }
@@ -137,6 +140,33 @@ namespace BirthClinicGUI.ViewModels
                     }
                 }
             });
+        }
+
+        private ICommand _addClinician;
+
+
+        public ICommand AddClinician
+        {
+            get
+            {
+                return _addClinician ?? (_addClinician = new DelegateCommand(AddClinicianCanExcecute));
+            }
+        }
+
+        private void AddClinicianCanExcecute()
+        {
+            if ((ClinicianFirstName == "" || ClinicianLastName == ""))
+                MessageBox.Show("Please fill out all required fields", "Error", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+
+            else
+            {
+                Clinician newClinician = new Clinician() { FirstName = ClinicianFirstName, LastName = ClinicianLastName };
+                access.Clinicians.AddClinician(newClinician);
+                access.Complete();
+    
+                MessageBox.Show("Clinician " + ClinicianFirstName + " " + ClinicianLastName + " added", "Clinician added", MessageBoxButton.OK);
+            }
         }
     }
 }

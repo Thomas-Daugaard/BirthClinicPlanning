@@ -20,8 +20,7 @@ namespace BirthClinicGUI.ViewModels
     {
         public Appointment Appointment { get; set; }
         public ObservableCollection<Clinician> Clinicians { get; set; }
-        public string ClinicianFirstName { get; set; }
-        public string ClinicianLastName { get; set; }
+        public int ClinicianIndex { get; set; }
         public ObservableCollection<Clinician> AllClinicians { get; set; }
 
         private bool _okButtonPressed;
@@ -37,7 +36,6 @@ namespace BirthClinicGUI.ViewModels
         {
             if (_okButtonPressed)
             {
-                Appointment.Clinicians = Clinicians;
                 Appointment.Child.BirthDate = Appointment.Date;
                 access.Appointments.AddAppointment(Appointment);
                 access.Complete();
@@ -46,7 +44,7 @@ namespace BirthClinicGUI.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            Appointment = new Appointment() {BirthInProgess = false, Date = DateTime.Now.Date, Parents = new Parents(), Child = new Child()};
+            Appointment = new Appointment() {BirthInProgess = false, Date = DateTime.Now.Date, Parents = new Parents(), Child = new Child(), Clinicians = new ObservableCollection<Clinician>()};
             Clinicians = new ObservableCollection<Clinician>();
             AllClinicians = access.Clinicians.GetAllClinicians();
         }
@@ -70,35 +68,29 @@ namespace BirthClinicGUI.ViewModels
             else if (parameter?.ToLower() == "false")
                 result = ButtonResult.Cancel;
 
-            if (Appointment.Parents.MomCPR == "" || Appointment.RoomID == 0 || Clinicians.Count == 0)
+            if (Appointment.Parents.MomCPR == "" || Appointment.RoomID == 0)
                 MessageBox.Show("Please fill out all required fields", "Error", MessageBoxButton.OK,
                     MessageBoxImage.Error);
             else
                 RequestClose(new DialogResult(result));
         }
 
-        private ICommand _addClinician;
-        
 
-        public ICommand AddClinician
+        private ICommand _addClinicianFromList;
+
+
+        public ICommand AddClinicianFromList
         {
             get
             {
-                return _addClinician ?? (_addClinician = new DelegateCommand(AddClinicianCanExcecute));
+                return _addClinicianFromList ?? (_addClinicianFromList = new DelegateCommand(AddClinicianFromListExcecute));
             }
         }
 
-        private void AddClinicianCanExcecute()
+        private void AddClinicianFromListExcecute()
         {
-            if ((ClinicianFirstName == "" || ClinicianLastName == ""))
-                MessageBox.Show("Please fill out all required fields", "Error", MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-
-            else
-            {
-                Clinicians.Add(new Clinician() {FirstName = ClinicianFirstName, LastName = ClinicianLastName});
-                MessageBox.Show("Clinician " + ClinicianFirstName + " " + ClinicianLastName + " added", "Clinician added", MessageBoxButton.OK);
-            }
+            Clinician clinician = AllClinicians[ClinicianIndex];
+            Appointment.Clinicians.Add(clinician);
         }
     }
 }
