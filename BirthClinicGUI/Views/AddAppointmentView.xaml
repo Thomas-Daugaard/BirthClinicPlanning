@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:BirthClinicGUI.Views"
+             xmlns:local="clr-namespace:BirthClinicGUI.Views" xmlns:viewmodels="clr-namespace:BirthClinicGUI.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AddAppointmentViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="500">
 
@@ -176,6 +176,12 @@
                         Content="Add Clinitian"
                         Margin="5"
                         Padding="5"/>
+                <ComboBox Grid.Row="3" Grid.Column="1" 
+                          Margin="5"
+                          IsReadOnly="True"
+                          ItemsSource="{Binding AllClinicians}"
+                          DisplayMemberPath="Display"
+                          SelectedIndex="0"/>
 
             </Grid>
         </GroupBox>

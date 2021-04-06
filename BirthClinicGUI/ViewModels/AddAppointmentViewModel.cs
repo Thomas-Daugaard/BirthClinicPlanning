@@ -22,6 +22,7 @@ namespace BirthClinicGUI.ViewModels
         public ObservableCollection<Clinician> Clinicians { get; set; }
         public string ClinicianFirstName { get; set; }
         public string ClinicianLastName { get; set; }
+        public ObservableCollection<Clinician> AllClinicians { get; set; }
 
         private bool _okButtonPressed;
 
@@ -44,6 +45,7 @@ namespace BirthClinicGUI.ViewModels
         {
             Appointment = new Appointment() {BirthInProgess = false, Date = DateTime.Now.Date, Parents = new Parents(), Child = new Child()};
             Clinicians = new ObservableCollection<Clinician>();
+            AllClinicians = access.Clinicians.GetAllClinicians();
         }
 
         public string Title { get; }
