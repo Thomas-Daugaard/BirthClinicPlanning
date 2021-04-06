@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using BirthClinicPlanningDB;
 using BirthClinicPlanningDB.DomainObjects;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -15,6 +16,10 @@ namespace BirthClinicGUI.ViewModels
 {
     public class StatusRoomsViewModel : BindableBase, IDialogAware
     {
+        public ObservableCollection<RestRoom> AllRestRooms { get; set; }
+        public ObservableCollection<BirthRoom> AllBirthRooms { get; set; }
+        public ObservableCollection<MaternityRoom> AllMaternityRooms { get; set; }
+        private IDataAccessActions access = new DataAccessActions(new Context());
         private IDialogService _dialog;
         public StatusRoomsViewModel()
         {
@@ -37,69 +42,74 @@ namespace BirthClinicGUI.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            RestRooms = new ObservableCollection<RestRoom>()
-            {
-                new RestRoom()
-                {
-                    RoomID = 1,
-                    Child = new Child()
-                    {
-                        BirthDate = DateTime.Parse("28/03/2018"),
-                        FirstName = "Lukas",
-                        LastName = "Meldgaard",
-                        Length = 56,
-                        Weight = 3590
+            AllRestRooms = access.RestRooms.GetAllRestRoom();
+            AllBirthRooms = access.BirthRooms.GetAllBirthsRooms();
+            AllMaternityRooms = access.MaternityRooms.GetAllMaternityRooms();
 
-                    },
 
-                    Parents = new Parents()
-                    {
-                        DadCPR = "250485-1234",
-                        MomCPR = "010186-1234",
-                        MomFirstName = "Jennifer",
-                        MomLastName = "Meldgaard",
-                        DadFirstName = "Thomas",
-                        DadLastName = "Daugaard"
-                    },
+            //RestRooms = new ObservableCollection<RestRoom>()
+            //{
+            //    new RestRoom()
+            //    {
+            //        RoomID = 1,
+            //        Child = new Child()
+            //        {
+            //            BirthDate = DateTime.Parse("28/03/2018"),
+            //            FirstName = "Lukas",
+            //            LastName = "Meldgaard",
+            //            Length = 56,
+            //            Weight = 3590
 
-                    Occupied = true
-                }
-            };
-            MaternityIndex = 0;
-            RestRoomIndex = 0;
-            CurrentRestRoom = RestRooms[RestRoomIndex];
+            //        },
 
-            MaternityRooms = new ObservableCollection<MaternityRoom>()
-            {
-                new MaternityRoom()
-                {
-                    RoomID = 1,
-                    Child = new Child()
-                    {
-                        BirthDate = DateTime.Parse("28/03/2018"),
-                        FirstName = "Lukas",
-                        LastName = "Meldgaard",
-                        Length = 56,
-                        Weight = 3590
+            //        Parents = new Parents()
+            //        {
+            //            DadCPR = "250485-1234",
+            //            MomCPR = "010186-1234",
+            //            MomFirstName = "Jennifer",
+            //            MomLastName = "Meldgaard",
+            //            DadFirstName = "Thomas",
+            //            DadLastName = "Daugaard"
+            //        },
 
-                    },
+            //        Occupied = true
+            //    }
+            //};
+            //MaternityIndex = 0;
+            //RestRoomIndex = 0;
+            //CurrentRestRoom = RestRooms[RestRoomIndex];
 
-                    Parents = new Parents()
-                    {
-                        DadCPR = "250485-1234",
-                        MomCPR = "010186-1234",
-                        MomFirstName = "Jennifer",
-                        MomLastName = "Meldgaard",
-                        DadFirstName = "Thomas",
-                        DadLastName = "Daugaard"
-                    },
+            //MaternityRooms = new ObservableCollection<MaternityRoom>()
+            //{
+            //    new MaternityRoom()
+            //    {
+            //        RoomID = 1,
+            //        Child = new Child()
+            //        {
+            //            BirthDate = DateTime.Parse("28/03/2018"),
+            //            FirstName = "Lukas",
+            //            LastName = "Meldgaard",
+            //            Length = 56,
+            //            Weight = 3590
 
-                    Occupied = true
-                }
-            };
-            MaternityIndex = 0;
-            MaternityIndex = 0;
-            CurrentMaternityRoom = MaternityRooms[MaternityIndex];
+            //        },
+
+            //        Parents = new Parents()
+            //        {
+            //            DadCPR = "250485-1234",
+            //            MomCPR = "010186-1234",
+            //            MomFirstName = "Jennifer",
+            //            MomLastName = "Meldgaard",
+            //            DadFirstName = "Thomas",
+            //            DadLastName = "Daugaard"
+            //        },
+
+            //        Occupied = true
+            //    }
+            //};
+            //MaternityIndex = 0;
+            //MaternityIndex = 0;
+            //CurrentMaternityRoom = MaternityRooms[MaternityIndex];
         }
 
         private ICommand _restRoomCommand;
@@ -115,14 +125,26 @@ namespace BirthClinicGUI.ViewModels
         private void RestRoomCommandExecute()
         {
         }
+        private ICommand _birthRoomCommand;
+        public ICommand BirthRoomCommand
+        {
+            get
+            {
+                return _birthRoomCommand ?? (_birthRoomCommand = new DelegateCommand(BirthRoomCanExecute));
+            }
+        }
 
+        private void BirthRoomCanExecute()
+        {
+
+        }
         private ICommand _maternityRoomCommand;
 
         public ICommand MaternityRoomCommand
         {
             get
             {
-                return _restRoomCommand ?? (_restRoomCommand = new DelegateCommand(MaternityRoomCommandExecute));
+                return _maternityRoomCommand ?? (_maternityRoomCommand = new DelegateCommand(MaternityRoomCommandExecute));
             }
         }
 
@@ -143,6 +165,14 @@ namespace BirthClinicGUI.ViewModels
         }
 
         public RestRoom CurrentRestRoom { get; set; }
+
+        private ObservableCollection<BirthRoom> _birthRooms;
+        public ObservableCollection<BirthRoom> BirthRooms
+        {
+            get => _birthRooms;
+            set => SetProperty(ref _birthRooms, value);
+        }
+        public BirthRoom CurrentBirthRoom { get; set; }
 
         private ObservableCollection<MaternityRoom> _maternityrooms;
 
@@ -170,6 +200,12 @@ namespace BirthClinicGUI.ViewModels
                 CurrentRestRoom = RestRooms[RestRoomIndex];
                 _dialog.ShowDialog("RestRoomView", r => { });
             }
+            //
+            else if (roomType == "BirthRooms")
+            {
+                CurrentBirthRoom = BirthRooms[BirthRoomIndex];
+                _dialog.ShowDialog("BirthRoomView", r => { });
+            }
 
             else if (roomType == "MaternityRooms")
             {
@@ -184,6 +220,12 @@ namespace BirthClinicGUI.ViewModels
         {
             get => _restRoomIndex;
             set => _restRoomIndex = value;
+        }
+        private int _birthRoomIndex;
+        public int BirthRoomIndex
+        {
+            get => _birthRoomIndex;
+            set => _birthRoomIndex = value;
         }
 
         private int _maternityRoomIndex;
