@@ -20,7 +20,6 @@ namespace BirthClinicPlanningDB.Repositories
         {
             return new ObservableCollection<Appointment>(context.Appointments
                 .Include(r => r.Room)
-                .Include(r => r.Room)
                     .ThenInclude(c => c.Child)
                 .Include(r => r.Room)
                     .ThenInclude(p => p.Parents)
@@ -30,8 +29,8 @@ namespace BirthClinicPlanningDB.Repositories
 
         public Appointment getSingleAppointment(int id)
         {
+            Appointment appointmentToMonitor = context.Appointments.Find(id);
             return context.Appointments
-                .Include(r => r.Room)
                 .Include(r => r.Room)
                     .ThenInclude(c => c.Child)
                 .Include(r => r.Room)
@@ -53,7 +52,9 @@ namespace BirthClinicPlanningDB.Repositories
 
         public void UpdateAppointment(Appointment appointment)
         {
-            context.Appointments.Update(appointment);
+            var appointmentToUpdate = context.Appointments.Find(appointment.AppointmentID);
+
+            appointmentToUpdate.Room = appointment.Room;
         }
 
         public Context context

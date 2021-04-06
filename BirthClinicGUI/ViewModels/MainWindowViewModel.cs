@@ -124,8 +124,6 @@ namespace BirthClinicGUI.ViewModels
                 Appointments = access.Appointments.getAllAppointments();
                 access.Complete();
             }
-                
-           
         }
 
         private ICommand _statusRoomsCommand;
