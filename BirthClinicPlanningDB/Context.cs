@@ -23,26 +23,12 @@ namespace BirthClinicPlanningDB
             //Seed(modelBuilder);
         }
 
-        //private void Seed(ModelBuilder modelBuilder)
-        //{
-        //    var clinicians = new List<Clinician>
-        //    {
-        //        new Clinician
-        //        {
-        //            FirstName = "Poul",
-        //            LastName = "Henningsen"
-        //        }
-        //    };
-
-        //    foreach (var clinician in clinicians)
-        //        modelBuilder.Entity<Clinician>().HasData(clinician);
-        //}
-
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Child> Childs { get; set; }
         public DbSet<Clinician> Clinicians { get; set; }
         public DbSet<RestRoom> Restrooms { get; set; }
         public DbSet<MaternityRoom> maternityrooms { get; set; }
+        public DbSet<BirthRoom> BirthRooms { get; set; }
         public DbSet<Parents> Parents { get; set; }
     }
 }

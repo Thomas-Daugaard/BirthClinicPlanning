@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirthClinicPlanningDB.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210406133319_InitCreate")]
-    partial class InitCreate
+    [Migration("20210406134932_InitCreate2")]
+    partial class InitCreate2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -167,6 +167,13 @@ namespace BirthClinicPlanningDB.Migrations
                     b.ToTable("Room");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Room");
+                });
+
+            modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.BirthRoom", b =>
+                {
+                    b.HasBaseType("BirthClinicPlanningDB.DomainObjects.Room");
+
+                    b.HasDiscriminator().HasValue("BirthRoom");
                 });
 
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.MaternityRoom", b =>

@@ -19,7 +19,6 @@ namespace BirthClinicGUI.ViewModels
     class AddAppointmentViewModel : BindableBase, IDialogAware
     {
         public Appointment Appointment { get; set; }
-        public ObservableCollection<Clinician> Clinicians { get; set; }
         public int ClinicianIndex { get; set; }
         public ObservableCollection<Clinician> AllClinicians { get; set; }
 
@@ -44,8 +43,7 @@ namespace BirthClinicGUI.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            Appointment = new Appointment() {BirthInProgess = false, Date = DateTime.Now.Date, Room = new Room() {Parents = new Parents(), Child = new Child(), Clinicians = new ObservableCollection<Clinician>()}};
-            Clinicians = new ObservableCollection<Clinician>();
+            Appointment = new Appointment() {BirthInProgess = false, Date = DateTime.Now.Date, Room = new BirthRoom() {Parents = new Parents(), Child = new Child(), Clinicians = new ObservableCollection<Clinician>()}};
             AllClinicians = access.Clinicians.GetAllClinicians();
         }
 
@@ -68,7 +66,7 @@ namespace BirthClinicGUI.ViewModels
             else if (parameter?.ToLower() == "false")
                 result = ButtonResult.Cancel;
 
-            if (Appointment.Room.Parents.MomCPR == "" || Appointment.Room.RoomID == 0)
+            if (Appointment.Room.Parents.MomCPR == "" || Appointment.Room.RoomNumber == 0)
                 MessageBox.Show("Please fill out all required fields", "Error", MessageBoxButton.OK,
                     MessageBoxImage.Error);
             else

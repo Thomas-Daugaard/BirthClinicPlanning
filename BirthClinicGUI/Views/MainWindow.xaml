@@ -75,14 +75,14 @@
             </DataGrid.InputBindings>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Room ID" Binding="{Binding RoomID}" MaxWidth="60" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Fathers CPR" Binding="{Binding Parents.DadCPR}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Mothers CPR" Binding="{Binding Parents.MomCPR}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Room ID" Binding="{Binding Room.RoomNumber}" MaxWidth="60" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Fathers CPR" Binding="{Binding Room.Parents.DadCPR}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Mothers CPR" Binding="{Binding Room.Parents.MomCPR}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Booked on" Binding="{Binding DisplayDate}" IsReadOnly="True"/>
                 <DataGridTemplateColumn Header="Clinicians" MinWidth="120">
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <ComboBox ItemsSource="{Binding Clinicians, Mode=OneWay}"
+                            <ComboBox ItemsSource="{Binding Room.Clinicians, Mode=OneWay}"
                                       DisplayMemberPath="Display"
                                       SelectedIndex="0">
                             </ComboBox>

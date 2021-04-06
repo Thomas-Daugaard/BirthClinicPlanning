@@ -40,7 +40,7 @@
                            Margin="5"/>
 
                 <TextBox Grid.Row="0" Grid.Column="1"
-                 Text="{Binding Appointment.Room.RoomID}"
+                 Text="{Binding Appointment.Room.RoomNumber}"
                  MinWidth="100"
                  Margin="5"/>
 
