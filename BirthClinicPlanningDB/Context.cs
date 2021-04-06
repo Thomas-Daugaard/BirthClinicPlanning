@@ -1,4 +1,5 @@
-﻿using BirthClinicPlanningDB.DomainObjects;
+﻿using System.Collections.Generic;
+using BirthClinicPlanningDB.DomainObjects;
 using Microsoft.EntityFrameworkCore;
 
 namespace BirthClinicPlanningDB
@@ -18,7 +19,24 @@ namespace BirthClinicPlanningDB
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //Seed(modelBuilder);
         }
+
+        //private void Seed(ModelBuilder modelBuilder)
+        //{
+        //    var clinicians = new List<Clinician>
+        //    {
+        //        new Clinician
+        //        {
+        //            FirstName = "Poul",
+        //            LastName = "Henningsen"
+        //        }
+        //    };
+
+        //    foreach (var clinician in clinicians)
+        //        modelBuilder.Entity<Clinician>().HasData(clinician);
+        //}
 
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Child> Childs { get; set; }
