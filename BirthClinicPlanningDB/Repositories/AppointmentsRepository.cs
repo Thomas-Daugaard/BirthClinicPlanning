@@ -18,7 +18,8 @@ namespace BirthClinicPlanningDB.Repositories
 
         public ObservableCollection<Appointment> getAllAppointments()
         {
-            return new ObservableCollection<Appointment>(context.Appointments.ToList());
+            return new ObservableCollection<Appointment>(context.Appointments.Include(p => p.Parents)
+                .Include(c => c.Child).Include(c => c.Clinicians).ToList());
         }
 
         public Appointment getSingleAppointment(int id)
