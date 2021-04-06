@@ -91,6 +91,15 @@ namespace BirthClinicGUI.ViewModels
         {
             Clinician clinician = AllClinicians[ClinicianIndex];
             Appointment.Clinicians.Add(clinician);
+
+            string message = "";
+
+            foreach (var person in Appointment.Clinicians)
+            {
+                message += string.Join(", ", $"\n{person.FirstName} {person.LastName}");
+            }
+
+            MessageBox.Show($"Currently added Clinicians:\n {message}", "Clinician added to appointment", MessageBoxButton.OK);
         }
     }
 }
