@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BirthClinicGUI.Views" xmlns:viewmodels="clr-namespace:BirthClinicGUI.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AddAppointmentViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="500">
+             d:DesignHeight="500" d:DesignWidth="500">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -18,18 +18,18 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="Required fields*"/>
 
-        <GroupBox Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Margin="5" Header="Room information">
+        <GroupBox Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Margin="5" Header="Room information">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -63,6 +63,15 @@
                          Text="{Binding Appointment.Date}"
                          MinWidth="100"
                          Margin="5"/>
+
+                <Label Grid.Row="3" Grid.Column="0"
+                       Content="Birth in Progress"
+                       Margin="5"/>
+
+                <CheckBox Grid.Row="3" Grid.Column="1" 
+                          IsChecked="{Binding Appointment.BirthInProgess}"
+                          VerticalAlignment="Center"/>
+
             </Grid>
         </GroupBox>
 

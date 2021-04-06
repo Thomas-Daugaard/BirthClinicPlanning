@@ -16,6 +16,8 @@ namespace BirthClinicGUI.ViewModels
     {
         public Appointment Appointment { get; set; }
         private IDataAccessActions access = new DataAccessActions(new Context());
+        public ObservableCollection<string> RoomType { get; set; }
+        public int RoomTypeIndex { get; set; }
 
         public bool CanCloseDialog()
         {
@@ -32,6 +34,7 @@ namespace BirthClinicGUI.ViewModels
             int id = int.Parse(parameters.GetValue<string>("Message"));
             Appointment = access.Appointments.getSingleAppointment(id);
             access.Complete();
+            RoomType = new ObservableCollection<string>() { "Birth Room", "Maternity Room", "Rest Room" };
         }
 
         public string Title { get; }
