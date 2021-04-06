@@ -111,6 +111,8 @@ namespace BirthClinicGUI.ViewModels
                 _dialog.ShowDialog("SpecificAppointmentView", new DialogParameters($"Message={id}"), r =>
                 {
                 });
+                Appointments = access.Appointments.getAllAppointments();
+                access.Complete();
             }
                 
            

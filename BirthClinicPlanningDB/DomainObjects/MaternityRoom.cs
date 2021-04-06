@@ -11,6 +11,9 @@ namespace BirthClinicPlanningDB.DomainObjects
 {
     public class MaternityRoom : Room
     {
-        [NotMapped] public new string RoomType => "Maternity Room";
+        public MaternityRoom() : base()
+        {
+            base.RoomType = "Maternity Room";
+        }
     }
 }

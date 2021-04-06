@@ -11,7 +11,8 @@ namespace BirthClinicPlanningDB.DomainObjects
 {
     public class Appointment
     {
-        [Key] public int AppointmentID { get; set; }
+        [Key] 
+        public int AppointmentID { get; set; }
         public Room Room { get; set; }
         public DateTime Date { get; set; }
 

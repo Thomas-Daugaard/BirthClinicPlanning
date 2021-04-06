@@ -16,7 +16,8 @@ namespace BirthClinicGUI.ViewModels
 {
     class SpecificAppointmentViewModel : BindableBase, IDialogAware
     {
-        public Appointment Appointment { get; set; }
+        private Appointment _appointment;
+        public Appointment Appointment { get => _appointment; set => SetProperty(ref _appointment, value); }
         private IDataAccessActions access = new DataAccessActions(new Context());
         private IDialogService _dialog;
         public ObservableCollection<string> RoomType { get; set; }
@@ -34,7 +35,6 @@ namespace BirthClinicGUI.ViewModels
 
         public void OnDialogClosed()
         {
-            
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
@@ -71,22 +71,30 @@ namespace BirthClinicGUI.ViewModels
                     Appointment.Room.Parents = roomToCopy.Parents;
                     Appointment.Room.Occupied = roomToCopy.Occupied;
                     Appointment.Room.RoomNumber = roomToCopy.RoomNumber;
+                    Appointment.Room.RoomType = "Birth Room";
                     Appointment.BirthInProgess = true;
+                    access.Appointments.UpdateAppointment(Appointment);
+                    access.Complete();
                     break;
 
                 case "Birth Room":
                     Appointment.Room = new MaternityRoom();
                     _dialog.Show("BabyInformationView");
                     Appointment.Room.Child = ((App)Application.Current).Child;
-                    Appointment.Room.Clinicians.Clear();
+                    if (Appointment.Room.Clinicians != null)
+                        Appointment.Room.Clinicians.Clear();
                     Appointment.Room.Parents = roomToCopy.Parents;
                     Appointment.Room.Occupied = roomToCopy.Occupied;
                     Appointment.Room.RoomNumber = roomToCopy.RoomNumber;
+                    Appointment.Room.RoomType = "Maternity Room";
                     Appointment.BirthInProgess = false;
+                    access.Appointments.UpdateAppointment(Appointment);
+                    access.Complete();
                     break;
 
                 case "Maternity Room":
                     access.Appointments.DelAppointment(Appointment.AppointmentID);
+                    access.Complete();
                     break;
             }
         }
