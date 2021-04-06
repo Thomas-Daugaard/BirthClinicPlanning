@@ -29,15 +29,13 @@ namespace BirthClinicPlanningDB.Repositories
 
         public Appointment getSingleAppointment(int id)
         {
-            Appointment appointment = context.Appointments
+            return context.Appointments
                 .Include(r => r.Room)
                     .ThenInclude(c => c.Child)
                 .Include(r => r.Room)
                     .ThenInclude(p => p.Parents)
                 .Include(r => r.Room)
-                    .ThenInclude(c => c.Clinicians).SingleOrDefault();
-
-            return appointment;
+                    .ThenInclude(c => c.Clinicians).Where(a => a.AppointmentID == id).SingleOrDefault();
         }
 
         public void AddAppointment(Appointment appointment)
