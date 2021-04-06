@@ -90,11 +90,11 @@ namespace BirthClinicGUI.ViewModels
         private void AddClinicianFromListExcecute()
         {
             Clinician clinician = AllClinicians[ClinicianIndex];
-            Appointment.Clinicians.Add(clinician);
+            Clinicians.Add(clinician);
 
             string message = "";
 
-            foreach (var person in Appointment.Clinicians)
+            foreach (var person in Clinicians)
             {
                 message += string.Join(", ", $"\n{person.FirstName} {person.LastName}");
             }
