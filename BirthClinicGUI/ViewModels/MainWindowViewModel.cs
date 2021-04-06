@@ -76,10 +76,20 @@ namespace BirthClinicGUI.ViewModels
 
         private void SelectAppointmentCommandExecute()
         {
-            string id = Appointments[AppointmentIndex].AppointmentID.ToString();
-            _dialog.ShowDialog("SpecificAppointmentView", new DialogParameters($"Message={id}"), r =>
+            if (AppointmentIndex >= Appointments.Count)
             {
-            });
+                MessageBox.Show("The chosen field has no value", "Error", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+            else
+            {
+                string id = Appointments[AppointmentIndex].AppointmentID.ToString();
+                _dialog.ShowDialog("SpecificAppointmentView", new DialogParameters($"Message={id}"), r =>
+                {
+                });
+            }
+                
+           
         }
 
         private ICommand _statusRoomsCommand;
