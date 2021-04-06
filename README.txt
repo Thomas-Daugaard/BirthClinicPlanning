@@ -8,7 +8,11 @@ Step A:
 
 3) Replace the connection string with you own connection string in the "OnConfiguring()" method, and save. 
 
+4) In the package manager console, type: "update-database", to apply the included migration fil to the database. 
+
+
 ======================================   Now you are ready to run the application  =========================================
+
 
 Step B:
 
