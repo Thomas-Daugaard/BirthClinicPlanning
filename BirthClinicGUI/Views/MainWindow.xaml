@@ -8,7 +8,7 @@
         xmlns:viewModels="clr-namespace:BirthClinicGUI.ViewModels"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Title="Birth Clinic App" Height="400" Width="500">
+        Title="Birth Clinic App" Height="430" Width="500">
     <Grid HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -54,53 +54,14 @@
                 Command="{Binding StatusRoomsCommand}"
                 />
 
-        <GroupBox Grid.Row="3">
-            <Grid HorizontalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <Label Grid.Row="0" Grid.Column="0" 
-                       Content="Clinician First name:*"
-                       Margin="5"/>
-
-                <TextBox Grid.Row="0" Grid.Column="1"
-                 Text="{Binding ClinicianFirstName}"
-                 MinWidth="100"
-                 Margin="5"/>
-
-        <Label Grid.Row="1" Grid.Column="0"
-               Content="Clinician Last name:*"
-               Margin="5"/>
-
-        <TextBox Grid.Row="1" Grid.Column="1"
-                 Text="{Binding ClinicianLastName}"
-                 MinWidth="100"
-                 Margin="5"/>
-
-        <Button Grid.Row="2" Grid.Column="0"
-                Command="{Binding AddClinician}"
-                Content="Add Clinitian"
-                Margin="5"
-                Padding="5"/>
-            </Grid>
-        </GroupBox>
-
-        <Label Grid.Row="4" Grid.Column="0"
+        <Label Grid.Row="3" Grid.Column="0"
                Name="SeeAppointBtn"
                Content="Current Appointments:"
                Padding="5"
                Margin="10"
                HorizontalAlignment="Center"/>
 
-        <DataGrid Grid.Row="5"
+        <DataGrid Grid.Row="4"
                   ItemsSource="{Binding Appointments}"
                   SelectedIndex="{Binding AppointmentIndex}"
                   AutoGenerateColumns="False"
@@ -130,5 +91,47 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Expander Grid.Row="5" Header="Add Clinitian" Margin="0,10,0,0">
+            <GroupBox>
+                <Grid HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" 
+                           Content="Clinician First name:*"
+                           Margin="5"/>
+
+                    <TextBox Grid.Row="0" Grid.Column="1"
+                             Text="{Binding ClinicianFirstName}"
+                             MinWidth="100"
+                             Margin="5"/>
+
+                    <Label Grid.Row="1" Grid.Column="0"
+                           Content="Clinician Last name:*"
+                           Margin="5"/>
+
+                    <TextBox Grid.Row="1" Grid.Column="1"
+                             Text="{Binding ClinicianLastName}"
+                             MinWidth="100"
+                             Margin="5"/>
+
+                    <Button Grid.Row="2" Grid.Column="0"
+                            Command="{Binding AddClinician}"
+                            Content="Add Clinitian"
+                            Margin="5"
+                            Padding="5"/>
+                </Grid>
+            </GroupBox>
+
+        </Expander>
     </Grid>
 </Window>
