@@ -22,7 +22,6 @@ namespace BirthClinicGUI.ViewModels
         public ObservableCollection<Clinician> Clinicians { get; set; }
         public string ClinicianFirstName { get; set; }
         public string ClinicianLastName { get; set; }
-        public int ClinicianID { get; set; }
 
         private bool _okButtonPressed;
 
