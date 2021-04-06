@@ -29,26 +29,18 @@ namespace BirthClinicPlanningDB.Migrations
                     b.Property<bool>("BirthInProgess")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("ChildID")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DisplayDate")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ParentsID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoomID")
+                    b.Property<int?>("RoomID")
                         .HasColumnType("int");
 
                     b.HasKey("AppointmentID");
 
-                    b.HasIndex("ChildID");
-
-                    b.HasIndex("ParentsID");
+                    b.HasIndex("RoomID");
 
                     b.ToTable("Appointments");
                 });
@@ -90,48 +82,20 @@ namespace BirthClinicPlanningDB.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AppointmentID")
-                        .HasColumnType("int");
-
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("RoomID")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
-                    b.HasIndex("AppointmentID");
+                    b.HasIndex("RoomID");
 
                     b.ToTable("Clinicians");
-                });
-
-            modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.MaternityRoom", b =>
-                {
-                    b.Property<int>("MaternityRoomID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ChildID")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Occupied")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("ParentsID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoomID")
-                        .HasColumnType("int");
-
-                    b.HasKey("MaternityRoomID");
-
-                    b.HasIndex("ChildID");
-
-                    b.HasIndex("ParentsID");
-
-                    b.ToTable("maternityrooms");
                 });
 
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Parents", b =>
@@ -169,9 +133,9 @@ namespace BirthClinicPlanningDB.Migrations
                     b.ToTable("Parents");
                 });
 
-            modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.RestRoom", b =>
+            modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Room", b =>
                 {
-                    b.Property<int>("RestRoomID")
+                    b.Property<int>("RoomID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -179,59 +143,58 @@ namespace BirthClinicPlanningDB.Migrations
                     b.Property<int?>("ChildID")
                         .HasColumnType("int");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Occupied")
                         .HasColumnType("bit");
 
                     b.Property<int?>("ParentsID")
                         .HasColumnType("int");
 
-                    b.Property<int>("RoomID")
+                    b.Property<int>("RoomNumber")
                         .HasColumnType("int");
 
-                    b.HasKey("RestRoomID");
+                    b.HasKey("RoomID");
 
                     b.HasIndex("ChildID");
 
                     b.HasIndex("ParentsID");
 
-                    b.ToTable("Restrooms");
-                });
+                    b.ToTable("Room");
 
-            modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Appointment", b =>
-                {
-                    b.HasOne("BirthClinicPlanningDB.DomainObjects.Child", "Child")
-                        .WithMany()
-                        .HasForeignKey("ChildID");
-
-                    b.HasOne("BirthClinicPlanningDB.DomainObjects.Parents", "Parents")
-                        .WithMany()
-                        .HasForeignKey("ParentsID");
-
-                    b.Navigation("Child");
-
-                    b.Navigation("Parents");
-                });
-
-            modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Clinician", b =>
-                {
-                    b.HasOne("BirthClinicPlanningDB.DomainObjects.Appointment", null)
-                        .WithMany("Clinicians")
-                        .HasForeignKey("AppointmentID");
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Room");
                 });
 
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.MaternityRoom", b =>
                 {
-                    b.HasOne("BirthClinicPlanningDB.DomainObjects.Child", "Child")
+                    b.HasBaseType("BirthClinicPlanningDB.DomainObjects.Room");
+
+                    b.HasDiscriminator().HasValue("MaternityRoom");
+                });
+
+            modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.RestRoom", b =>
+                {
+                    b.HasBaseType("BirthClinicPlanningDB.DomainObjects.Room");
+
+                    b.HasDiscriminator().HasValue("RestRoom");
+                });
+
+            modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Appointment", b =>
+                {
+                    b.HasOne("BirthClinicPlanningDB.DomainObjects.Room", "Room")
                         .WithMany()
-                        .HasForeignKey("ChildID");
+                        .HasForeignKey("RoomID");
 
-                    b.HasOne("BirthClinicPlanningDB.DomainObjects.Parents", "Parents")
-                        .WithMany()
-                        .HasForeignKey("ParentsID");
+                    b.Navigation("Room");
+                });
 
-                    b.Navigation("Child");
-
-                    b.Navigation("Parents");
+            modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Clinician", b =>
+                {
+                    b.HasOne("BirthClinicPlanningDB.DomainObjects.Room", null)
+                        .WithMany("Clinicians")
+                        .HasForeignKey("RoomID");
                 });
 
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Parents", b =>
@@ -243,7 +206,7 @@ namespace BirthClinicPlanningDB.Migrations
                     b.Navigation("Child");
                 });
 
-            modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.RestRoom", b =>
+            modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Room", b =>
                 {
                     b.HasOne("BirthClinicPlanningDB.DomainObjects.Child", "Child")
                         .WithMany()
@@ -258,7 +221,7 @@ namespace BirthClinicPlanningDB.Migrations
                     b.Navigation("Parents");
                 });
 
-            modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Appointment", b =>
+            modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Room", b =>
                 {
                     b.Navigation("Clinicians");
                 });

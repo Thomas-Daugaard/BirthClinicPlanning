@@ -36,7 +36,7 @@ namespace BirthClinicGUI.ViewModels
         {
             if (_okButtonPressed)
             {
-                Appointment.Child.BirthDate = Appointment.Date;
+                Appointment.Room.Child.BirthDate = Appointment.Date;
                 access.Appointments.AddAppointment(Appointment);
                 access.Complete();
             }
@@ -44,7 +44,7 @@ namespace BirthClinicGUI.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            Appointment = new Appointment() {BirthInProgess = false, Date = DateTime.Now.Date, Parents = new Parents(), Child = new Child(), Clinicians = new ObservableCollection<Clinician>()};
+            Appointment = new Appointment() {BirthInProgess = false, Date = DateTime.Now.Date, Room = new Room() {Parents = new Parents(), Child = new Child(), Clinicians = new ObservableCollection<Clinician>()}};
             Clinicians = new ObservableCollection<Clinician>();
             AllClinicians = access.Clinicians.GetAllClinicians();
         }
@@ -68,7 +68,7 @@ namespace BirthClinicGUI.ViewModels
             else if (parameter?.ToLower() == "false")
                 result = ButtonResult.Cancel;
 
-            if (Appointment.Parents.MomCPR == "" || Appointment.RoomID == 0)
+            if (Appointment.Room.Parents.MomCPR == "" || Appointment.Room.RoomID == 0)
                 MessageBox.Show("Please fill out all required fields", "Error", MessageBoxButton.OK,
                     MessageBoxImage.Error);
             else
@@ -90,7 +90,7 @@ namespace BirthClinicGUI.ViewModels
         private void AddClinicianFromListExcecute()
         {
             Clinician clinician = AllClinicians[ClinicianIndex];
-            Appointment.Clinicians.Add(clinician);
+            Appointment.Room.Clinicians.Add(clinician);
         }
     }
 }

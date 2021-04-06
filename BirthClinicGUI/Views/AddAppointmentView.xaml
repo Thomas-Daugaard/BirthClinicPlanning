@@ -40,7 +40,7 @@
                            Margin="5"/>
 
                 <TextBox Grid.Row="0" Grid.Column="1"
-                 Text="{Binding Appointment.RoomID}"
+                 Text="{Binding Appointment.Room.RoomID}"
                  MinWidth="100"
                  Margin="5"/>
 
@@ -72,7 +72,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="0" Grid.Column="1"
-                         Text="{Binding Appointment.Parents.DadFirstName}"
+                         Text="{Binding Appointment.Room.Parents.DadFirstName}"
                          MinWidth="120"
                          Margin="5"/>
 
@@ -81,7 +81,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="1" Grid.Column="1"
-                         Text="{Binding Appointment.Parents.DadLastName}"
+                         Text="{Binding Appointment.Room.Parents.DadLastName}"
                          MinWidth="120"
                          Margin="5"/>
 
@@ -90,7 +90,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="2" Grid.Column="1"
-                         Text="{Binding Appointment.Parents.DadCPR}"
+                         Text="{Binding Appointment.Room.Parents.DadCPR}"
                          MinWidth="100"
                          Margin="5"/>
 
@@ -114,7 +114,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="0" Grid.Column="1"
-                         Text="{Binding Appointment.Parents.MomFirstName}"
+                         Text="{Binding Appointment.Room.Parents.MomFirstName}"
                          MinWidth="120"
                          Margin="5"/>
 
@@ -123,7 +123,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="1" Grid.Column="1"
-                         Text="{Binding Appointment.Parents.MomLastName}"
+                         Text="{Binding Appointment.Room.Parents.MomLastName}"
                          MinWidth="120"
                          Margin="5"/>
 
@@ -132,7 +132,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="2" Grid.Column="1"
-                         Text="{Binding Appointment.Parents.MomCPR}"
+                         Text="{Binding Appointment.Room.Parents.MomCPR}"
                          MinWidth="100"
                          Margin="5"/>
 
