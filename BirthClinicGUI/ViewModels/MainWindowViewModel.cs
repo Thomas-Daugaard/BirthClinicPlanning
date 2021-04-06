@@ -20,8 +20,18 @@ namespace BirthClinicGUI.ViewModels
         private IDialogService _dialog;
         private ObservableCollection<Appointment> _appointments;
         private IDataAccessActions access = new DataAccessActions(new Context());
-        public string ClinicianFirstName { get; set; }
-        public string ClinicianLastName { get; set; }
+        private string _clinicianFirstName;
+        private string _clinicianLastName;
+        public string ClinicianFirstName 
+        { 
+            get => _clinicianFirstName;
+            set => SetProperty(ref _clinicianFirstName, value);
+        }
+        public string ClinicianLastName 
+        { 
+            get => _clinicianLastName;
+            set => SetProperty(ref _clinicianLastName, value); 
+        }
 
         private int _appointmentIndex;
         public int AppointmentIndex
@@ -164,8 +174,11 @@ namespace BirthClinicGUI.ViewModels
                 Clinician newClinician = new Clinician() { FirstName = ClinicianFirstName, LastName = ClinicianLastName };
                 access.Clinicians.AddClinician(newClinician);
                 access.Complete();
-    
+
                 MessageBox.Show("Clinician " + ClinicianFirstName + " " + ClinicianLastName + " added", "Clinician added", MessageBoxButton.OK);
+
+                ClinicianFirstName = "";
+                ClinicianLastName = "";
             }
         }
     }

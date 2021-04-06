@@ -114,7 +114,8 @@
                     <TextBox Grid.Row="0" Grid.Column="1"
                              Text="{Binding ClinicianFirstName}"
                              MinWidth="100"
-                             Margin="5"/>
+                             Margin="5"
+                             Name="txbFirstName"/>
 
                     <Label Grid.Row="1" Grid.Column="0"
                            Content="Clinician Last name:*"
@@ -123,7 +124,8 @@
                     <TextBox Grid.Row="1" Grid.Column="1"
                              Text="{Binding ClinicianLastName}"
                              MinWidth="100"
-                             Margin="5"/>
+                             Margin="5"
+                             Name="txbLastName"/>
 
                     <Button Grid.Row="2" Grid.Column="0"
                             Command="{Binding AddClinician}"
