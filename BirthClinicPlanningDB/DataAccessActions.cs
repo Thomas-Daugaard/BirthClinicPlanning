@@ -14,6 +14,7 @@ namespace BirthClinicPlanningDB
         public IAppointmentRepository Appointments { get; private set; }
         public IRestRoomRepository RestRooms { get; private set; }
         public IMaternityRoomRepository MaternityRooms { get; private set; }
+        public IClinicianRepository Clinicians { get; private set; }
 
         //public repository object (by interface) decleration as property
 
@@ -23,6 +24,7 @@ namespace BirthClinicPlanningDB
             Appointments = new AppointmentsRepository(_context);
             RestRooms = new RestRoomRepository(_context);
             MaternityRooms = new MaternityRoomRepository(_context);
+            Clinicians = new ClinicianRepository(_context);
 
             //Instantiate repository objects
         }
