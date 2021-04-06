@@ -88,7 +88,16 @@ namespace BirthClinicGUI.ViewModels
         private void AddClinicianFromListExcecute()
         {
             Clinician clinician = AllClinicians[ClinicianIndex];
-            Appointment.Room.Clinicians.Add(clinician);
+            Clinicians.Add(clinician);
+
+            string message = "";
+
+            foreach (var staff in Clinicians)
+            {
+                message += string.Join(", ", $"\n{staff.FirstName} {staff.LastName}");
+            }
+
+            MessageBox.Show($"Currently added Clinicians:\n {message}", "Clinician added to appointment", MessageBoxButton.OK);
         }
     }
 }
