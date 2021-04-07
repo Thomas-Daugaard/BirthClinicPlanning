@@ -53,15 +53,29 @@ namespace BirthClinicGUI.ViewModels
             TimeRange AppointmentToInsert = new TimeRange(a1.StartTime, a1.EndTime);
             TimeRange AppointmentToCompare = new TimeRange(a2.StartTime, a2.EndTime);
 
-
-            if (AppointmentToCompare.IntersectsWith(AppointmentToInsert))
+            if (AppointmentToCompare.IsSamePeriod(AppointmentToInsert))
             {
-                MessageBox.Show("Date already booked");
-                return false;
+                MessageBox.Show("TimeRange is occupied");
+                return AppointmentToCompare.IsSamePeriod(AppointmentToInsert);
+            }
+            else if (AppointmentToCompare.HasInside(AppointmentToInsert))
+            {
+                MessageBox.Show("TimeRange overlaps another Timerange");
+                return AppointmentToCompare.HasInside(AppointmentToInsert);
+            }
+            else if (AppointmentToCompare.OverlapsWith(AppointmentToInsert))
+            {
+                MessageBox.Show("TimeRange overlaps another Timerange");
+                return AppointmentToCompare.OverlapsWith(AppointmentToInsert);
+            }
+            else if (AppointmentToCompare.IntersectsWith(AppointmentToInsert))
+            {
+                MessageBox.Show("Timerange intersects with another Timerange");
+                return AppointmentToCompare.IntersectsWith(AppointmentToInsert);
             }
 
             else
-                return true;
+                return false;
         }
 
         public void OnDialogClosed()
@@ -78,11 +92,11 @@ namespace BirthClinicGUI.ViewModels
 
                         foreach (var room in restRoomsToCheck)
                         {
-                            if (room.Appointments != null)
+                            if (room.Appointments != null) //Vi kommer aldrig ind i dette scope
                             {
                                 foreach (var appointment in room.Appointments)
                                 {
-                                    if (!ValidateDate(Appointment, appointment))
+                                    if (ValidateDate(Appointment, appointment))
                                     {
                                         return;
                                     }
