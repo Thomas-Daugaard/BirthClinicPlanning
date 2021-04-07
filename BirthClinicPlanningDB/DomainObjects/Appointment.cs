@@ -15,7 +15,7 @@ namespace BirthClinicPlanningDB.DomainObjects
         public int AppointmentID { get; set; }
 
         public Room Room { get; set; }
-        public DateTime StarTime { get; set; }
+        public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 
         public bool BirthInProgess { get; set; }
@@ -23,7 +23,7 @@ namespace BirthClinicPlanningDB.DomainObjects
         [NotMapped]
         public string DisplayStartDate
         {
-            get => StarTime.ToShortDateString();
+            get => StartTime.ToShortDateString();
             set => DateTime.Parse(value);
         }
 
