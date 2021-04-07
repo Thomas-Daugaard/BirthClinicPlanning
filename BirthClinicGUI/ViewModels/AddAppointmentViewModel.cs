@@ -39,10 +39,15 @@ namespace BirthClinicGUI.ViewModels
             if (a1.StartTime >= DateTime.Now)
                 return true;
 
+            else
+                MessageBox.Show("Invalid Date");
 
             if (DateTime.Compare(a1.StartTime + (a1.EndTime - a1.StartTime),
                 a2.StartTime + (a2.EndTime - a2.StartTime)) == 0)
                 return true;
+
+            else
+                MessageBox.Show("Date already booked");
 
             return false;
         }
@@ -51,6 +56,7 @@ namespace BirthClinicGUI.ViewModels
         {
             if (_okButtonPressed)
             {
+                bool DateOk = true;
                 Room roomToCopy = Appointment.Room;
 
                 switch (RoomType[RoomTypeIndex])
@@ -67,7 +73,6 @@ namespace BirthClinicGUI.ViewModels
                                 {
                                     if (!ValidateDate(Appointment, appointment))
                                     {
-                                        MessageBox.Show("Invalid Date");
                                         return;
                                     }
                                 }
