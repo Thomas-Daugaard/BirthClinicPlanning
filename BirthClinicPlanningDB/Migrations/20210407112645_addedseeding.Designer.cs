@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirthClinicPlanningDB.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210407103010_addedseeding")]
+    [Migration("20210407112645_addedseeding")]
     partial class addedseeding
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,11 +31,14 @@ namespace BirthClinicPlanningDB.Migrations
                     b.Property<bool>("BirthInProgess")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("RoomID")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("AppointmentID");
 
@@ -48,13 +51,15 @@ namespace BirthClinicPlanningDB.Migrations
                         {
                             AppointmentID = 1,
                             BirthInProgess = false,
-                            Date = new DateTime(2021, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            EndTime = new DateTime(2021, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2021, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             AppointmentID = 2,
                             BirthInProgess = false,
-                            Date = new DateTime(2021, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            EndTime = new DateTime(2021, 7, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -96,8 +101,8 @@ namespace BirthClinicPlanningDB.Migrations
                         new
                         {
                             ChildID = 1,
-                            BirthDate = new DateTime(2020, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DisplayDate = "06-04-2020",
+                            BirthDate = new DateTime(2020, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayDate = "06-06-2020",
                             FirstName = "Leif",
                             LastName = "Knudsen",
                             Length = 56,
@@ -106,8 +111,8 @@ namespace BirthClinicPlanningDB.Migrations
                         new
                         {
                             ChildID = 2,
-                            BirthDate = new DateTime(2020, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DisplayDate = "07-04-2020",
+                            BirthDate = new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayDate = "07-06-2020",
                             FirstName = "Viggo",
                             LastName = "Mortensen",
                             Length = 56,
@@ -116,8 +121,8 @@ namespace BirthClinicPlanningDB.Migrations
                         new
                         {
                             ChildID = 3,
-                            BirthDate = new DateTime(2020, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DisplayDate = "08-04-2020",
+                            BirthDate = new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayDate = "08-06-2020",
                             FirstName = "Pascal",
                             LastName = "Pedersen",
                             Length = 56,
@@ -278,19 +283,22 @@ namespace BirthClinicPlanningDB.Migrations
                         {
                             RoomID = 1,
                             Occupied = false,
-                            RoomNumber = 1
+                            RoomNumber = 1,
+                            RoomType = "RestRoom"
                         },
                         new
                         {
                             RoomID = 2,
                             Occupied = false,
-                            RoomNumber = 2
+                            RoomNumber = 2,
+                            RoomType = "RestRoom"
                         },
                         new
                         {
                             RoomID = 3,
                             Occupied = false,
-                            RoomNumber = 3
+                            RoomNumber = 3,
+                            RoomType = "MaternityRoom"
                         });
                 });
 

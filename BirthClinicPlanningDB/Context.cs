@@ -64,7 +64,7 @@ namespace BirthClinicPlanningDB
                     LastName = "Knudsen",
                     Weight = 3500,
                     Length = 56,
-                    BirthDate = new DateTime(2020, 4,6)
+                    BirthDate = new DateTime(2020, 6,6)
                 },
                 new Child
                 {
@@ -73,7 +73,7 @@ namespace BirthClinicPlanningDB
                     LastName = "Mortensen",
                     Weight = 3500,
                     Length = 56,
-                    BirthDate = new DateTime(2020, 4,7)
+                    BirthDate = new DateTime(2020, 6,7)
                 },
                 new Child
                 {
@@ -82,7 +82,7 @@ namespace BirthClinicPlanningDB
                     LastName = "Pedersen",
                     Weight = 3500,
                     Length = 56,
-                    BirthDate = new DateTime(2020, 4,8)
+                    BirthDate = new DateTime(2020, 6,8)
                 }
             };
 
@@ -168,14 +168,16 @@ namespace BirthClinicPlanningDB
                 new Appointment
                 {
                     AppointmentID = 1,
-                    Date = new DateTime(2021,04,07),
+                    StartTime = new DateTime(2021,06,07),
+                    EndTime = new DateTime(2021,06,08),
                     BirthInProgess = false
                 },
 
                 new Appointment
                 {
                 AppointmentID = 2,
-                Date = new DateTime(2021,04,08),
+                StartTime = new DateTime(2021,07,08),
+                EndTime = new DateTime(2021,07,09),
                 BirthInProgess = false
                 }
 
