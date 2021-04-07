@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirthClinicPlanningDB.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210406201552_InitCreate")]
+    [Migration("20210407084202_InitCreate")]
     partial class InitCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,7 +108,7 @@ namespace BirthClinicPlanningDB.Migrations
 
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Clinician", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("ClinicianID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -122,7 +122,7 @@ namespace BirthClinicPlanningDB.Migrations
                     b.Property<int?>("RoomID")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("ClinicianID");
 
                     b.HasIndex("RoomID");
 
@@ -131,19 +131,19 @@ namespace BirthClinicPlanningDB.Migrations
                     b.HasData(
                         new
                         {
-                            ID = 1,
+                            ClinicianID = 1,
                             FirstName = "Camilla",
                             LastName = "Holmstoel"
                         },
                         new
                         {
-                            ID = 2,
+                            ClinicianID = 2,
                             FirstName = "Thomas",
                             LastName = "Daugaard"
                         },
                         new
                         {
-                            ID = 3,
+                            ClinicianID = 3,
                             FirstName = "Emil",
                             LastName = "Garder"
                         });
@@ -297,7 +297,7 @@ namespace BirthClinicPlanningDB.Migrations
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Appointment", b =>
                 {
                     b.HasOne("BirthClinicPlanningDB.DomainObjects.Room", "Room")
-                        .WithMany()
+                        .WithMany("Appointments")
                         .HasForeignKey("RoomID");
 
                     b.Navigation("Room");
@@ -336,6 +336,8 @@ namespace BirthClinicPlanningDB.Migrations
 
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Room", b =>
                 {
+                    b.Navigation("Appointments");
+
                     b.Navigation("Clinicians");
                 });
 #pragma warning restore 612, 618
