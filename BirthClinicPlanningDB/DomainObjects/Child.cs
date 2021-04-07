@@ -18,8 +18,6 @@ namespace BirthClinicPlanningDB.DomainObjects
         public int Length { get; set; }
         public DateTime BirthDate { get; set; }
 
-        [ForeignKey("ParentsID")]
-        public Parents parents { get; set; }
 
         public string DisplayDate { get => BirthDate.ToShortDateString(); set => DateTime.Parse(value); }
     }

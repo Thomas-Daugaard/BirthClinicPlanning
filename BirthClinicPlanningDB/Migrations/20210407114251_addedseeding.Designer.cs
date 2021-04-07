@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirthClinicPlanningDB.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210407112645_addedseeding")]
+    [Migration("20210407114251_addedseeding")]
     partial class addedseeding
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,15 +85,10 @@ namespace BirthClinicPlanningDB.Migrations
                     b.Property<int>("Length")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ParentsID")
-                        .HasColumnType("int");
-
                     b.Property<int>("Weight")
                         .HasColumnType("int");
 
                     b.HasKey("ChildID");
-
-                    b.HasIndex("ParentsID");
 
                     b.ToTable("Childs");
 
@@ -203,9 +198,7 @@ namespace BirthClinicPlanningDB.Migrations
 
                     b.HasKey("ParentsID");
 
-                    b.HasIndex("ChildID")
-                        .IsUnique()
-                        .HasFilter("[ChildID] IS NOT NULL");
+                    b.HasIndex("ChildID");
 
                     b.ToTable("Parents");
 
@@ -332,15 +325,6 @@ namespace BirthClinicPlanningDB.Migrations
                     b.Navigation("Room");
                 });
 
-            modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Child", b =>
-                {
-                    b.HasOne("BirthClinicPlanningDB.DomainObjects.Parents", "parents")
-                        .WithMany()
-                        .HasForeignKey("ParentsID");
-
-                    b.Navigation("parents");
-                });
-
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Clinician", b =>
                 {
                     b.HasOne("BirthClinicPlanningDB.DomainObjects.Room", null)
@@ -351,8 +335,8 @@ namespace BirthClinicPlanningDB.Migrations
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Parents", b =>
                 {
                     b.HasOne("BirthClinicPlanningDB.DomainObjects.Child", "Child")
-                        .WithOne()
-                        .HasForeignKey("BirthClinicPlanningDB.DomainObjects.Parents", "ChildID");
+                        .WithMany()
+                        .HasForeignKey("ChildID");
 
                     b.Navigation("Child");
                 });

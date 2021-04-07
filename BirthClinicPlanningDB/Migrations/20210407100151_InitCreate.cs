@@ -125,32 +125,13 @@ namespace BirthClinicPlanningDB.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Appointments",
-                columns: new[] { "AppointmentID", "BirthInProgess", "EndTime", "RoomID", "StartTime" },
-                values: new object[,]
-                {
-                    { 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2021, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2021, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified) }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Childs",
-                columns: new[] { "ChildID", "BirthDate", "DisplayDate", "FirstName", "LastName", "Length", "ParentsID", "Weight" },
+                columns: new[] { "ChildID", "BirthDate", "DisplayDate", "FirstName", "LastName", "Length", "Weight" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2020, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "06-04-2020", "Leif", "Knudsen", 56, null, 3500 },
-                    { 2, new DateTime(2020, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "07-04-2020", "Viggo", "Mortensen", 56, null, 3500 },
-                    { 3, new DateTime(2020, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "08-04-2020", "Pascal", "Pedersen", 56, null, 3500 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Clinicians",
-                columns: new[] { "ClinicianID", "FirstName", "LastName", "RoomID" },
-                values: new object[,]
-                {
-                    { 1, "Camilla", "Holmstoel", null },
-                    { 2, "Thomas", "Daugaard", null },
-                    { 3, "Emil", "Garder", null }
+                    { 1, new DateTime(2020, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "06-04-2020", "Leif", "Knudsen", 56,  3500 },
+                    { 2, new DateTime(2020, 7, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "07-04-2020", "Viggo", "Mortensen", 56,  3500 },
+                    { 3, new DateTime(2020, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "08-04-2020", "Pascal", "Pedersen", 56,  3500 }
                 });
 
             migrationBuilder.InsertData(
@@ -158,9 +139,9 @@ namespace BirthClinicPlanningDB.Migrations
                 columns: new[] { "ParentsID", "ChildID", "DadCPR", "DadFirstName", "DadLastName", "MomCPR", "MomFirstName", "MomLastName" },
                 values: new object[,]
                 {
-                    { 1, null, "2103898569", "Lars", "Thomsen", "2003928596", "Camilla", "Thomsen" },
-                    { 2, null, "2104898569", "Knabe", "Frederiksen", "2004928596", "Tove", "Frederiksen" },
-                    { 3, null, "2105898569", "Per", "Gudrundsen", "2005928596", "Hilda", "Gudrundsen" }
+                    { 1, 1, "2103898569", "Lars", "Thomsen", "2003928596", "Camilla", "Thomsen" },
+                    { 2, 2, "2104898569", "Knabe", "Frederiksen", "2004928596", "Tove", "Frederiksen" },
+                    { 3, 3, "2105898569", "Per", "Gudrundsen", "2005928596", "Hilda", "Gudrundsen" }
                 });
 
             migrationBuilder.InsertData(
@@ -168,9 +149,28 @@ namespace BirthClinicPlanningDB.Migrations
                 columns: new[] { "RoomID", "ChildID", "Discriminator", "Occupied", "ParentsID", "RoomNumber", "RoomType" },
                 values: new object[,]
                 {
-                    { 1, null, "Room", false, null, 1, null },
-                    { 2, null, "Room", false, null, 2, null },
-                    { 3, null, "Room", false, null, 3, null }
+                    { 1, 1, "Room", false, 1, 1, "RestRoom" },
+                    { 2, 2, "Room", false, 2, 2, "RestRoom" },
+                    { 3, 3, "Room", false, 3, 3, "MaternityRoom"}
+                });
+
+            migrationBuilder.InsertData(
+                table: "Appointments",
+                columns: new[] { "AppointmentID", "BirthInProgess", "StartTime", "EndTime", "RoomID" },
+                values: new object[,]
+                {
+                    { 1, false, new DateTime(2021, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),new DateTime(2021, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 2, false, new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),new DateTime(2021, 7, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Clinicians",
+                columns: new[] { "ClinicianID", "FirstName", "LastName", "RoomID" },
+                values: new object[,]
+                {
+                    { 1, "Camilla", "Holmstoel", 1 },
+                    { 2, "Thomas", "Daugaard", 1 },
+                    { 3, "Emil", "Garder", 2 }
                 });
 
             migrationBuilder.CreateIndex(
