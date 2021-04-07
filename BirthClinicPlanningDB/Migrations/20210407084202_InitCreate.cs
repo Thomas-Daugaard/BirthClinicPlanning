@@ -57,10 +57,10 @@ namespace BirthClinicPlanningDB.Migrations
                     RoomID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoomNumber = table.Column<int>(type: "int", nullable: false),
+                    RoomType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Occupied = table.Column<bool>(type: "bit", nullable: false),
                     ParentsID = table.Column<int>(type: "int", nullable: true),
                     ChildID = table.Column<int>(type: "int", nullable: true),
-                    RoomType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -105,7 +105,7 @@ namespace BirthClinicPlanningDB.Migrations
                 name: "Clinicians",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    ClinicianID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -113,7 +113,7 @@ namespace BirthClinicPlanningDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clinicians", x => x.ID);
+                    table.PrimaryKey("PK_Clinicians", x => x.ClinicianID);
                     table.ForeignKey(
                         name: "FK_Clinicians_Room_RoomID",
                         column: x => x.RoomID,
@@ -134,7 +134,7 @@ namespace BirthClinicPlanningDB.Migrations
 
             migrationBuilder.InsertData(
                 table: "Clinicians",
-                columns: new[] { "ID", "FirstName", "LastName", "RoomID" },
+                columns: new[] { "ClinicianID", "FirstName", "LastName", "RoomID" },
                 values: new object[,]
                 {
                     { 1, "Camilla", "Holmstoel", null },
