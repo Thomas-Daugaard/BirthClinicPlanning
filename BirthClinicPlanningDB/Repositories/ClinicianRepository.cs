@@ -22,7 +22,7 @@ namespace BirthClinicPlanningDB.Repositories
 
         public Clinician GetSingleClinician(int id)
         {
-            return context.Clinicians.SingleOrDefault(a => a.ID == id);
+            return context.Clinicians.SingleOrDefault(a => a.ClinicianID == id);
         }
         public Context context
         {
