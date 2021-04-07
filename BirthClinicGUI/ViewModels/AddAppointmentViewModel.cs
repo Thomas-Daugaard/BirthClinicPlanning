@@ -42,12 +42,72 @@ namespace BirthClinicGUI.ViewModels
                 switch (RoomType[RoomTypeIndex])
                 {
                     case "Birth Room":
+                        //if (Appointment.Room.RoomNumber >= 0 && Appointment.Room.RoomNumber <= 15)
+                        //{
+                        //    ObservableCollection<BirthRoom> tempRooms = access.BirthRooms.GetAllBirthsRooms();
+                        //    foreach(BirthRoom br in tempRooms)
+                        //    {
+                        //        if(br.RoomID != roomToCopy.RoomID)
+                        //        {
+                        //            Appointment.Room = new BirthRoom();
+                        //        }
+                        //        else
+                        //        {
+
+                        //        }
+                        //    }
+                        //}
                         Appointment.Room = new BirthRoom();
+
                         break;
                     case "Maternity Room":
                         Appointment.Room = new MaternityRoom();
                         break;
                     case "Rest Room":
+                        //int tempCount = 0;
+                        //ObservableCollection<RestRoom> tempRestRoom = access.RestRooms.GetAllRestRoom();
+                        //if (Appointment.Room.RoomNumber >=0 && Appointment.Room.RoomNumber <= 5)
+                        //{
+                        //    foreach(RestRoom RR in tempRestRoom)
+                        //    {
+                        //        foreach(Appointment ap in RR.Appointments)
+                        //        {
+
+                        //        }
+                        //        if(RR.Occupied)
+                        //        {
+                        //            ++tempCount;
+                        //        }
+                        //    }
+                        //    if (tempCount < 5)
+                        //    {
+                        //        access.RestRooms.AddRestRoom((RestRoom)roomToCopy);
+                        //    }
+                        //    else
+                        //    {
+                        //        MessageBox.Show("All rooms occuoied at this time", "Error", 
+                        //            MessageBoxButton.OK, MessageBoxImage.Error);
+                        //    }
+                        //    if (RR.Occupied != true)
+                        //    {
+                        //        Appointment.Room.Parents = roomToCopy.Parents;
+                        //        Appointment.Room.Child = roomToCopy.Child;
+                        //        Appointment.Room.Clinicians = roomToCopy.Clinicians;
+                        //        Appointment.Room.Occupied = true;
+                        //        access.Appointments.AddAppointment(Appointment);
+                        //    }
+                        //    else
+                        //    {
+                        //        MessageBox.Show("Room occupied", "Error", MessageBoxButton.OK,
+                        //            MessageBoxImage.Error);
+                        //    }
+
+                        //}
+                        //else
+                        //{
+                        //    MessageBox.Show("Room does not exsist", "Error", MessageBoxButton.OK, 
+                        //        MessageBoxImage.Error);
+                        //}
                         Appointment.Room = new RestRoom();
                         break;
                 }

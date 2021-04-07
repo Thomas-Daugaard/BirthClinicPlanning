@@ -83,22 +83,30 @@ namespace BirthClinicGUI.ViewModels
         {
             Room roomToCopy = Appointment.Room;
             ObservableCollection<BirthRoom> birthRooms = access.BirthRooms.GetAllBirthsRooms();
+            int index = 0;
 
             foreach (var birthroom in birthRooms)
             {
-                if (!birthroom.Occupied)
+                foreach (var appointment in birthroom.Appointments)
                 {
-                    Appointment.Room = birthroom;
-                }
-            }
+                    if (!appointment.Room.Occupied && appointment.Date != DateTime.Today.AddDays(5))
+                    {
+                        Appointment.Room = birthroom;
 
-            Appointment.Room.Child = roomToCopy.Child;
-            Appointment.Room.Parents = roomToCopy.Parents;
-            Appointment.Room.Clinicians = roomToCopy.Clinicians;
-            Appointment.Room.Occupied = true;
-            Appointment.BirthInProgess = true;
-            
-            access.Complete();
+                        Appointment.Room.Child = roomToCopy.Child;
+                        Appointment.Room.Parents = roomToCopy.Parents;
+                        Appointment.Room.Clinicians = roomToCopy.Clinicians;
+                        Appointment.Room.Occupied = true;
+                        Appointment.BirthInProgess = true;
+
+                        access.Complete();
+                    }
+
+                    ++index;
+                }
+
+                index = 0;
+            }
         }
 
         private void ChangeToMaternityRoom()

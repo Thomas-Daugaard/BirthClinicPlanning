@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirthClinicPlanningDB.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210407084202_InitCreate")]
-    partial class InitCreate
+    [Migration("20210407084454_InitMigration")]
+    partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -16,14 +16,22 @@ namespace BirthClinicPlanningDB.DomainObjects
 
         [ForeignKey("RoomID")]
         public Room Room { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         public bool BirthInProgess { get; set; }
 
         [NotMapped]
-        public string DisplayDate
+        public string DisplayStartDate
         {
-            get => Date.ToShortDateString();
+            get => StartTime.ToShortDateString();
+            set => DateTime.Parse(value);
+        }
+
+        [NotMapped]
+        public string DisplayEndDate
+        {
+            get => EndTime.ToShortDateString();
             set => DateTime.Parse(value);
         }
 
