@@ -176,7 +176,8 @@ namespace BirthClinicPlanningDB
                 new Appointment
                 {
                 AppointmentID = 2,
-                Date = new DateTime(2021,04,08),
+                StartTime = new DateTime(2021,07,08),
+                EndTime = new DateTime(2021,07,09),
                 BirthInProgess = false
                 }
 

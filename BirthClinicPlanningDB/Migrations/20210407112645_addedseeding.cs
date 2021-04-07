@@ -110,7 +110,7 @@ namespace BirthClinicPlanningDB.Migrations
                 values: new object[,]
                 {
                     { 1, false, new DateTime(2021, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),new DateTime(2021, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 2, false, new DateTime(2021, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),new DateTime(2021, 4, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 }
+                    { 2, false, new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),new DateTime(2021, 7, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 }
                 });
 
             migrationBuilder.CreateIndex(
