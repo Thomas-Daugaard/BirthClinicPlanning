@@ -198,6 +198,6 @@ namespace BirthClinicPlanningDB
         public DbSet<MaternityRoom> maternityrooms { get; set; }
         public DbSet<BirthRoom> BirthRooms { get; set; }
         public DbSet<Parents> Parents { get; set; }
-        public DbSet<Room> Rooms { get; set; }
+        //public DbSet<Room> Rooms { get; set; }
     }
 }
