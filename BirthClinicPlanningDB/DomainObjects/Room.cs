@@ -16,6 +16,8 @@ namespace BirthClinicPlanningDB.DomainObjects
         [ForeignKey("ChildID")]
         public Child Child { get; set; }
         public ObservableCollection<Clinician> Clinicians { get; set; }
+
+        [ForeignKey("AppointmentID")]
         public ObservableCollection<Appointment> Appointments { get; set; }
     }
 }

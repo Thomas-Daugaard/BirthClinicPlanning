@@ -28,7 +28,7 @@ namespace BirthClinicPlanningDB
             Seed(modelBuilder);
         }
 
-        private void Seed(ModelBuilder modelBuilder)
+        private static void Seed(ModelBuilder modelBuilder)
         {
             var clinicians = new ObservableCollection<Clinician>
             {
@@ -133,36 +133,34 @@ namespace BirthClinicPlanningDB
                 modelBuilder.Entity<Parents>().HasData(parent);
             }
 
-            var rooms = new ObservableCollection<Room>
+            var rooms = new ObservableCollection<RestRoom>
             {
-                new Room
+                new RestRoom()
                 {
                     RoomID = 1,
                     RoomNumber = 1,
-                    Occupied = false,
-                    RoomType = "RestRoom"
+                    Occupied = false
                 },
 
-                new Room
+                new RestRoom()
                 {
                     RoomID = 2,
                     RoomNumber = 2,
-                    Occupied = false,
-                    RoomType = "RestRoom"
-                },
-                new Room
-                {
-                    RoomID = 3,
-                    RoomNumber = 3,
-                    Occupied = false,
-                    RoomType = "MaternityRoom"
+                    Occupied = false
                 }
             };
 
             foreach (var room in rooms)
             {
-                modelBuilder.Entity<Room>().HasData(room);
+                modelBuilder.Entity<RestRoom>().HasData(room);
             }
+
+            modelBuilder.Entity<MaternityRoom>().HasData(new MaternityRoom()
+            {
+                RoomID = 3,
+                RoomNumber = 3,
+                Occupied = false
+            });
 
 
             var appointments = new ObservableCollection<Appointment>
@@ -190,6 +188,7 @@ namespace BirthClinicPlanningDB
                 modelBuilder.Entity<Appointment>().HasData(app);
             }
 
+            
         }
 
         public DbSet<Appointment> Appointments { get; set; }
