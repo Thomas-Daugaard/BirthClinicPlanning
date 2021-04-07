@@ -30,6 +30,11 @@ namespace BirthClinicPlanningDB.Repositories
             return context.Restrooms.SingleOrDefault(a => a.RoomID == id);
         }
 
+        public void AddRestRoom(RestRoom room)
+        {
+            context.Restrooms.Add(room);
+        }
+
         public Context context
         {
             get { return Context as Context; }
