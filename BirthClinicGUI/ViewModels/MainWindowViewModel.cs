@@ -50,7 +50,7 @@ namespace BirthClinicGUI.ViewModels
         {
             _dialog = dialog;
 
-            //==============Setting up relation between seeded rooms and appointments
+            //==============Setting up relation between seeded rooms and appointments - Skal vi evt. benytte en Room repository?
             var room1 = access.RestRooms.GetSingleRestRoom(1);
 
             var appoint1 = access.Appointments.getSingleAppointment(1);
