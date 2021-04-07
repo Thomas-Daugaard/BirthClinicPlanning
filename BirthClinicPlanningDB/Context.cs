@@ -163,6 +163,13 @@ namespace BirthClinicPlanningDB
                 Occupied = false
             });
 
+            modelBuilder.Entity<BirthRoom>().HasData(new BirthRoom()
+            {
+                RoomID = 4,
+                RoomNumber = 5,
+                Occupied = true
+            });
+
 
             var appointments = new ObservableCollection<Appointment>
             {

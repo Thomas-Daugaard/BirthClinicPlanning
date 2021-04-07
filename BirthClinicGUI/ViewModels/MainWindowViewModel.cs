@@ -50,52 +50,28 @@ namespace BirthClinicGUI.ViewModels
         {
             _dialog = dialog;
 
-            //==============Setting up relation between seeded rooms and appointments - Skal vi evt. benytte en Room repository?
-            //var room1 = access.RestRooms.GetSingleRestRoom(1);
-
-            //var appoint1 = access.Appointments.getSingleAppointment(1);
-
-            //room1.Appointments.Add(appoint1);
-
-            //var room2 = access.RestRooms.GetSingleRestRoom(2);
-
-            //var appoint2 = access.Appointments.getSingleAppointment(2);
-
-            //room2.Appointments.Add(appoint2);
-            //access.Complete();
-            //==================================================================
-
-
+            SetUpRoomsAppointmentsListInDb(); //Setting up relation between seeded rooms and appointments
+            
             Appointments = access.Appointments.getAllAppointments();
             access.Complete();
             AppointmentIndex = 0;
 
-            for (int i = 1; i <= 5; i++)
-            {
-                var restRoom = new RestRoom();
-                restRoom.RoomNumber = i;
-                
-                access.RestRooms.AddRestRoom(restRoom);
-                access.Complete();
-            }
+        }
 
-            for (int i = 1; i <= 15; i++)
-            {
-                var birthRoom = new BirthRoom();
-                birthRoom.RoomNumber = i;
+        internal void SetUpRoomsAppointmentsListInDb() 
+        {
+            var room1 = access.RestRooms.GetSingleRestRoom(1);
 
-                access.BirthRooms.AddBirthRoom(birthRoom);
-                access.Complete();
-            }
+            var appoint1 = access.Appointments.getSingleAppointment(1);
 
-            for (int i = 1; i <= 22; i++)
-            {
-                var maternityRoom = new MaternityRoom();
-                maternityRoom.RoomNumber = i;
+            room1.Appointments.Add(appoint1);
 
-                access.MaternityRooms.AddMaternity(maternityRoom);
-                access.Complete();
-            }
+            var room2 = access.RestRooms.GetSingleRestRoom(2);
+
+            var appoint2 = access.Appointments.getSingleAppointment(2);
+
+            room2.Appointments.Add(appoint2);
+            access.Complete();
         }
 
         private ICommand _addAppointmentCommand;

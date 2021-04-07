@@ -42,7 +42,7 @@
                 MinWidth="110"/>
 
         <DataGrid Grid.Row="1" Grid.Column="0" MinHeight="100" Margin="10" MaxWidth="90"
-                  ItemsSource="{Binding RestRooms}"
+                  ItemsSource="{Binding AllRestRooms}"
                   AutoGenerateColumns="False"
                   SelectedIndex="{Binding RestRoomIndex}"
                   IsSynchronizedWithCurrentItem="True">
@@ -60,7 +60,7 @@
         </DataGrid>
 
         <DataGrid Grid.Row="1" Grid.Column="1" MinHeight="100" Margin="10" MaxWidth="90"
-                  ItemsSource="{Binding BirthRooms}"
+                  ItemsSource="{Binding AllBirthRooms}"
                   AutoGenerateColumns="False"
                   SelectedIndex="{Binding BirthRoomIndex}"
                   IsSynchronizedWithCurrentItem="True">
@@ -79,7 +79,7 @@
 
 
         <DataGrid Grid.Row="1" Grid.Column="2" MinHeight="100" Margin="10" MaxWidth="90"
-                  ItemsSource="{Binding MaternityRooms}"
+                  ItemsSource="{Binding AllMaternityRooms}"
                   AutoGenerateColumns="False"
                   SelectedIndex="{Binding MaternityIndex}"
                   IsSynchronizedWithCurrentItem="True">
@@ -101,7 +101,10 @@
                     MaxWidth="70"
                     Margin="5"
                     Padding="5"
-                    IsCancel="True"/>
+                    IsCancel="True"
+            />
+
+            <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Stretch">Double Click Room ID to show details</Label>
 
     </Grid>
 </UserControl>
