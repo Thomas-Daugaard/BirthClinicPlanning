@@ -32,19 +32,19 @@ namespace BirthClinicPlanningDB
             {
                 new Clinician
                 {
-                    ID = 1,
+                    ClinicianID = 1,
                     FirstName = "Camilla",
                     LastName = "Holmstoel"
                 },
                 new Clinician
                 {
-                    ID = 2,
+                    ClinicianID = 2,
                     FirstName = "Thomas",
                     LastName = "Daugaard"
                 },
                 new Clinician
                 {
-                    ID = 3,
+                    ClinicianID = 3,
                     FirstName = "Emil",
                     LastName = "Garder"
                 }

@@ -8,11 +8,11 @@ namespace BirthClinicPlanningDB.DomainObjects
     {
         public int RoomID { get; set; }
         public int RoomNumber { get; set; }
+        public string RoomType { get; set; }
         public bool Occupied { get; set; }
         public Parents Parents { get; set; }
         public Child Child { get; set; }
         public ObservableCollection<Clinician> Clinicians { get; set; }
-
-        public string RoomType { get; set;}
+        public ObservableCollection<Appointment> Appointments { get; set; }
     }
 }
