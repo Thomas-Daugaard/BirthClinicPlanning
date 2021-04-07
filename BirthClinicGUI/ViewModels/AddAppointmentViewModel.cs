@@ -77,6 +77,7 @@ namespace BirthClinicGUI.ViewModels
                         }
 
                         MessageBox.Show("Room occucpied on selected date and time");
+
                         break;
 
                     case "Maternity Room":
