@@ -28,7 +28,11 @@ namespace BirthClinicPlanningDB.Repositories
 
         public RestRoom GetSingleRestRoom(int id)
         {
-            return context.Restrooms.Where(RoomID == id).SingleOrDefault();
+            return context.Restrooms.Where(x=>x.RoomID == id)
+                .Include(p => p.Parents)
+                .Include(c => c.Child)
+                .Include(cl => cl.Clinicians)
+                .Include(j => j.Appointments).SingleOrDefault();
         }
 
         public void AddRestRoom(RestRoom restRoom)
