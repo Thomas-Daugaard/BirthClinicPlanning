@@ -22,6 +22,7 @@ namespace BirthClinicPlanningDB.Repositories
                 .Include(p => p.Parents)
                 .Include(c => c.Child)
                 .Include(cl => cl.Clinicians)
+                .Include(j=>j.Appointments)
                 .ToList());
         }
 
