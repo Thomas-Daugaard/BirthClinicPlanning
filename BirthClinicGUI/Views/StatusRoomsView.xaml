@@ -96,7 +96,10 @@
                     MaxWidth="70"
                     Margin="5"
                     Padding="5"
-                    IsCancel="True"/>
+                    IsCancel="True"
+            />
+
+            <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Stretch">Double Click Room ID to show details</Label>
 
     </Grid>
 </UserControl>

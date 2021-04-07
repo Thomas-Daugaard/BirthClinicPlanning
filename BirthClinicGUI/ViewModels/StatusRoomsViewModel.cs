@@ -46,117 +46,13 @@ namespace BirthClinicGUI.ViewModels
             AllBirthRooms = access.BirthRooms.GetAllBirthsRooms();
             AllMaternityRooms = access.MaternityRooms.GetAllMaternityRooms();
 
-
-            //RestRooms = new ObservableCollection<RestRoom>()
-            //{
-            //    new RestRoom()
-            //    {
-            //        RoomID = 1,
-            //        Child = new Child()
-            //        {
-            //            BirthDate = DateTime.Parse("28/03/2018"),
-            //            FirstName = "Lukas",
-            //            LastName = "Meldgaard",
-            //            Length = 56,
-            //            Weight = 3590
-
-            //        },
-
-            //        Parents = new Parents()
-            //        {
-            //            DadCPR = "250485-1234",
-            //            MomCPR = "010186-1234",
-            //            MomFirstName = "Jennifer",
-            //            MomLastName = "Meldgaard",
-            //            DadFirstName = "Thomas",
-            //            DadLastName = "Daugaard"
-            //        },
-
-            //        Occupied = true
-            //    }
-            //};
-            //MaternityIndex = 0;
-            //RestRoomIndex = 0;
-            //CurrentRestRoom = RestRooms[RestRoomIndex];
-
-            //MaternityRooms = new ObservableCollection<MaternityRoom>()
-            //{
-            //    new MaternityRoom()
-            //    {
-            //        RoomID = 1,
-            //        Child = new Child()
-            //        {
-            //            BirthDate = DateTime.Parse("28/03/2018"),
-            //            FirstName = "Lukas",
-            //            LastName = "Meldgaard",
-            //            Length = 56,
-            //            Weight = 3590
-
-            //        },
-
-            //        Parents = new Parents()
-            //        {
-            //            DadCPR = "250485-1234",
-            //            MomCPR = "010186-1234",
-            //            MomFirstName = "Jennifer",
-            //            MomLastName = "Meldgaard",
-            //            DadFirstName = "Thomas",
-            //            DadLastName = "Daugaard"
-            //        },
-
-            //        Occupied = true
-            //    }
-            //};
-            //MaternityIndex = 0;
-            //MaternityIndex = 0;
-            //CurrentMaternityRoom = MaternityRooms[MaternityIndex];
-        }
-
-        private ICommand _restRoomCommand;
-
-        public ICommand RestRoomCommand
-        {
-            get
-            {
-                return _restRoomCommand ?? (_restRoomCommand = new DelegateCommand(RestRoomCommandExecute));
-            }
-        }
-
-        private void RestRoomCommandExecute()
-        {
-        }
-        private ICommand _birthRoomCommand;
-        public ICommand BirthRoomCommand
-        {
-            get
-            {
-                return _birthRoomCommand ?? (_birthRoomCommand = new DelegateCommand(BirthRoomCanExecute));
-            }
-        }
-
-        private void BirthRoomCanExecute()
-        {
-
-        }
-        private ICommand _maternityRoomCommand;
-
-        public ICommand MaternityRoomCommand
-        {
-            get
-            {
-                return _maternityRoomCommand ?? (_maternityRoomCommand = new DelegateCommand(MaternityRoomCommandExecute));
-            }
-        }
-
-        private void MaternityRoomCommandExecute()
-        {
-            
         }
 
         public string Title { get; }
         public event Action<IDialogResult> RequestClose;
 
-        private ObservableCollection<RestRoom> _restrooms;
+        #region Rooms collections + CurrentRoom properties
+        private ObservableCollection<RestRoom> _restrooms;  //Restroom
 
         public ObservableCollection<RestRoom> RestRooms
         {
@@ -164,9 +60,10 @@ namespace BirthClinicGUI.ViewModels
             set => SetProperty(ref _restrooms, value);
         }
 
-        public RestRoom CurrentRestRoom { get; set; }
+        private RestRoom _currentRestRoom;
+        public RestRoom CurrentRestRoom { get=>_currentRestRoom; set=>SetProperty(ref _currentRestRoom, value); }
 
-        private ObservableCollection<BirthRoom> _birthRooms;
+        private ObservableCollection<BirthRoom> _birthRooms;  //Birthroom
         public ObservableCollection<BirthRoom> BirthRooms
         {
             get => _birthRooms;
@@ -174,15 +71,19 @@ namespace BirthClinicGUI.ViewModels
         }
         public BirthRoom CurrentBirthRoom { get; set; }
 
-        private ObservableCollection<MaternityRoom> _maternityrooms;
+
+        private ObservableCollection<MaternityRoom> _maternityrooms; //MaternityRoom
 
         public ObservableCollection<MaternityRoom> MaternityRooms
         {
             get => _maternityrooms;
             set => SetProperty(ref _maternityrooms, value);
         }
-        public MaternityRoom CurrentMaternityRoom { get; set; }
 
+        public MaternityRoom CurrentMaternityRoom { get; set; }
+        #endregion
+
+        #region Select Room Command
         private DelegateCommand<string> _selectRoomCommand;
 
         public DelegateCommand<string> SelectRoomCommand
@@ -197,7 +98,7 @@ namespace BirthClinicGUI.ViewModels
         {
             if (roomType == "RestRooms")
             {
-                CurrentRestRoom = AllRestRooms[RestRoomIndex];
+                CurrentRestRoom= AllRestRooms[RestRoomIndex];
                 _dialog.ShowDialog("RestRoomView", r => { });
             }
             //
@@ -213,7 +114,9 @@ namespace BirthClinicGUI.ViewModels
                 _dialog.ShowDialog("MaternityRoomView", r => { });
             }
         }
+        #endregion
 
+        #region Room indexes
         private int _restRoomIndex;
 
         public int RestRoomIndex
@@ -221,6 +124,7 @@ namespace BirthClinicGUI.ViewModels
             get => _restRoomIndex;
             set => _restRoomIndex = value;
         }
+
         private int _birthRoomIndex;
         public int BirthRoomIndex
         {
@@ -229,11 +133,14 @@ namespace BirthClinicGUI.ViewModels
         }
 
         private int _maternityRoomIndex;
-
         public int MaternityIndex
         {
             get => _maternityRoomIndex;
             set => _maternityRoomIndex = value;
         }
+
+
+        #endregion
+
     }
 }
