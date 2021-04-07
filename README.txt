@@ -2,17 +2,18 @@ How to use the application:
 
 Step A:
 
-1) Create your own local SQL database to be used for running this application. 
+1) Choose a random connection string from your SQL server.
 
 2) Open the "BirthClinicPlanningDB" project, and open the "Context.cs" file. 
 
-3) Replace the connection string with you own connection string in the "OnConfiguring()" method, and save. 
+3) Replace the connection string with you own connection string in the "OnConfiguring()" method, AND correct the "Catalog" assignment to a name of your choice. 
+   Press save. 
 
 4) Set the "BirthClinicPlanningDB" project as your startup project. 
 
 5) Right click at the "BirthClinicGUI" project and choose "Unload project".
 
-6) In the package manager console, type: "update-database", to apply the included migration fil to the database. 
+6) In the package manager console, type: "update-database", to apply the included migration file to the database. (The DB will be created on its own) 
 
 7) Ensure that the tables has been created in your local database. 
 
