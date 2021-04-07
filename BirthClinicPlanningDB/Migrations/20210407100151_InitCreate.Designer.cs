@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirthClinicPlanningDB.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210407084202_InitCreate")]
+    [Migration("20210407100151_InitCreate")]
     partial class InitCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,17 +31,36 @@ namespace BirthClinicPlanningDB.Migrations
                     b.Property<bool>("BirthInProgess")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("RoomID")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("AppointmentID");
 
                     b.HasIndex("RoomID");
 
                     b.ToTable("Appointments");
+
+                    b.HasData(
+                        new
+                        {
+                            AppointmentID = 1,
+                            BirthInProgess = false,
+                            EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2021, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            AppointmentID = 2,
+                            BirthInProgess = false,
+                            EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2021, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Child", b =>
@@ -66,17 +85,22 @@ namespace BirthClinicPlanningDB.Migrations
                     b.Property<int>("Length")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ParentsID")
+                        .HasColumnType("int");
+
                     b.Property<int>("Weight")
                         .HasColumnType("int");
 
                     b.HasKey("ChildID");
+
+                    b.HasIndex("ParentsID");
 
                     b.ToTable("Childs");
 
                     b.HasData(
                         new
                         {
-                            ChildID = -1,
+                            ChildID = 1,
                             BirthDate = new DateTime(2020, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DisplayDate = "06-04-2020",
                             FirstName = "Leif",
@@ -86,7 +110,7 @@ namespace BirthClinicPlanningDB.Migrations
                         },
                         new
                         {
-                            ChildID = -2,
+                            ChildID = 2,
                             BirthDate = new DateTime(2020, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DisplayDate = "07-04-2020",
                             FirstName = "Viggo",
@@ -96,7 +120,7 @@ namespace BirthClinicPlanningDB.Migrations
                         },
                         new
                         {
-                            ChildID = -3,
+                            ChildID = 3,
                             BirthDate = new DateTime(2020, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DisplayDate = "08-04-2020",
                             FirstName = "Pascal",
@@ -179,14 +203,16 @@ namespace BirthClinicPlanningDB.Migrations
 
                     b.HasKey("ParentsID");
 
-                    b.HasIndex("ChildID");
+                    b.HasIndex("ChildID")
+                        .IsUnique()
+                        .HasFilter("[ChildID] IS NOT NULL");
 
                     b.ToTable("Parents");
 
                     b.HasData(
                         new
                         {
-                            ParentsID = -1,
+                            ParentsID = 1,
                             DadCPR = "2103898569",
                             DadFirstName = "Lars",
                             DadLastName = "Thomsen",
@@ -196,7 +222,7 @@ namespace BirthClinicPlanningDB.Migrations
                         },
                         new
                         {
-                            ParentsID = -2,
+                            ParentsID = 2,
                             DadCPR = "2104898569",
                             DadFirstName = "Knabe",
                             DadLastName = "Frederiksen",
@@ -206,7 +232,7 @@ namespace BirthClinicPlanningDB.Migrations
                         },
                         new
                         {
-                            ParentsID = -3,
+                            ParentsID = 3,
                             DadCPR = "2105898569",
                             DadFirstName = "Per",
                             DadLastName = "Gudrundsen",
@@ -255,19 +281,19 @@ namespace BirthClinicPlanningDB.Migrations
                     b.HasData(
                         new
                         {
-                            RoomID = -1,
+                            RoomID = 1,
                             Occupied = false,
                             RoomNumber = 1
                         },
                         new
                         {
-                            RoomID = -2,
+                            RoomID = 2,
                             Occupied = false,
                             RoomNumber = 2
                         },
                         new
                         {
-                            RoomID = -3,
+                            RoomID = 3,
                             Occupied = false,
                             RoomNumber = 3
                         });
@@ -303,6 +329,15 @@ namespace BirthClinicPlanningDB.Migrations
                     b.Navigation("Room");
                 });
 
+            modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Child", b =>
+                {
+                    b.HasOne("BirthClinicPlanningDB.DomainObjects.Parents", "parents")
+                        .WithMany()
+                        .HasForeignKey("ParentsID");
+
+                    b.Navigation("parents");
+                });
+
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Clinician", b =>
                 {
                     b.HasOne("BirthClinicPlanningDB.DomainObjects.Room", null)
@@ -313,8 +348,8 @@ namespace BirthClinicPlanningDB.Migrations
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Parents", b =>
                 {
                     b.HasOne("BirthClinicPlanningDB.DomainObjects.Child", "Child")
-                        .WithMany()
-                        .HasForeignKey("ChildID");
+                        .WithOne()
+                        .HasForeignKey("BirthClinicPlanningDB.DomainObjects.Parents", "ChildID");
 
                     b.Navigation("Child");
                 });

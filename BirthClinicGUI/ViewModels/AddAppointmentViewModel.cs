@@ -41,15 +41,64 @@ namespace BirthClinicGUI.ViewModels
 
                 switch (RoomType[RoomTypeIndex])
                 {
-                    case "Birth Room":
-                        Appointment.Room = new BirthRoom();
-                        break;
-                    case "Maternity Room":
-                        Appointment.Room = new MaternityRoom();
-                        break;
                     case "Rest Room":
-                        Appointment.Room = new RestRoom();
+                        ObservableCollection<RestRoom> restRoomsToCheck = access.RestRooms.GetAllRestRoom();
+
+                        foreach (var room in restRoomsToCheck)
+                        {
+                            foreach (var appointment in room.Appointments)
+                            {
+                                if (Appointment.StartTime >= DateTime.Now &&
+                                    (DateTime.Compare(Appointment.StartTime, appointment.StartTime) < 0 ||
+                                     DateTime.Compare(Appointment.EndTime, appointment.EndTime) > 0))
+                                {
+                                    Appointment.Room = appointment.Room;
+                                    return;
+                                }
+                            }
+                        }
                         break;
+
+                    case "Birth Room":
+                        ObservableCollection<BirthRoom> birthRoomsToCheck = access.BirthRooms.GetAllBirthsRooms();
+
+                        foreach (var room in birthRoomsToCheck)
+                        {
+                            foreach (var appointment in room.Appointments)
+                            {
+                                if (Appointment.StartTime >= DateTime.Now &&
+                                    (DateTime.Compare(Appointment.StartTime, appointment.StartTime) < 0 ||
+                                     DateTime.Compare(Appointment.EndTime, appointment.EndTime) > 0))
+                                {
+                                    Appointment.Room = appointment.Room;
+                                    return;
+                                }
+                            }
+                        }
+
+                        MessageBox.Show("Room occucpied on selected date and time");
+                        break;
+
+                    case "Maternity Room":
+                        ObservableCollection<MaternityRoom> maternityRoomsToCheck = access.MaternityRooms.GetAllMaternityRooms();
+
+                        foreach (var room in maternityRoomsToCheck)
+                        {
+                            foreach (var appointment in room.Appointments)
+                            {
+                                if (Appointment.StartTime >= DateTime.Now &&
+                                    (DateTime.Compare(Appointment.StartTime, appointment.StartTime) < 0 ||
+                                     DateTime.Compare(Appointment.EndTime, appointment.EndTime) > 0))
+                                {
+                                    Appointment.Room = appointment.Room;
+                                    return;
+                                }
+                            }
+                        }
+
+                        MessageBox.Show("Room occucpied on selected date and time");
+                        break;
+
                 }
 
                 Appointment.Room.Child = roomToCopy.Child;
@@ -58,7 +107,6 @@ namespace BirthClinicGUI.ViewModels
                 Appointment.Room.Occupied = roomToCopy.Occupied;
                 Appointment.Room.RoomNumber = roomToCopy.RoomNumber;
 
-                Appointment.Room.Child.BirthDate = Appointment.Date;
                 Appointment.Room.Occupied = true;
                 access.Appointments.AddAppointment(Appointment);
                 access.Complete();
@@ -67,7 +115,7 @@ namespace BirthClinicGUI.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            Appointment = new Appointment() {BirthInProgess = false, Date = DateTime.Now.Date, Room = new BirthRoom() {Parents = new Parents(), Child = new Child(), Clinicians = new ObservableCollection<Clinician>()}};
+            Appointment = new Appointment() {BirthInProgess = false, StartTime = DateTime.Now.Date, Room = new BirthRoom() {Parents = new Parents(), Child = new Child(), Clinicians = new ObservableCollection<Clinician>()}};
             AllClinicians = access.Clinicians.GetAllClinicians();
             RoomType = new ObservableCollection<string>() {"Birth Room", "Maternity Room", "Rest Room"};
         }

@@ -13,5 +13,7 @@ namespace BirthClinicPlanningDB.Repositories.RepositoryInterfaces
         public ObservableCollection<MaternityRoom> GetAllMaternityRooms();
 
         public MaternityRoom GetSingleMaternityRoom(int id);
+
+        public void AddMaternity(MaternityRoom maternityRoom);
     }
 }

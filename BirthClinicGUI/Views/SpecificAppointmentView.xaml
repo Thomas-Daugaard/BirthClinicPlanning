@@ -31,6 +31,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" 
@@ -50,19 +51,27 @@
                            VerticalAlignment="Center"/>
 
                 <Label Grid.Row="2" Grid.Column="0"
-                       Content="Date:"
+                       Content="Start Date:"
                        Margin="5"/>
                 <TextBlock Grid.Row="2" Grid.Column="1"
-                           Text="{Binding Appointment.DisplayDate}"
+                           Text="{Binding Appointment.StartTime}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
-                <TextBlock Grid.Row="3" Grid.Column="0"
+                <Label Grid.Row="3" Grid.Column="0"
+                       Content="End Date:"
+                       Margin="5"/>
+                <TextBlock Grid.Row="3" Grid.Column="1"
+                           Text="{Binding Appointment.EndTime}"
+                           Margin="5"
+                           VerticalAlignment="Center"/>
+
+                <TextBlock Grid.Row="4" Grid.Column="0"
                            Text="{Binding Appointment.BirthStatus}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
-                <Button Grid.Row="4" Grid.Column="0"
+                <Button Grid.Row="5" Grid.Column="0"
                        Content="Checkout"
                        Padding="5"
                        Background="AliceBlue"

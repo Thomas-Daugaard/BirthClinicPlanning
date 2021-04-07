@@ -33,6 +33,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
 
@@ -56,19 +57,28 @@
                          Margin="5"/>
 
                 <Label Grid.Row="2" Grid.Column="0"
-                       Content="Date:*"
+                       Content="Start Date:*"
                        Margin="5"/>
 
                 <TextBox Grid.Row="2" Grid.Column="1"
-                         Text="{Binding Appointment.Date}"
+                         Text="{Binding Appointment.StartTime}"
                          MinWidth="100"
                          Margin="5"/>
 
                 <Label Grid.Row="3" Grid.Column="0"
+                       Content="End Date:*"
+                       Margin="5"/>
+
+                <TextBox Grid.Row="3" Grid.Column="1"
+                         Text="{Binding Appointment.EndTime}"
+                         MinWidth="100"
+                         Margin="5"/>
+
+                <Label Grid.Row="4" Grid.Column="0"
                        Content="Birth in Progress"
                        Margin="5"/>
 
-                <CheckBox Grid.Row="3" Grid.Column="1" 
+                <CheckBox Grid.Row="4" Grid.Column="1" 
                           IsChecked="{Binding Appointment.BirthInProgess}"
                           VerticalAlignment="Center"/>
 
