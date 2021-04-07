@@ -16,7 +16,7 @@ namespace BirthClinicPlanningDB
         protected override void OnConfiguring(DbContextOptionsBuilder ob)
         {
             ob.UseSqlServer(
-                "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=HandIn2;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                "Data Source=localhost;Initial Catalog=birthclinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,7 +28,7 @@ namespace BirthClinicPlanningDB
 
         private void Seed(ModelBuilder modelBuilder)
         {
-            var clinicians = new List<Clinician>
+            var clinicians = new ObservableCollection<Clinician>
             {
                 new Clinician
                 {
@@ -59,7 +59,7 @@ namespace BirthClinicPlanningDB
             {
                 new Child
                 {
-                    ChildID = -1,
+                    ChildID = 1,
                     FirstName = "Leif",
                     LastName = "Knudsen",
                     Weight = 3500,
@@ -68,7 +68,7 @@ namespace BirthClinicPlanningDB
                 },
                 new Child
                 {
-                    ChildID = -2,
+                    ChildID = 2,
                     FirstName = "Viggo",
                     LastName = "Mortensen",
                     Weight = 3500,
@@ -77,7 +77,7 @@ namespace BirthClinicPlanningDB
                 },
                 new Child
                 {
-                    ChildID = -3,
+                    ChildID = 3,
                     FirstName = "Pascal",
                     LastName = "Pedersen",
                     Weight = 3500,
@@ -95,7 +95,7 @@ namespace BirthClinicPlanningDB
             {
                 new Parents
                 {
-                    ParentsID = -1,
+                    ParentsID = 1,
                     MomCPR="2003928596",
                     MomFirstName = "Camilla",
                     MomLastName = "Thomsen",
@@ -105,7 +105,7 @@ namespace BirthClinicPlanningDB
                 },
                 new Parents
                 {
-                    ParentsID = -2,
+                    ParentsID = 2,
                     MomCPR="2004928596",
                     MomFirstName = "Tove",
                     MomLastName = "Frederiksen",
@@ -115,7 +115,7 @@ namespace BirthClinicPlanningDB
                 },
                 new Parents
                 {
-                    ParentsID = -3,
+                    ParentsID = 3,
                     MomCPR="2005928596",
                     MomFirstName = "Hilda",
                     MomLastName = "Gudrundsen",
@@ -125,28 +125,30 @@ namespace BirthClinicPlanningDB
                 }
             };
 
+            
             foreach (var parent in parents)
             {
                 modelBuilder.Entity<Parents>().HasData(parent);
             }
 
-            var rooms = new List<Room>
+            var rooms = new ObservableCollection<Room>
             {
                 new Room
                 {
-                    RoomID = -1,
+                    RoomID = 1,
                     RoomNumber = 1,
                     Occupied = false
                 },
+
                 new Room
                 {
-                    RoomID = -2,
-                    RoomNumber = 2,
-                    Occupied = false
+                RoomID = 2,
+                RoomNumber = 2,
+                Occupied = false
                 },
                 new Room
                 {
-                    RoomID = -3,
+                    RoomID = 3,
                     RoomNumber = 3,
                     Occupied = false
                 }
@@ -155,6 +157,30 @@ namespace BirthClinicPlanningDB
             foreach (var room in rooms)
             {
                 modelBuilder.Entity<Room>().HasData(room);
+            }
+
+
+            var appointments = new ObservableCollection<Appointment>
+            {
+                new Appointment
+                {
+                    AppointmentID = 1,
+                    Date = new DateTime(2021,04,07),
+                    BirthInProgess = false
+                },
+
+                new Appointment
+                {
+                AppointmentID = 2,
+                Date = new DateTime(2021,04,08),
+                BirthInProgess = false
+                }
+
+            };
+
+            foreach (var app in appointments)
+            {
+                modelBuilder.Entity<Appointment>().HasData(app);
             }
 
         }
