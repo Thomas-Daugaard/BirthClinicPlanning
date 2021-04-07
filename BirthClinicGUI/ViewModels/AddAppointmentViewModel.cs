@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,6 +34,19 @@ namespace BirthClinicGUI.ViewModels
             return true;
         }
 
+        public bool ValidateDate(Appointment a1, Appointment a2)
+        {
+            if (a1.StartTime >= DateTime.Now)
+                return true;
+
+
+            if (DateTime.Compare(a1.StartTime + (a1.EndTime - a1.StartTime),
+                a2.StartTime + (a2.EndTime - a2.StartTime)) == 0)
+                return true;
+
+            return false;
+        }
+
         public void OnDialogClosed()
         {
             if (_okButtonPressed)
@@ -41,75 +55,70 @@ namespace BirthClinicGUI.ViewModels
 
                 switch (RoomType[RoomTypeIndex])
                 {
-                    case "Birth Room":
-                        //if (Appointment.Room.RoomNumber >= 0 && Appointment.Room.RoomNumber <= 15)
-                        //{
-                        //    ObservableCollection<BirthRoom> tempRooms = access.BirthRooms.GetAllBirthsRooms();
-                        //    foreach(BirthRoom br in tempRooms)
-                        //    {
-                        //        if(br.RoomID != roomToCopy.RoomID)
-                        //        {
-                        //            Appointment.Room = new BirthRoom();
-                        //        }
-                        //        else
-                        //        {
-
-                        //        }
-                        //    }
-                        //}
-                        Appointment.Room = new BirthRoom();
-
-                        break;
-                    case "Maternity Room":
-                        Appointment.Room = new MaternityRoom();
-                        break;
                     case "Rest Room":
-                        //int tempCount = 0;
-                        //ObservableCollection<RestRoom> tempRestRoom = access.RestRooms.GetAllRestRoom();
-                        //if (Appointment.Room.RoomNumber >=0 && Appointment.Room.RoomNumber <= 5)
-                        //{
-                        //    foreach(RestRoom RR in tempRestRoom)
-                        //    {
-                        //        foreach(Appointment ap in RR.Appointments)
-                        //        {
+                        ObservableCollection<RestRoom> restRoomsToCheck = access.RestRooms.GetAllRestRoom();
+                        access.Complete();
 
-                        //        }
-                        //        if(RR.Occupied)
-                        //        {
-                        //            ++tempCount;
-                        //        }
-                        //    }
-                        //    if (tempCount < 5)
-                        //    {
-                        //        access.RestRooms.AddRestRoom((RestRoom)roomToCopy);
-                        //    }
-                        //    else
-                        //    {
-                        //        MessageBox.Show("All rooms occuoied at this time", "Error", 
-                        //            MessageBoxButton.OK, MessageBoxImage.Error);
-                        //    }
-                        //    if (RR.Occupied != true)
-                        //    {
-                        //        Appointment.Room.Parents = roomToCopy.Parents;
-                        //        Appointment.Room.Child = roomToCopy.Child;
-                        //        Appointment.Room.Clinicians = roomToCopy.Clinicians;
-                        //        Appointment.Room.Occupied = true;
-                        //        access.Appointments.AddAppointment(Appointment);
-                        //    }
-                        //    else
-                        //    {
-                        //        MessageBox.Show("Room occupied", "Error", MessageBoxButton.OK,
-                        //            MessageBoxImage.Error);
-                        //    }
-
-                        //}
-                        //else
-                        //{
-                        //    MessageBox.Show("Room does not exsist", "Error", MessageBoxButton.OK, 
-                        //        MessageBoxImage.Error);
-                        //}
-                        Appointment.Room = new RestRoom();
+                        foreach (var room in restRoomsToCheck)
+                        {
+                            if (room.Appointments != null)
+                            {
+                                foreach (var appointment in room.Appointments)
+                                {
+                                    if (!ValidateDate(Appointment, appointment))
+                                    {
+                                        MessageBox.Show("Invalid Date");
+                                        return;
+                                    }
+                                }
+                            }
+                            Appointment.Room = room;
+                        }
                         break;
+
+                    case "Birth Room":
+                        ObservableCollection<BirthRoom> birthRoomsToCheck = access.BirthRooms.GetAllBirthsRooms();
+                        access.Complete();
+
+                        foreach (var room in birthRoomsToCheck)
+                        {
+                            foreach (var appointment in room.Appointments)
+                            {
+                                if (Appointment.StartTime >= DateTime.Now &&
+                                    (DateTime.Compare(Appointment.StartTime, appointment.StartTime) < 0 ||
+                                     DateTime.Compare(Appointment.EndTime, appointment.EndTime) > 0))
+                                {
+                                    Appointment.Room = appointment.Room;
+                                    return;
+                                }
+                            }
+                        }
+
+                        MessageBox.Show("Room occucpied on selected date and time");
+
+                        break;
+
+                    case "Maternity Room":
+                        ObservableCollection<MaternityRoom> maternityRoomsToCheck = access.MaternityRooms.GetAllMaternityRooms();
+                        access.Complete();
+
+                        foreach (var room in maternityRoomsToCheck)
+                        {
+                            foreach (var appointment in room.Appointments)
+                            {
+                                if (Appointment.StartTime >= DateTime.Now &&
+                                    (DateTime.Compare(Appointment.StartTime, appointment.StartTime) < 0 ||
+                                     DateTime.Compare(Appointment.EndTime, appointment.EndTime) > 0))
+                                {
+                                    Appointment.Room = appointment.Room;
+                                    return;
+                                }
+                            }
+                        }
+
+                        MessageBox.Show("Room occucpied on selected date and time");
+                        break;
+
                 }
 
                 Appointment.Room.Child = roomToCopy.Child;
@@ -118,7 +127,6 @@ namespace BirthClinicGUI.ViewModels
                 Appointment.Room.Occupied = roomToCopy.Occupied;
                 Appointment.Room.RoomNumber = roomToCopy.RoomNumber;
 
-                Appointment.Room.Child.BirthDate = Appointment.Date;
                 Appointment.Room.Occupied = true;
                 access.Appointments.AddAppointment(Appointment);
                 access.Complete();
@@ -127,9 +135,13 @@ namespace BirthClinicGUI.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            Appointment = new Appointment() {BirthInProgess = false, Date = DateTime.Now.Date, Room = new BirthRoom() {Parents = new Parents(), Child = new Child(), Clinicians = new ObservableCollection<Clinician>()}};
+            Appointment = new Appointment() {BirthInProgess = false, StartTime = DateTime.Now.Date, Room = new BirthRoom() {Parents = new Parents(), Child = new Child(), Clinicians = new ObservableCollection<Clinician>()}};
             AllClinicians = access.Clinicians.GetAllClinicians();
+            access.Complete();
+
             RoomType = new ObservableCollection<string>() {"Birth Room", "Maternity Room", "Rest Room"};
+            Appointment.StartTime = DateTime.Now;
+            Appointment.EndTime = DateTime.Now.AddHours(4);
         }
 
         public string Title { get; }

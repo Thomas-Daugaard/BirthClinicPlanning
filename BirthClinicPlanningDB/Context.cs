@@ -16,7 +16,7 @@ namespace BirthClinicPlanningDB
         protected override void OnConfiguring(DbContextOptionsBuilder ob)
         {
             ob.UseSqlServer(
-                "Data Source=localhost;Initial Catalog=Birthclinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Handin2;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -176,8 +176,7 @@ namespace BirthClinicPlanningDB
                 new Appointment
                 {
                 AppointmentID = 2,
-                StartTime = new DateTime(2021,07,08),
-                EndTime = new DateTime(2021,07,09),
+                Date = new DateTime(2021,04,08),
                 BirthInProgess = false
                 }
 

@@ -14,6 +14,6 @@ namespace BirthClinicPlanningDB.Repositories.RepositoryInterfaces
 
         public RestRoom GetSingleRestRoom(int id);
 
-        public void AddRestRoom(RestRoom room);
+        public void AddRestRoom(RestRoom restRoom);
     }
 }

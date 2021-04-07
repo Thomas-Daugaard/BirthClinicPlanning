@@ -21,19 +21,19 @@ namespace BirthClinicPlanningDB.DomainObjects
 
         public bool BirthInProgess { get; set; }
 
-        [NotMapped]
-        public string DisplayStartDate
-        {
-            get => StartTime.ToShortDateString();
-            set => DateTime.Parse(value);
-        }
+        //[NotMapped]
+        //public string DisplayStartDate
+        //{
+        //    get => StartTime.ToShortDateString();
+        //    set => DateTime.Parse(value);
+        //}
 
-        [NotMapped]
-        public string DisplayEndDate
-        {
-            get => EndTime.ToShortDateString();
-            set => DateTime.Parse(value);
-        }
+        //[NotMapped]
+        //public string DisplayEndDate
+        //{
+        //    get => EndTime.ToShortDateString();
+        //    set => DateTime.Parse(value);
+        //}
 
         [NotMapped]
         public string BirthStatus

@@ -52,6 +52,33 @@ namespace BirthClinicGUI.ViewModels
             Appointments = access.Appointments.getAllAppointments();
             access.Complete();
             AppointmentIndex = 0;
+
+            for (int i = 1; i <= 5; i++)
+            {
+                var restRoom = new RestRoom();
+                restRoom.RoomNumber = i;
+                
+                access.RestRooms.AddRestRoom(restRoom);
+                access.Complete();
+            }
+
+            for (int i = 1; i <= 15; i++)
+            {
+                var birthRoom = new BirthRoom();
+                birthRoom.RoomNumber = i;
+
+                access.BirthRooms.AddBirthRoom(birthRoom);
+                access.Complete();
+            }
+
+            for (int i = 1; i <= 22; i++)
+            {
+                var maternityRoom = new MaternityRoom();
+                maternityRoom.RoomNumber = i;
+
+                access.MaternityRooms.AddMaternity(maternityRoom);
+                access.Complete();
+            }
         }
 
         private ICommand _addAppointmentCommand;
