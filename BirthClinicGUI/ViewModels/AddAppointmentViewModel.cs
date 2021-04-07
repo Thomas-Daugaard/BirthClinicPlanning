@@ -119,6 +119,7 @@ namespace BirthClinicGUI.ViewModels
                 Appointment.Room.RoomNumber = roomToCopy.RoomNumber;
 
                 Appointment.Room.Child.BirthDate = Appointment.Date;
+                Appointment.Room.Occupied = true;
                 access.Appointments.AddAppointment(Appointment);
                 access.Complete();
             }

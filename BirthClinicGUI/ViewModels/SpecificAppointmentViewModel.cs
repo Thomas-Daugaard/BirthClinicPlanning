@@ -60,7 +60,7 @@ namespace BirthClinicGUI.ViewModels
 
         private void CheckoutExecute()
         {
-            
+            Appointment.Room.Occupied = false;
 
             switch (Appointment.Room.RoomType)
             {
@@ -77,46 +77,57 @@ namespace BirthClinicGUI.ViewModels
                     access.Complete();
                     break;
             }
-
-            Appointment = access.Appointments.getSingleAppointment(Appointment.AppointmentID);
         }
 
         private void ChangeToBirthRoom()
         {
             Room roomToCopy = Appointment.Room;
-            Appointment = access.Appointments.getSingleAppointment(Appointment.AppointmentID);
-            Appointment.Room = new BirthRoom();
-            Appointment.Room.Child = new Child();
-            Appointment.Room.Clinicians = roomToCopy.Clinicians;
-            Appointment.Room.Parents = roomToCopy.Parents;
-            Appointment.Room.Occupied = roomToCopy.Occupied;
-            Appointment.Room.RoomNumber = roomToCopy.RoomNumber;
-            Appointment.Room.RoomType = "Birth Room";
-            Appointment.BirthInProgess = true;
-            //access.Appointments.UpdateAppointment(Appointment);
-            access.Complete();
+            ObservableCollection<BirthRoom> birthRooms = access.BirthRooms.GetAllBirthsRooms();
+            int index = 0;
+
+            foreach (var birthroom in birthRooms)
+            {
+                foreach (var appointment in birthroom.Appointments)
+                {
+                    if (!appointment.Room.Occupied && appointment.Date != DateTime.Today.AddDays(5))
+                    {
+                        Appointment.Room = birthroom;
+
+                        Appointment.Room.Child = roomToCopy.Child;
+                        Appointment.Room.Parents = roomToCopy.Parents;
+                        Appointment.Room.Clinicians = roomToCopy.Clinicians;
+                        Appointment.Room.Occupied = true;
+                        Appointment.BirthInProgess = true;
+
+                        access.Complete();
+                    }
+
+                    ++index;
+                }
+
+                index = 0;
+            }
         }
 
         private void ChangeToMaternityRoom()
         {
             Room roomToCopy = Appointment.Room;
+            ObservableCollection<MaternityRoom> maternityRooms = access.MaternityRooms.GetAllMaternityRooms();
 
-            Appointment = access.Appointments.getSingleAppointment(Appointment.AppointmentID);
-            Appointment.Room = new MaternityRoom();
+            foreach (var maternityRoom in maternityRooms)
+            {
+                if (!maternityRoom.Occupied)
+                {
+                    Appointment.Room = maternityRoom;
+                }
+            }
 
-            _dialog.Show("BabyInformationView");
-
-            Appointment.Room.Child = ((App)Application.Current).Child;
-
-            if (Appointment.Room.Clinicians != null)
-                Appointment.Room.Clinicians.Clear();
-
+            Appointment.Room.Child = roomToCopy.Child;
             Appointment.Room.Parents = roomToCopy.Parents;
-            Appointment.Room.Occupied = roomToCopy.Occupied;
-            Appointment.Room.RoomNumber = roomToCopy.RoomNumber;
-            Appointment.Room.RoomType = "Maternity Room";
+            Appointment.Room.Clinicians.Clear();
+            Appointment.Room.Occupied = true;
             Appointment.BirthInProgess = false;
-            //access.Appointments.UpdateAppointment(Appointment);
+
             access.Complete();
         }
     }

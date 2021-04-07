@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,9 @@ namespace BirthClinicPlanningDB.DomainObjects
         public int Weight { get; set; }
         public int Length { get; set; }
         public DateTime BirthDate { get; set; }
+
+        [ForeignKey("ParentsID")]
+        public Parents parents { get; set; }
 
         public string DisplayDate { get => BirthDate.ToShortDateString(); set => DateTime.Parse(value); }
     }
