@@ -197,19 +197,19 @@ namespace BirthClinicGUI.ViewModels
         {
             if (roomType == "RestRooms")
             {
-                CurrentRestRoom = RestRooms[RestRoomIndex];
+                CurrentRestRoom = AllRestRooms[RestRoomIndex];
                 _dialog.ShowDialog("RestRoomView", r => { });
             }
             //
             else if (roomType == "BirthRooms")
             {
-                CurrentBirthRoom = BirthRooms[BirthRoomIndex];
+                CurrentBirthRoom = AllBirthRooms[BirthRoomIndex];
                 _dialog.ShowDialog("BirthRoomView", r => { });
             }
 
             else if (roomType == "MaternityRooms")
             {
-                CurrentMaternityRoom = MaternityRooms[MaternityIndex];
+                CurrentMaternityRoom = AllMaternityRooms[MaternityIndex];
                 _dialog.ShowDialog("MaternityRoomView", r => { });
             }
         }
