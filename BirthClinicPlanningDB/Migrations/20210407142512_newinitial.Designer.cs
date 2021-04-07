@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirthClinicPlanningDB.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210407114251_addedseeding")]
-    partial class addedseeding
+    [Migration("20210407142512_newinitial")]
+    partial class newinitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,9 +24,7 @@ namespace BirthClinicPlanningDB.Migrations
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Appointment", b =>
                 {
                     b.Property<int>("AppointmentID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<bool>("BirthInProgess")
                         .HasColumnType("bit");
@@ -270,29 +268,6 @@ namespace BirthClinicPlanningDB.Migrations
                     b.ToTable("Room");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Room");
-
-                    b.HasData(
-                        new
-                        {
-                            RoomID = 1,
-                            Occupied = false,
-                            RoomNumber = 1,
-                            RoomType = "RestRoom"
-                        },
-                        new
-                        {
-                            RoomID = 2,
-                            Occupied = false,
-                            RoomNumber = 2,
-                            RoomType = "RestRoom"
-                        },
-                        new
-                        {
-                            RoomID = 3,
-                            Occupied = false,
-                            RoomNumber = 3,
-                            RoomType = "MaternityRoom"
-                        });
                 });
 
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.BirthRoom", b =>
@@ -307,6 +282,15 @@ namespace BirthClinicPlanningDB.Migrations
                     b.HasBaseType("BirthClinicPlanningDB.DomainObjects.Room");
 
                     b.HasDiscriminator().HasValue("MaternityRoom");
+
+                    b.HasData(
+                        new
+                        {
+                            RoomID = 3,
+                            Occupied = false,
+                            RoomNumber = 3,
+                            RoomType = "Maternity Room"
+                        });
                 });
 
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.RestRoom", b =>
@@ -314,12 +298,34 @@ namespace BirthClinicPlanningDB.Migrations
                     b.HasBaseType("BirthClinicPlanningDB.DomainObjects.Room");
 
                     b.HasDiscriminator().HasValue("RestRoom");
+
+                    b.HasData(
+                        new
+                        {
+                            RoomID = 1,
+                            Occupied = false,
+                            RoomNumber = 1,
+                            RoomType = "Rest Room"
+                        },
+                        new
+                        {
+                            RoomID = 2,
+                            Occupied = false,
+                            RoomNumber = 2,
+                            RoomType = "Rest Room"
+                        });
                 });
 
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Appointment", b =>
                 {
-                    b.HasOne("BirthClinicPlanningDB.DomainObjects.Room", "Room")
+                    b.HasOne("BirthClinicPlanningDB.DomainObjects.Room", null)
                         .WithMany("Appointments")
+                        .HasForeignKey("AppointmentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BirthClinicPlanningDB.DomainObjects.Room", "Room")
+                        .WithMany()
                         .HasForeignKey("RoomID");
 
                     b.Navigation("Room");

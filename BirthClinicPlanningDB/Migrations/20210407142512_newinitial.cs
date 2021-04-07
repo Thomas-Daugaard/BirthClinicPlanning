@@ -3,10 +3,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BirthClinicPlanningDB.Migrations
 {
-    public partial class InitCreate : Migration
+    public partial class newinitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Childs",
+                columns: table => new
+                {
+                    ChildID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Weight = table.Column<int>(type: "int", nullable: false),
+                    Length = table.Column<int>(type: "int", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DisplayDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Childs", x => x.ChildID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Parents",
                 columns: table => new
@@ -24,30 +42,11 @@ namespace BirthClinicPlanningDB.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Parents", x => x.ParentsID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Childs",
-                columns: table => new
-                {
-                    ChildID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Weight = table.Column<int>(type: "int", nullable: false),
-                    Length = table.Column<int>(type: "int", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ParentsID = table.Column<int>(type: "int", nullable: true),
-                    DisplayDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Childs", x => x.ChildID);
                     table.ForeignKey(
-                        name: "FK_Childs_Parents_ParentsID",
-                        column: x => x.ParentsID,
-                        principalTable: "Parents",
-                        principalColumn: "ParentsID",
+                        name: "FK_Parents_Childs_ChildID",
+                        column: x => x.ChildID,
+                        principalTable: "Childs",
+                        principalColumn: "ChildID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -85,8 +84,7 @@ namespace BirthClinicPlanningDB.Migrations
                 name: "Appointments",
                 columns: table => new
                 {
-                    AppointmentID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AppointmentID = table.Column<int>(type: "int", nullable: false),
                     RoomID = table.Column<int>(type: "int", nullable: true),
                     StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -95,6 +93,12 @@ namespace BirthClinicPlanningDB.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Appointments", x => x.AppointmentID);
+                    table.ForeignKey(
+                        name: "FK_Appointments_Room_AppointmentID",
+                        column: x => x.AppointmentID,
+                        principalTable: "Room",
+                        principalColumn: "RoomID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Appointments_Room_RoomID",
                         column: x => x.RoomID,
@@ -129,10 +133,11 @@ namespace BirthClinicPlanningDB.Migrations
                 columns: new[] { "ChildID", "BirthDate", "DisplayDate", "FirstName", "LastName", "Length", "Weight" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2020, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "06-04-2020", "Leif", "Knudsen", 56,  3500 },
-                    { 2, new DateTime(2020, 7, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "07-04-2020", "Viggo", "Mortensen", 56,  3500 },
-                    { 3, new DateTime(2020, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "08-04-2020", "Pascal", "Pedersen", 56,  3500 }
+                    { 1, new DateTime(2020, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "06-06-2020", "Leif", "Knudsen", 56, 3500 },
+                    { 2, new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "07-06-2020", "Viggo", "Mortensen", 56, 3500 },
+                    { 3, new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "08-06-2020", "Pascal", "Pedersen", 56, 3500 }
                 });
+
 
             migrationBuilder.InsertData(
                 table: "Parents",
@@ -149,19 +154,20 @@ namespace BirthClinicPlanningDB.Migrations
                 columns: new[] { "RoomID", "ChildID", "Discriminator", "Occupied", "ParentsID", "RoomNumber", "RoomType" },
                 values: new object[,]
                 {
-                    { 1, 1, "Room", false, 1, 1, "RestRoom" },
-                    { 2, 2, "Room", false, 2, 2, "RestRoom" },
-                    { 3, 3, "Room", false, 3, 3, "MaternityRoom"}
+                    { 3, 3, "MaternityRoom", false, 3, 3, "Maternity Room" },
+                    { 1, 1, "RestRoom", false, 1, 1, "Rest Room" },
+                    { 2, 2, "RestRoom", false, 2, 2, "Rest Room" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Appointments",
-                columns: new[] { "AppointmentID", "BirthInProgess", "StartTime", "EndTime", "RoomID" },
-                values: new object[,]
-                {
-                    { 1, false, new DateTime(2021, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),new DateTime(2021, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 2, false, new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),new DateTime(2021, 7, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 }
-                });
+                columns: new[] { "AppointmentID", "BirthInProgess", "EndTime", "RoomID", "StartTime" },
+                values: new object[] { 1, false, new DateTime(2021, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2021, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "Appointments",
+                columns: new[] { "AppointmentID", "BirthInProgess", "EndTime", "RoomID", "StartTime" },
+                values: new object[] { 2, false, new DateTime(2021, 7, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Clinicians",
@@ -169,7 +175,7 @@ namespace BirthClinicPlanningDB.Migrations
                 values: new object[,]
                 {
                     { 1, "Camilla", "Holmstoel", 1 },
-                    { 2, "Thomas", "Daugaard", 1 },
+                    { 2, "Thomas", "Daugaard", 2 },
                     { 3, "Emil", "Garder", 2 }
                 });
 
@@ -179,11 +185,6 @@ namespace BirthClinicPlanningDB.Migrations
                 column: "RoomID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Childs_ParentsID",
-                table: "Childs",
-                column: "ParentsID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Clinicians_RoomID",
                 table: "Clinicians",
                 column: "RoomID");
@@ -191,9 +192,7 @@ namespace BirthClinicPlanningDB.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Parents_ChildID",
                 table: "Parents",
-                column: "ChildID",
-                unique: true,
-                filter: "[ChildID] IS NOT NULL");
+                column: "ChildID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Room_ChildID",
@@ -204,22 +203,10 @@ namespace BirthClinicPlanningDB.Migrations
                 name: "IX_Room_ParentsID",
                 table: "Room",
                 column: "ParentsID");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Parents_Childs_ChildID",
-                table: "Parents",
-                column: "ChildID",
-                principalTable: "Childs",
-                principalColumn: "ChildID",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Childs_Parents_ParentsID",
-                table: "Childs");
-
             migrationBuilder.DropTable(
                 name: "Appointments");
 
