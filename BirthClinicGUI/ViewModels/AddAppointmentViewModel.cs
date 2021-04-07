@@ -35,19 +35,6 @@ namespace BirthClinicGUI.ViewModels
             return true;
         }
 
-        //public bool IsValidReservation(Appointment a1, Appointment a2)
-        //{
-        //    if (!TimeCompare.IsSameDay(a1.StartTime, a2.EndTime))
-        //    {
-        //        return false;  // multiple day reservation
-        //    }
-
-        //    TimeRange workingHours =
-        //        new TimeRange(TimeTrim.Hour(a1.StartTime, a2.StartTime.Hour), TimeTrim.Hour(a1.EndTime, a2.EndTime));
-        //    return workingHours.HasInside(new TimeRange(start, end));
-        //} // IsValidReservation
-
-
         public bool ValidateDate(Appointment a1, Appointment a2)
         {
             TimeRange AppointmentToInsert = new TimeRange(a1.StartTime, a1.EndTime);
