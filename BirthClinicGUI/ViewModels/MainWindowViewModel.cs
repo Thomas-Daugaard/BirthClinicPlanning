@@ -57,8 +57,9 @@ namespace BirthClinicGUI.ViewModels
             {
                 var restRoom = new RestRoom();
                 restRoom.RoomNumber = i;
-
+                
                 access.RestRooms.AddRestRoom(restRoom);
+                access.Complete();
             }
 
             for (int i = 1; i <= 15; i++)
@@ -67,6 +68,7 @@ namespace BirthClinicGUI.ViewModels
                 birthRoom.RoomNumber = i;
 
                 access.BirthRooms.AddBirthRoom(birthRoom);
+                access.Complete();
             }
 
             for (int i = 1; i <= 22; i++)
@@ -75,6 +77,7 @@ namespace BirthClinicGUI.ViewModels
                 maternityRoom.RoomNumber = i;
 
                 access.MaternityRooms.AddMaternity(maternityRoom);
+                access.Complete();
             }
         }
 

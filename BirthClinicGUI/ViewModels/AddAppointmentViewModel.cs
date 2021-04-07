@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,6 +34,19 @@ namespace BirthClinicGUI.ViewModels
             return true;
         }
 
+        public bool ValidateDate(Appointment a1, Appointment a2)
+        {
+            if (a1.StartTime >= DateTime.Now)
+                return true;
+
+
+            if (DateTime.Compare(a1.StartTime + (a1.EndTime - a1.StartTime),
+                a2.StartTime + (a2.EndTime - a2.StartTime)) == 0)
+                return true;
+
+            return false;
+        }
+
         public void OnDialogClosed()
         {
             if (_okButtonPressed)
@@ -43,24 +57,28 @@ namespace BirthClinicGUI.ViewModels
                 {
                     case "Rest Room":
                         ObservableCollection<RestRoom> restRoomsToCheck = access.RestRooms.GetAllRestRoom();
+                        access.Complete();
 
                         foreach (var room in restRoomsToCheck)
                         {
-                            foreach (var appointment in room.Appointments)
+                            if (room.Appointments != null)
                             {
-                                if (Appointment.StartTime >= DateTime.Now &&
-                                    (DateTime.Compare(Appointment.StartTime, appointment.StartTime) < 0 ||
-                                     DateTime.Compare(Appointment.EndTime, appointment.EndTime) > 0))
+                                foreach (var appointment in room.Appointments)
                                 {
-                                    Appointment.Room = appointment.Room;
-                                    return;
+                                    if (!ValidateDate(Appointment, appointment))
+                                    {
+                                        MessageBox.Show("Invalid Date");
+                                        return;
+                                    }
                                 }
                             }
+                            Appointment.Room = room;
                         }
                         break;
 
                     case "Birth Room":
                         ObservableCollection<BirthRoom> birthRoomsToCheck = access.BirthRooms.GetAllBirthsRooms();
+                        access.Complete();
 
                         foreach (var room in birthRoomsToCheck)
                         {
@@ -82,6 +100,7 @@ namespace BirthClinicGUI.ViewModels
 
                     case "Maternity Room":
                         ObservableCollection<MaternityRoom> maternityRoomsToCheck = access.MaternityRooms.GetAllMaternityRooms();
+                        access.Complete();
 
                         foreach (var room in maternityRoomsToCheck)
                         {
@@ -118,7 +137,11 @@ namespace BirthClinicGUI.ViewModels
         {
             Appointment = new Appointment() {BirthInProgess = false, StartTime = DateTime.Now.Date, Room = new BirthRoom() {Parents = new Parents(), Child = new Child(), Clinicians = new ObservableCollection<Clinician>()}};
             AllClinicians = access.Clinicians.GetAllClinicians();
+            access.Complete();
+
             RoomType = new ObservableCollection<string>() {"Birth Room", "Maternity Room", "Rest Room"};
+            Appointment.StartTime = DateTime.Now;
+            Appointment.EndTime = DateTime.Now.AddHours(4);
         }
 
         public string Title { get; }
