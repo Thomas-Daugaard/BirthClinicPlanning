@@ -16,7 +16,7 @@ namespace BirthClinicPlanningDB
         protected override void OnConfiguring(DbContextOptionsBuilder ob)
         {
             ob.UseSqlServer(
-                "Data Source=localhost;Initial Catalog=birthclinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                "Data Source=localhost;Initial Catalog=Birthclinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -101,7 +101,7 @@ namespace BirthClinicPlanningDB
                     MomLastName = "Thomsen",
                     DadCPR = "2103898569",
                     DadFirstName = "Lars",
-                    DadLastName = "Thomsen"
+                    DadLastName = "Thomsen",
                 },
                 new Parents
                 {
@@ -137,20 +137,23 @@ namespace BirthClinicPlanningDB
                 {
                     RoomID = 1,
                     RoomNumber = 1,
-                    Occupied = false
+                    Occupied = false,
+                    RoomType = "RestRoom"
                 },
 
                 new Room
                 {
-                RoomID = 2,
-                RoomNumber = 2,
-                Occupied = false
+                    RoomID = 2,
+                    RoomNumber = 2,
+                    Occupied = false,
+                    RoomType = "RestRoom"
                 },
                 new Room
                 {
                     RoomID = 3,
                     RoomNumber = 3,
-                    Occupied = false
+                    Occupied = false,
+                    RoomType = "MaternityRoom"
                 }
             };
 
