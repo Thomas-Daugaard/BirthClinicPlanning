@@ -29,7 +29,6 @@ namespace BirthClinicPlanningDB.Repositories
 
         public Appointment getSingleAppointment(int id)
         {
-            Appointment appointmentToMonitor = context.Appointments.Find(id);
             return context.Appointments
                 .Include(r => r.Room)
                     .ThenInclude(c => c.Child)

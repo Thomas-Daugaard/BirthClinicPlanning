@@ -61,7 +61,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="2" Grid.Column="1"
-                         Text="{Binding Appointment.StartTime}"
+                         Text="{Binding Appointment.DisplayStartDateTime}"
                          MinWidth="100"
                          Margin="5"/>
 
@@ -70,7 +70,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="3" Grid.Column="1"
-                         Text="{Binding Appointment.EndTime}"
+                         Text="{Binding Appointment.DisplayEndDateTime}"
                          MinWidth="100"
                          Margin="5"/>
 
