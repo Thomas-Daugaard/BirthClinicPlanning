@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using BirthClinicPlanningDB;
 using BirthClinicPlanningDB.DomainObjects;
+using Itenso.TimePeriod;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -34,29 +35,39 @@ namespace BirthClinicGUI.ViewModels
             return true;
         }
 
+        //public bool IsValidReservation(Appointment a1, Appointment a2)
+        //{
+        //    if (!TimeCompare.IsSameDay(a1.StartTime, a2.EndTime))
+        //    {
+        //        return false;  // multiple day reservation
+        //    }
+
+        //    TimeRange workingHours =
+        //        new TimeRange(TimeTrim.Hour(a1.StartTime, a2.StartTime.Hour), TimeTrim.Hour(a1.EndTime, a2.EndTime));
+        //    return workingHours.HasInside(new TimeRange(start, end));
+        //} // IsValidReservation
+
+
         public bool ValidateDate(Appointment a1, Appointment a2)
         {
-            if (a1.StartTime >= DateTime.Now)
-                return true;
+            TimeRange AppointmentToInsert = new TimeRange(a1.StartTime, a1.EndTime);
+            TimeRange AppointmentToCompare = new TimeRange(a2.StartTime, a2.EndTime);
 
-            else
-                MessageBox.Show("Invalid Date");
 
-            if (DateTime.Compare(a1.StartTime + (a1.EndTime - a1.StartTime),
-                a2.StartTime + (a2.EndTime - a2.StartTime)) == 0)
-                return true;
-
-            else
+            if (AppointmentToCompare.IntersectsWith(AppointmentToInsert))
+            {
                 MessageBox.Show("Date already booked");
+                return false;
+            }
 
-            return false;
+            else
+                return true;
         }
 
         public void OnDialogClosed()
         {
             if (_okButtonPressed)
             {
-                bool DateOk = true;
                 Room roomToCopy = Appointment.Room;
 
                 switch (RoomType[RoomTypeIndex])
@@ -162,8 +173,17 @@ namespace BirthClinicGUI.ViewModels
 
             if (parameter?.ToLower() == "true")
             {
-                result = ButtonResult.OK;
-                _okButtonPressed = true;
+                if (DateTime.Compare(Appointment.StartTime, DateTime.Now) < 0)
+                {
+                    MessageBox.Show("Invalid Date");
+                    return;
+                }
+
+                else
+                {
+                    result = ButtonResult.OK;
+                    _okButtonPressed = true;
+                }
             }
             else if (parameter?.ToLower() == "false")
                 result = ButtonResult.Cancel;
