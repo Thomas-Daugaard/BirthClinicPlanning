@@ -52,7 +52,7 @@
                 />
 
                 <TextBlock Grid.Row="1" Grid.Column="1" MinWidth="50" MinHeight="20"
-                           Text="{Binding CurrentRestRoom.Occupied}"
+                           Text="{Binding Occupied}"
                            Margin="5"
                            VerticalAlignment="Center" 
                            HorizontalAlignment="Center"
@@ -135,6 +135,15 @@
                            Text="{Binding Parents.MomLastName}"
                            Margin="5"
                            VerticalAlignment="Center"/>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="Clinicians information" Margin="5">
+            <Grid>
+                <ListBox ItemsSource="{Binding Clinicians}"
+                         DisplayMemberPath="Display"
+                         Background="Gainsboro"/>
+
             </Grid>
         </GroupBox>
     </Grid>

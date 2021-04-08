@@ -143,13 +143,21 @@ namespace BirthClinicGUI.ViewModels
                     return;
                 }
             }
-            //
             else if (roomType == "BirthRooms")
             {
                 CurrentBirthRoom = BirthRooms[BirthRoomIndex];
-                _dialog.ShowDialog("BirthRoomView", r => { });
-            }
 
+                if (CurrentBirthRoom != null)
+                {
+                    _dialog.ShowDialog("BirthRoomView", new DialogParameters($"Message={CurrentBirthRoom.RoomID}"), r => { });
+                }
+                else
+                {
+                    MessageBox.Show("CurrentBirthRoom == null / Not set");
+                    return;
+                }
+
+            }
             else if (roomType == "MaternityRooms")
             {
                 CurrentMaternityRoom = MaternityRooms[MaternityIndex];

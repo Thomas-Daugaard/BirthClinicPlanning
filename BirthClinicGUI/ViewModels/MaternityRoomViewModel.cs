@@ -59,6 +59,7 @@ namespace BirthClinicGUI.ViewModels
         public void OnDialogClosed()
         {
         }
+        public bool Occupied { get; set; }
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
@@ -77,12 +78,14 @@ namespace BirthClinicGUI.ViewModels
                 if (appointmentrange.IntersectsWith(nowrange))
                 {
                     CurrentMaternityRoom.Occupied = true;
+                    Occupied = true;
                     Parents = CurrentMaternityRoom.Parents;
                     Clinicians = CurrentMaternityRoom.Clinicians;
                 }
                 else
                 {
                     CurrentMaternityRoom.Occupied = false;
+                    Occupied = false;
                 }
             }
 

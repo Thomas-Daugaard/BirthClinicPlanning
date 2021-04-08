@@ -12,15 +12,17 @@ using Prism.Services.Dialogs;
 
 namespace BirthClinicGUI.ViewModels
 {
-    class RestRoomViewModel : BindableBase, IDialogAware
+    class BirthRoomViewModel : BindableBase, IDialogAware
     {
         private IDataAccessActions access = new DataAccessActions(new Context());
         private IDialogService _dialog;
 
-        private RestRoom _currentRestRoom;
-        public RestRoom CurrentRestRoom { 
-            get=> _currentRestRoom; 
-            set=>SetProperty(ref _currentRestRoom,value); }
+        private BirthRoom _currentBirthRoom;
+        public BirthRoom CurrentBirthRoom
+        {
+            get => _currentBirthRoom;
+            set => SetProperty(ref _currentBirthRoom, value);
+        }
 
         private ObservableCollection<Appointment> _appointmentsForRoom = new ObservableCollection<Appointment>();
 
@@ -45,7 +47,7 @@ namespace BirthClinicGUI.ViewModels
             get => _clinicians;
             set => SetProperty(ref _clinicians, value);
         }
-        public RestRoomViewModel(IDialogService dialog)
+        public BirthRoomViewModel(IDialogService dialog)
         {
             _dialog = dialog;
         }
@@ -59,13 +61,14 @@ namespace BirthClinicGUI.ViewModels
         }
 
         public bool Occupied { get; set; }
+
         public void OnDialogOpened(IDialogParameters parameters)
         {
             int roomid = int.Parse(parameters.GetValue<string>("Message"));
 
-            CurrentRestRoom = access.RestRooms.GetSingleRestRoom(roomid);
+            CurrentBirthRoom = access.BirthRooms.GetSingleBirthRoom(roomid);
 
-            AppointmentsForRoom = CurrentRestRoom.Appointments;
+            AppointmentsForRoom = CurrentBirthRoom.Appointments;
 
             foreach (var item in AppointmentsForRoom)
             {
@@ -75,14 +78,14 @@ namespace BirthClinicGUI.ViewModels
 
                 if (appointmentrange.IntersectsWith(nowrange))
                 {
-                    CurrentRestRoom.Occupied = true;
+                    CurrentBirthRoom.Occupied = true;
                     Occupied = true;
-                    Parents = CurrentRestRoom.Parents;
-                    Clinicians = CurrentRestRoom.Clinicians;
+                    Parents = CurrentBirthRoom.Parents;
+                    Clinicians = CurrentBirthRoom.Clinicians;
                 }
                 else
                 {
-                    CurrentRestRoom.Occupied = false;
+                    CurrentBirthRoom.Occupied = false;
                     Occupied = false;
                 }
             }
