@@ -42,8 +42,13 @@ namespace BirthClinicGUI.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
+            AllRestRooms = new ObservableCollection<RestRoom>();
             AllRestRooms = access.RestRooms.GetAllRestRoom();
+
+            AllBirthRooms = new ObservableCollection<BirthRoom>();
             AllBirthRooms = access.BirthRooms.GetAllBirthsRooms();
+
+            AllMaternityRooms = new ObservableCollection<MaternityRoom>();
             AllMaternityRooms = access.MaternityRooms.GetAllMaternityRooms();
         }
 
@@ -51,6 +56,7 @@ namespace BirthClinicGUI.ViewModels
         public event Action<IDialogResult> RequestClose;
 
         #region Rooms collections + CurrentRoom properties
+
         private ObservableCollection<RestRoom> _restrooms;  //Restroom
 
         public ObservableCollection<RestRoom> RestRooms
@@ -59,8 +65,18 @@ namespace BirthClinicGUI.ViewModels
             set => SetProperty(ref _restrooms, value);
         }
 
-        private RestRoom _currentRestRoom;   
-        public RestRoom CurrentRestRoom { get=>_currentRestRoom; set=>SetProperty(ref _currentRestRoom, value); }
+        private RestRoom _currentRestRoom;
+
+        public RestRoom CurrentRestRoom
+        {
+            get=>_currentRestRoom; 
+            set=>SetProperty(ref _currentRestRoom, value);
+        }
+
+        public string CurrentRestRoomId
+        {
+            get => CurrentRestRoom.RoomID.ToString();
+        }
 
 
         private ObservableCollection<BirthRoom> _birthRooms;  //Birthroom
@@ -102,7 +118,7 @@ namespace BirthClinicGUI.ViewModels
 
                 if (CurrentRestRoom != null)
                 {
-                    _dialog.ShowDialog("RestRoomView", r => { });
+                    _dialog.ShowDialog("RestRoomView", r => { CurrentRestRoom = CurrentRestRoom; });
                 }
                 else
                 {
@@ -133,6 +149,7 @@ namespace BirthClinicGUI.ViewModels
             get => _restRoomIndex;
             set => _restRoomIndex = value;
         }
+
 
         private int _birthRoomIndex;
         public int BirthRoomIndex

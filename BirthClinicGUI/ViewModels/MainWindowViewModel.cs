@@ -53,7 +53,7 @@ namespace BirthClinicGUI.ViewModels
             SetUpRoomsAppointmentsListInDb(); //Setting up relation between seeded rooms and appointments
             
             Appointments = access.Appointments.getAllAppointments();
-            access.Complete();
+            
             AppointmentIndex = 0;
 
         }

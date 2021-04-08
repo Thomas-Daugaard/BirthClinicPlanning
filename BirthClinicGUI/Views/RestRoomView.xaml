@@ -41,7 +41,7 @@
                 />
 
                 <TextBlock Grid.Row="0" Grid.Column="1" MinWidth="50" MinHeight="20"
-                           Text="{Binding Path=CurrentRestRoom.RoomID, Mode=OneWay}"
+                           Text="{Binding CurrentRestRoomId}"
                            Margin="5"
                            VerticalAlignment="Center" 
                            HorizontalAlignment="Center" 
