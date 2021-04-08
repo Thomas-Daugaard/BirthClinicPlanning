@@ -20,7 +20,7 @@ namespace BirthClinicPlanningDB
             ob.LogTo(message => Debug.WriteLine(message));
 
             ob.UseSqlServer(
-                "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BirthClinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                "Data Source=localhost;Initial Catalog=BirthClinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
             //Example: Data Source=localhost;Initial Catalog=BirthClinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
             // Thomas Conn string: Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BirthClinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
@@ -297,133 +297,133 @@ namespace BirthClinicPlanningDB
                 new MaternityRoom()
                 {
                     RoomID = 3,
-                    RoomNumber = 3,
+                    RoomNumber = 1,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 8,
-                    RoomNumber = 8,
+                    RoomNumber = 2,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 9,
-                    RoomNumber = 9,
+                    RoomNumber = 3,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 10,
-                    RoomNumber = 10,
+                    RoomNumber = 4,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 11,
-                    RoomNumber = 11,
+                    RoomNumber = 5,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 12,
-                    RoomNumber = 12,
+                    RoomNumber = 6,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 13,
-                    RoomNumber = 13,
+                    RoomNumber = 7,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 14,
-                    RoomNumber = 14,
+                    RoomNumber = 8,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 15,
-                    RoomNumber = 15,
+                    RoomNumber = 9,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 16,
-                    RoomNumber = 16,
+                    RoomNumber = 10,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 17,
-                    RoomNumber = 17,
+                    RoomNumber = 11,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 18,
-                    RoomNumber = 18,
+                    RoomNumber = 12,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 19,
-                    RoomNumber = 19,
+                    RoomNumber = 13,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 20,
-                    RoomNumber = 20,
+                    RoomNumber = 14,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 21,
-                    RoomNumber = 21,
+                    RoomNumber = 15,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 22,
-                    RoomNumber = 22,
+                    RoomNumber = 16,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 23,
-                    RoomNumber = 23,
+                    RoomNumber = 17,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 24,
-                    RoomNumber = 24,
+                    RoomNumber = 18,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 25,
-                    RoomNumber = 25,
+                    RoomNumber = 19,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 27,
-                    RoomNumber = 27,
+                    RoomNumber = 20,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 28,
-                    RoomNumber = 28,
+                    RoomNumber = 21,
                     Occupied = false
                 },
                 new MaternityRoom()
                 {
                     RoomID = 29,
-                    RoomNumber = 29,
+                    RoomNumber = 22,
                     Occupied = false
                 }
             };
@@ -439,91 +439,91 @@ namespace BirthClinicPlanningDB
                 new BirthRoom()
                 {
                     RoomID = 4,
-                    RoomNumber = 4,
+                    RoomNumber = 1,
                     Occupied = false
                 },
                 new BirthRoom()
                 {
                     RoomID = 30,
-                    RoomNumber = 30,
+                    RoomNumber = 2,
                     Occupied = false
                 },
                 new BirthRoom()
                 {
                     RoomID = 31,
-                    RoomNumber = 31,
+                    RoomNumber = 3,
                     Occupied = false
                 },
                 new BirthRoom()
                 {
                     RoomID = 32,
-                    RoomNumber = 32,
+                    RoomNumber = 4,
                     Occupied = false
                 },
                 new BirthRoom()
                 {
                     RoomID = 33,
-                    RoomNumber = 33,
+                    RoomNumber = 5,
                     Occupied = false
                 },
                 new BirthRoom()
                 {
                     RoomID = 34,
-                    RoomNumber = 34,
+                    RoomNumber = 6,
                     Occupied = false
                 },
                 new BirthRoom()
                 {
                     RoomID = 35,
-                    RoomNumber = 35,
+                    RoomNumber = 7,
                     Occupied = false
                 },
                 new BirthRoom()
                 {
                     RoomID = 36,
-                    RoomNumber = 36,
+                    RoomNumber = 8,
                     Occupied = false
                 },
                 new BirthRoom()
                 {
                     RoomID = 37,
-                    RoomNumber = 37,
+                    RoomNumber = 9,
                     Occupied = false
                 },
                 new BirthRoom()
                 {
                     RoomID = 38,
-                    RoomNumber = 38,
+                    RoomNumber = 10,
                     Occupied = false
                 },
                 new BirthRoom()
                 {
                     RoomID = 39,
-                    RoomNumber = 39,
+                    RoomNumber = 11,
                     Occupied = false
                 },
                 new BirthRoom()
                 {
                     RoomID = 40,
-                    RoomNumber = 40,
+                    RoomNumber = 12,
                     Occupied = false
                 },
                 new BirthRoom()
                 {
                     RoomID = 41,
-                    RoomNumber = 41,
+                    RoomNumber = 13,
                     Occupied = false
                 },
                 new BirthRoom()
                 {
                     RoomID = 42,
-                    RoomNumber = 42,
+                    RoomNumber = 14,
                     Occupied = false
                 },
                 new BirthRoom()
                 {
                     RoomID = 43,
-                    RoomNumber = 43,
+                    RoomNumber = 15,
                     Occupied = false
                 }
             };
