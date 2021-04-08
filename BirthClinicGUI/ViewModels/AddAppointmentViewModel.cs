@@ -100,47 +100,31 @@ namespace BirthClinicGUI.ViewModels
         #region Helper methods
         public void AddAppointmentToRestRoom()
         {
-            RestRoom roomToInsert = null;
-            ObservableCollection<RestRoom> restRoomsToCheck =
-            access.RestRooms.GetAllRestRoomsWithSpecificNumber(Room.RoomNumber);
+            RestRoom roomToInsert = access.RestRooms.GetRestRoomWithSpecificNumber(Room.RoomNumber);
 
-            foreach (var room in restRoomsToCheck)
+            foreach (var appointment in roomToInsert.Appointments)
             {
-                if (room.Appointments != null)
+                if (appointment != null && appointment.StartTime.Date == StartTime.Date)
                 {
-                    foreach (var appointment in room.Appointments)
+                    if (ValidateDate(appointment))
                     {
-                        if (appointment.StartTime.Date == StartTime.Date)
-                        {
-                            if (ValidateDate(appointment))
-                            {
-                                CanClose = false;
-                                return;
-                            }
-                        }
+                        CanClose = false;
+                        return;
                     }
                 }
-                roomToInsert = room;
             }
 
-            if (roomToInsert == null)
-            {
-                roomToInsert = new RestRoom() { Appointments = new ObservableCollection<Appointment>() };
-            }
-
-            roomToInsert.Clinicians = Clinicians;
-            roomToInsert.Parents = Parents;
-            roomToInsert.RoomNumber = Room.RoomNumber;
-            roomToInsert.Occupied = Room.Occupied;
-            roomToInsert.RoomType = RoomType[RoomTypeIndex];
-
-            roomToInsert.Appointments.Add(new Appointment()
+            var newAppointment = new Appointment()
             {
                 BirthInProgess = BirthInProgess,
                 StartTime = StartTime,
-                EndTime = EndTime
-            });
+                EndTime = EndTime,
+                RoomID = roomToInsert.RoomID,
+                Room = roomToInsert
+            };
 
+            roomToInsert.Appointments.Add(newAppointment);
+            access.Appointments.AddAppointment(newAppointment);
             access.Complete();
         }
         public void AddAppointmentToBirthRoom()
@@ -189,6 +173,7 @@ namespace BirthClinicGUI.ViewModels
                 EndTime = EndTime
             });
 
+            access.BirthRooms.AddBirthRoom(roomToInsert);
             access.Complete();
         }
         public void AddAppointmentToMaternityRoom()
