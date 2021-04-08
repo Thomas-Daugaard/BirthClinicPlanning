@@ -50,18 +50,5 @@ namespace BirthClinicPlanningDB.DomainObjects
         {
             get => $"{(EndTime - StartTime).Days} days - {(EndTime - StartTime).Hours} hours";
         }
-
-        [NotMapped]
-        public string BirthStatus
-        {
-            get
-            {
-                if (BirthInProgess)
-                    return "***Birth in Progress***";
-                else
-                    return "";
-            }
-
-        }
     }
 }

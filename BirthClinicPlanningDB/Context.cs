@@ -55,7 +55,6 @@ namespace BirthClinicPlanningDB
                     AppointmentID = 1,
                     StartTime = new DateTime(2021,06,07),
                     EndTime = new DateTime(2021,06,08),
-                    BirthInProgess = false
                 },
 
                 new Appointment
@@ -63,7 +62,6 @@ namespace BirthClinicPlanningDB
                     AppointmentID = 2,
                     StartTime = new DateTime(2021,07,08),
                     EndTime = new DateTime(2021,07,09),
-                    BirthInProgess = false
                 }
 
             };

@@ -50,7 +50,7 @@ namespace BirthClinicGUI.ViewModels
 
         public bool ValidateDate(Appointment existingAppointment)
         {
-            TimeRange AppointmentToInsert = new TimeRange(DateTime.Now.Date.Add(StartTime.TimeOfDay), DateTime.Now.Date.Add(EndTime.TimeOfDay));
+            TimeRange AppointmentToInsert = new TimeRange(DateTime.Now.Date.Add(Appointment.StartTime.TimeOfDay), DateTime.Now.Date.Add(Appointment.EndTime.TimeOfDay));
             TimeRange AppointmentToCompare = new TimeRange(DateTime.Now.Date.Add(existingAppointment.StartTime.TimeOfDay), DateTime.Now.Date.Add(existingAppointment.EndTime.TimeOfDay));
 
             if (AppointmentToCompare.IsSamePeriod(AppointmentToInsert))
@@ -154,7 +154,7 @@ namespace BirthClinicGUI.ViewModels
             Appointment.EndTime = DateTime.Now.AddHours(5);
         }
 
-        public string Title { get; }
+        public string Title => "Add Appointment";
         public event Action<IDialogResult> RequestClose;
 
         private DelegateCommand<string> _closeDialogCommand;
