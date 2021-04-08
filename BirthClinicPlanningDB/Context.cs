@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using BirthClinicPlanningDB.DomainObjects;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace BirthClinicPlanningDB
 {
@@ -15,6 +17,8 @@ namespace BirthClinicPlanningDB
         public Context(DbContextOptions<Context> options): base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder ob)
         {
+            ob.LogTo(message => Debug.WriteLine(message));
+
             ob.UseSqlServer(
                 "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BirthClinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
@@ -195,8 +199,6 @@ namespace BirthClinicPlanningDB
             {
                 modelBuilder.Entity<Appointment>().HasData(app);
             }
-
-            
         }
 
         public DbSet<Appointment> Appointments { get; set; }

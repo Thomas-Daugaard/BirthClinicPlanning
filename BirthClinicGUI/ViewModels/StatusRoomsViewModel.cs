@@ -26,7 +26,6 @@ namespace BirthClinicGUI.ViewModels
         //    set=>SetProperty(ref _allBirthRooms, value);
         //}
         //fpublic ObservableCollection<MaternityRoom> AllMaternityRooms { get; set; }
-        private IDataAccessActions access = new DataAccessActions(new Context());
         private IDialogService _dialog;
         public StatusRoomsViewModel()
         {
@@ -50,13 +49,13 @@ namespace BirthClinicGUI.ViewModels
         public void OnDialogOpened(IDialogParameters parameters)
         {
             RestRooms = new ObservableCollection<RestRoom>();
-            RestRooms = access.RestRooms.GetAllRestRoom();
+            RestRooms = ((App)Application.Current).access.RestRooms.GetAllRestRoom();
 
             BirthRooms = new ObservableCollection<BirthRoom>();
-            BirthRooms = access.BirthRooms.GetAllBirthsRooms();
+            BirthRooms = ((App)Application.Current).access.BirthRooms.GetAllBirthsRooms();
 
             MaternityRooms = new ObservableCollection<MaternityRoom>();
-            MaternityRooms = access.MaternityRooms.GetAllMaternityRooms();
+            MaternityRooms = ((App)Application.Current).access.MaternityRooms.GetAllMaternityRooms();
         }
 
         public string Title { get; }

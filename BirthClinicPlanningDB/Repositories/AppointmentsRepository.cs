@@ -43,18 +43,10 @@ namespace BirthClinicPlanningDB.Repositories
             context.Appointments.Add(appointment);
         }
 
-        public void DelAppointment(int id)
+        public void DelAppointment(Appointment appointmentToDelete)
         {
-            Appointment appointmentToDelete = context.Appointments.Find(id);
             context.Appointments.Remove(appointmentToDelete);
         }
-
-        //public void UpdateAppointment(Appointment appointment)
-        //{
-        //    var appointmentToUpdate = context.Appointments.Find(appointment.AppointmentID);
-
-        //    appointmentToUpdate.Room = appointment.Room;
-        //}
 
         public Context context
         {

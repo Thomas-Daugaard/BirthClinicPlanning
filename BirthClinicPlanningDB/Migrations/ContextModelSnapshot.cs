@@ -327,7 +327,7 @@ namespace BirthClinicPlanningDB.Migrations
                 {
                     b.HasOne("BirthClinicPlanningDB.DomainObjects.Room", "Room")
                         .WithMany("Appointments")
-                        .HasForeignKey("AppointmentID")
+                        .HasForeignKey("RoomID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

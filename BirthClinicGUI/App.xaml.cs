@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using BirthClinicGUI.ViewModels;
 using BirthClinicGUI.Views;
+using BirthClinicPlanningDB;
 using BirthClinicPlanningDB.DomainObjects;
 using Prism.Ioc;
 using Prism.Unity;
@@ -35,5 +36,7 @@ namespace BirthClinicGUI
         }
 
         public Child Child { get; set; }
+
+        public IDataAccessActions access = new DataAccessActions(new Context());
     }
 }

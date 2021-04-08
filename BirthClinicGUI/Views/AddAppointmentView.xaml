@@ -42,7 +42,7 @@
                            Margin="5"/>
 
                 <TextBox Grid.Row="0" Grid.Column="1"
-                 Text="{Binding Appointment.Room.RoomNumber}"
+                 Text="{Binding Room.RoomNumber}"
                  MinWidth="100"
                  Margin="5"/>
 
@@ -61,7 +61,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="2" Grid.Column="1"
-                         Text="{Binding Appointment.DisplayStartDateTime}"
+                         Text="{Binding DisplayStartDateTime}"
                          MinWidth="100"
                          Margin="5"/>
 
@@ -70,7 +70,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="3" Grid.Column="1"
-                         Text="{Binding Appointment.DisplayEndDateTime}"
+                         Text="{Binding DisplayEndDateTime}"
                          MinWidth="100"
                          Margin="5"/>
 
@@ -79,7 +79,7 @@
                        Margin="5"/>
 
                 <CheckBox Grid.Row="4" Grid.Column="1" 
-                          IsChecked="{Binding Appointment.BirthInProgess}"
+                          IsChecked="{Binding BirthInProgess}"
                           VerticalAlignment="Center"/>
 
             </Grid>
@@ -102,7 +102,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="0" Grid.Column="1"
-                         Text="{Binding Appointment.Room.Parents.DadFirstName}"
+                         Text="{Binding Parents.DadFirstName}"
                          MinWidth="120"
                          Margin="5"/>
 
@@ -111,7 +111,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="1" Grid.Column="1"
-                         Text="{Binding Appointment.Room.Parents.DadLastName}"
+                         Text="{Binding Parents.DadLastName}"
                          MinWidth="120"
                          Margin="5"/>
 
@@ -120,7 +120,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="2" Grid.Column="1"
-                         Text="{Binding Appointment.Room.Parents.DadCPR}"
+                         Text="{Binding Parents.DadCPR}"
                          MinWidth="100"
                          Margin="5"/>
 
@@ -144,7 +144,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="0" Grid.Column="1"
-                         Text="{Binding Appointment.Room.Parents.MomFirstName}"
+                         Text="{Binding Parents.MomFirstName}"
                          MinWidth="120"
                          Margin="5"/>
 
@@ -153,7 +153,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="1" Grid.Column="1"
-                         Text="{Binding Appointment.Room.Parents.MomLastName}"
+                         Text="{Binding Parents.MomLastName}"
                          MinWidth="120"
                          Margin="5"/>
 
@@ -162,7 +162,7 @@
                        Margin="5"/>
 
                 <TextBox Grid.Row="2" Grid.Column="1"
-                         Text="{Binding Appointment.Room.Parents.MomCPR}"
+                         Text="{Binding Parents.MomCPR}"
                          MinWidth="100"
                          Margin="5"/>
 

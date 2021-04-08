@@ -18,7 +18,6 @@ namespace BirthClinicGUI.ViewModels
     {
         private Appointment _appointment;
         public Appointment Appointment { get => _appointment; set => SetProperty(ref _appointment, value); }
-        private IDataAccessActions access = new DataAccessActions(new Context());
         private IDialogService _dialog;
         public ObservableCollection<string> RoomType { get; set; }
         public int RoomTypeIndex { get; set; }
@@ -40,8 +39,8 @@ namespace BirthClinicGUI.ViewModels
         public void OnDialogOpened(IDialogParameters parameters)
         {
             int id = int.Parse(parameters.GetValue<string>("Message"));
-            Appointment = access.Appointments.getSingleAppointment(id);
-            access.Complete();
+            Appointment = ((App)Application.Current).access.Appointments.getSingleAppointment(id);
+            ((App)Application.Current).access.Complete();
             RoomType = new ObservableCollection<string>() { "Birth Room", "Maternity Room", "Rest Room" };
         }
 
@@ -73,8 +72,8 @@ namespace BirthClinicGUI.ViewModels
                     break;
 
                 case "Maternity Room":
-                    access.Appointments.DelAppointment(Appointment.AppointmentID);
-                    access.Complete();
+                    ((App)Application.Current).access.Appointments.DelAppointment(Appointment);
+                    ((App)Application.Current).access.Complete();
                     break;
             }
         }
@@ -82,7 +81,7 @@ namespace BirthClinicGUI.ViewModels
         private void ChangeToBirthRoom()
         {
             Room roomToCopy = Appointment.Room;
-            ObservableCollection<BirthRoom> birthRooms = access.BirthRooms.GetAllBirthsRooms();
+            ObservableCollection<BirthRoom> birthRooms = ((App)Application.Current).access.BirthRooms.GetAllBirthsRooms();
             int index = 0;
 
             //foreach (var birthroom in birthRooms)
@@ -112,7 +111,7 @@ namespace BirthClinicGUI.ViewModels
         private void ChangeToMaternityRoom()
         {
             Room roomToCopy = Appointment.Room;
-            ObservableCollection<MaternityRoom> maternityRooms = access.MaternityRooms.GetAllMaternityRooms();
+            ObservableCollection<MaternityRoom> maternityRooms = ((App)Application.Current).access.MaternityRooms.GetAllMaternityRooms();
 
             foreach (var maternityRoom in maternityRooms)
             {
@@ -128,7 +127,7 @@ namespace BirthClinicGUI.ViewModels
             Appointment.Room.Occupied = true;
             Appointment.BirthInProgess = false;
 
-            access.Complete();
+            ((App)Application.Current).access.Complete();
         }
     }
 }
