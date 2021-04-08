@@ -59,7 +59,13 @@ namespace BirthClinicGUI.ViewModels
             MaternityRooms = access.MaternityRooms.GetAllMaternityRooms();
         }
 
-        public string Title { get; }
+        private string title = "StatusRoomsViewModel";
+
+        public string Title
+        {
+            get=>title;
+            set => SetProperty(ref title, value);
+        }
         public event Action<IDialogResult> RequestClose;
 
         #region Rooms collections + CurrentRoom properties
@@ -125,7 +131,7 @@ namespace BirthClinicGUI.ViewModels
 
                 if (CurrentRestRoom != null)
                 {
-                    _dialog.ShowDialog("RestRoomView", r => { CurrentRestRoom = CurrentRestRoom; });
+                    _dialog.ShowDialog("RestRoomView", r=>{ });
                 }
                 else
                 {
