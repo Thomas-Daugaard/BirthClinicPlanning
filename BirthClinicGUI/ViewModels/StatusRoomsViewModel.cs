@@ -16,16 +16,16 @@ namespace BirthClinicGUI.ViewModels
 {
     public class StatusRoomsViewModel : BindableBase, IDialogAware
     {
-        public ObservableCollection<RestRoom> AllRestRooms { get; set; }
+        //public ObservableCollection<RestRoom> AllRestRooms { get; set; }
 
-        private ObservableCollection<BirthRoom> _allBirthRooms;
+        //private ObservableCollection<BirthRoom> _allBirthRooms;
 
-        public ObservableCollection<BirthRoom> AllBirthRooms
-        {
-            get=>_allBirthRooms; 
-            set=>SetProperty(ref _allBirthRooms, value);
-        }
-        public ObservableCollection<MaternityRoom> AllMaternityRooms { get; set; }
+        //public ObservableCollection<BirthRoom> AllBirthRooms
+        //{
+        //    get=>_allBirthRooms; 
+        //    set=>SetProperty(ref _allBirthRooms, value);
+        //}
+        //fpublic ObservableCollection<MaternityRoom> AllMaternityRooms { get; set; }
         private IDataAccessActions access = new DataAccessActions(new Context());
         private IDialogService _dialog;
         public StatusRoomsViewModel()
@@ -52,8 +52,8 @@ namespace BirthClinicGUI.ViewModels
             RestRooms = new ObservableCollection<RestRoom>();
             RestRooms = access.RestRooms.GetAllRestRoom();
 
-            AllBirthRooms = new ObservableCollection<BirthRoom>();
-            AllBirthRooms = access.BirthRooms.GetAllBirthsRooms();
+            BirthRooms = new ObservableCollection<BirthRoom>();
+            BirthRooms = access.BirthRooms.GetAllBirthsRooms();
 
             MaternityRooms = new ObservableCollection<MaternityRoom>();
             MaternityRooms = access.MaternityRooms.GetAllMaternityRooms();
@@ -121,7 +121,7 @@ namespace BirthClinicGUI.ViewModels
         {
             if (roomType == "RestRooms")
             {
-                CurrentRestRoom = AllRestRooms[RestRoomIndex]; 
+                CurrentRestRoom = RestRooms[RestRoomIndex]; 
 
                 if (CurrentRestRoom != null)
                 {
@@ -136,13 +136,13 @@ namespace BirthClinicGUI.ViewModels
             //
             else if (roomType == "BirthRooms")
             {
-                CurrentBirthRoom = AllBirthRooms[BirthRoomIndex];
+                CurrentBirthRoom = BirthRooms[BirthRoomIndex];
                 _dialog.ShowDialog("BirthRoomView", r => { });
             }
 
             else if (roomType == "MaternityRooms")
             {
-                CurrentMaternityRoom = AllMaternityRooms[MaternityIndex];
+                CurrentMaternityRoom = MaternityRooms[MaternityIndex];
                 _dialog.ShowDialog("MaternityRoomView", r => { });
             }
         }
