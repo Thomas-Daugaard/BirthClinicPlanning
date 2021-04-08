@@ -52,14 +52,14 @@ namespace BirthClinicPlanningDB
             {
                 new Appointment
                 {
-                    AppointmentID = 1,
+                    AppointmentID = -1,
                     StartTime = new DateTime(2021,06,07),
                     EndTime = new DateTime(2021,06,08),
                 },
 
                 new Appointment
                 {
-                    AppointmentID = 2,
+                    AppointmentID = -2,
                     StartTime = new DateTime(2021,07,08),
                     EndTime = new DateTime(2021,07,09),
                 }

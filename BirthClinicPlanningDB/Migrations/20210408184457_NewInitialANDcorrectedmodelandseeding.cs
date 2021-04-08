@@ -201,12 +201,12 @@ namespace BirthClinicPlanningDB.Migrations
             migrationBuilder.InsertData(
                 table: "Appointments",
                 columns: new[] { "AppointmentID", "ChildID", "EndTime", "ParentsID", "RoomID", "StartTime" },
-                values: new object[] { 1, 1, new DateTime(2021, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, new DateTime(2021, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { -1, 1, new DateTime(2021, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, new DateTime(2021, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Appointments",
                 columns: new[] { "AppointmentID", "ChildID", "EndTime", "ParentsID", "RoomID", "StartTime" },
-                values: new object[] { 2, 2, new DateTime(2021, 7, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { -2, 2, new DateTime(2021, 7, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Clinicians",
