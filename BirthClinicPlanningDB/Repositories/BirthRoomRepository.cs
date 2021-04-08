@@ -39,7 +39,12 @@ namespace BirthClinicPlanningDB.Repositories
 
         public BirthRoom GetSingleBirthRoom(int id)
         {
-            return context.BirthRooms.SingleOrDefault(a => a.RoomID == id);
+            return context.BirthRooms
+                .Include(r => r.Appointments)
+                .Include(s => s.Clinicians)
+                .Include(p => p.Child)
+                .Include(i => i.Parents)
+                .SingleOrDefault(a => a.RoomID == id);
         }
 
         public void AddBirthRoom(BirthRoom room)

@@ -146,7 +146,17 @@ namespace BirthClinicGUI.ViewModels
             else if (roomType == "MaternityRooms")
             {
                 CurrentMaternityRoom = MaternityRooms[MaternityIndex];
-                _dialog.ShowDialog("MaternityRoomView", r => { });
+
+                if (CurrentBirthRoom != null)
+                {
+                    _dialog.ShowDialog("MaternityRoomView", r => { });
+                }
+                else
+                {
+                    MessageBox.Show("CurrentMaternityRoom == null / Not set");
+                    return;
+                }
+                
             }
         }
         #endregion
