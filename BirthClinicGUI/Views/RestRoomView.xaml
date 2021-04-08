@@ -9,8 +9,9 @@
              d:DesignHeight="450" d:DesignWidth="800" Background="Gainsboro">
 
 <UserControl.DataContext>
-    <viewModels:StatusRoomsViewModel></viewModels:StatusRoomsViewModel>
+    <viewModels:StatusRoomsViewModel/>
 </UserControl.DataContext>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -40,11 +41,10 @@
                 />
 
                 <TextBlock Grid.Row="0" Grid.Column="1" MinWidth="50" MinHeight="20"
-                           Text="{Binding CurrentRestRoom.RoomID}"
+                           Text="{Binding CurrentRestRoomId}"
                            Margin="5"
                            VerticalAlignment="Center" 
-                           HorizontalAlignment="Center" 
-                           Background="White"
+                           HorizontalAlignment="Center"
                 />
             </Grid>
         </GroupBox>

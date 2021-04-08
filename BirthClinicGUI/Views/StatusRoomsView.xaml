@@ -55,7 +55,10 @@
             </DataGrid.InputBindings>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Room ID" Binding="{Binding RoomID}" MinWidth="80" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Room ID" 
+                                    Binding="{Binding RoomID}" 
+                                    MinWidth="80" 
+                                    IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 

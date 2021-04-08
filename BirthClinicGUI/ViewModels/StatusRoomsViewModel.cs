@@ -17,7 +17,14 @@ namespace BirthClinicGUI.ViewModels
     public class StatusRoomsViewModel : BindableBase, IDialogAware
     {
         public ObservableCollection<RestRoom> AllRestRooms { get; set; }
-        public ObservableCollection<BirthRoom> AllBirthRooms { get; set; }
+
+        private ObservableCollection<BirthRoom> _allBirthRooms;
+
+        public ObservableCollection<BirthRoom> AllBirthRooms
+        {
+            get=>_allBirthRooms; 
+            set=>SetProperty(ref _allBirthRooms, value);
+        }
         public ObservableCollection<MaternityRoom> AllMaternityRooms { get; set; }
         private IDataAccessActions access = new DataAccessActions(new Context());
         private IDialogService _dialog;
@@ -42,16 +49,21 @@ namespace BirthClinicGUI.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
+            AllRestRooms = new ObservableCollection<RestRoom>();
             AllRestRooms = access.RestRooms.GetAllRestRoom();
-            AllBirthRooms = access.BirthRooms.GetAllBirthsRooms();
-            AllMaternityRooms = access.MaternityRooms.GetAllMaternityRooms();
 
+            AllBirthRooms = new ObservableCollection<BirthRoom>();
+            AllBirthRooms = access.BirthRooms.GetAllBirthsRooms();
+
+            AllMaternityRooms = new ObservableCollection<MaternityRoom>();
+            AllMaternityRooms = access.MaternityRooms.GetAllMaternityRooms();
         }
 
         public string Title { get; }
         public event Action<IDialogResult> RequestClose;
 
         #region Rooms collections + CurrentRoom properties
+
         private ObservableCollection<RestRoom> _restrooms;  //Restroom
 
         public ObservableCollection<RestRoom> RestRooms
@@ -61,7 +73,18 @@ namespace BirthClinicGUI.ViewModels
         }
 
         private RestRoom _currentRestRoom;
-        public RestRoom CurrentRestRoom { get=>_currentRestRoom; set=>SetProperty(ref _currentRestRoom, value); }
+
+        public RestRoom CurrentRestRoom
+        {
+            get=>_currentRestRoom; 
+            set=>SetProperty(ref _currentRestRoom, value);
+        }
+
+        public string CurrentRestRoomId
+        {
+            get => CurrentRestRoom.RoomID.ToString();
+        }
+
 
         private ObservableCollection<BirthRoom> _birthRooms;  //Birthroom
         public ObservableCollection<BirthRoom> BirthRooms
@@ -98,8 +121,17 @@ namespace BirthClinicGUI.ViewModels
         {
             if (roomType == "RestRooms")
             {
-                CurrentRestRoom= AllRestRooms[RestRoomIndex];
-                _dialog.ShowDialog("RestRoomView", r => { });
+                CurrentRestRoom = AllRestRooms[RestRoomIndex]; 
+
+                if (CurrentRestRoom != null)
+                {
+                    _dialog.ShowDialog("RestRoomView", r => { CurrentRestRoom = CurrentRestRoom; });
+                }
+                else
+                {
+                    MessageBox.Show("CurrentRestRoom == null / Not set");
+                    return;
+                }
             }
             //
             else if (roomType == "BirthRooms")
@@ -124,6 +156,7 @@ namespace BirthClinicGUI.ViewModels
             get => _restRoomIndex;
             set => _restRoomIndex = value;
         }
+
 
         private int _birthRoomIndex;
         public int BirthRoomIndex
