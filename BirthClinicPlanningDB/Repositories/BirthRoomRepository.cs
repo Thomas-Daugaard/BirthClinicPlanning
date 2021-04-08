@@ -18,22 +18,16 @@ namespace BirthClinicPlanningDB.Repositories
         public ObservableCollection<BirthRoom> GetAllBirthsRooms()
         {
             return new ObservableCollection<BirthRoom>(context.BirthRooms
-                .Include(p => p.Parents)
-                .Include(c => c.Child)
-                .Include(cl => cl.Clinicians)
                 .Include(a => a.Appointments)
                 .ToList());
         }
 
-        public ObservableCollection<BirthRoom> GetAllBirthRoomsWithSpecificNumber(int no)
+        public BirthRoom GetBirthRoomWithSpecificNumber(int no)
         {
-            return new ObservableCollection<BirthRoom>(context.BirthRooms
-                .Include(p => p.Parents)
-                .Include(c => c.Child)
-                .Include(cl => cl.Clinicians)
+            return context.BirthRooms
                 .Include(a => a.Appointments)
                 .Where(r => r.RoomNumber == no)
-                .ToList());
+                .SingleOrDefault();
         }
 
 
@@ -41,9 +35,6 @@ namespace BirthClinicPlanningDB.Repositories
         {
             return context.BirthRooms
                 .Include(r => r.Appointments)
-                .Include(s => s.Clinicians)
-                .Include(p => p.Child)
-                .Include(i => i.Parents)
                 .SingleOrDefault(a => a.RoomID == id);
         }
 

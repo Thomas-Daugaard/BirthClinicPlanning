@@ -22,7 +22,7 @@ namespace BirthClinicPlanningDB.DomainObjects
         [NotMapped]
         public string Display
         {
-            get => $"{FirstName} {LastName}";
+            get => $"{Type} {FirstName} {LastName}";
         }
     }
 }

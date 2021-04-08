@@ -20,22 +20,20 @@ namespace BirthClinicPlanningDB.Repositories
         {
             return new ObservableCollection<Appointment>(context.Appointments
                 .Include(r => r.Room)
-                    .ThenInclude(c => c.Child)
-                .Include(r => r.Room)
-                    .ThenInclude(p => p.Parents)
-                .Include(r => r.Room)
-                    .ThenInclude(c => c.Clinicians).ToList());
+                .Include(c => c.Child)
+                .Include(p => p.Parents)
+                .Include(c => c.Clinicians)
+                .ToList());
         }
 
         public Appointment getSingleAppointment(int id)
         {
             return context.Appointments
                 .Include(r => r.Room)
-                    .ThenInclude(c => c.Child)
-                .Include(r => r.Room)
-                    .ThenInclude(p => p.Parents)
-                .Include(r => r.Room)
-                    .ThenInclude(c => c.Clinicians).Where(a => a.AppointmentID == id).SingleOrDefault();
+                .Include(c => c.Child)
+                .Include(p => p.Parents)
+                .Include(c => c.Clinicians)
+                .SingleOrDefault();
         }
 
         public void AddAppointment(Appointment appointment)

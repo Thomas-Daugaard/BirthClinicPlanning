@@ -70,18 +70,18 @@ namespace BirthClinicGUI.ViewModels
 
             AppointmentsForRoom = CurrentBirthRoom.Appointments;
 
-            foreach (var item in AppointmentsForRoom)
+            foreach (var appointment in AppointmentsForRoom)
             {
                 DateTime currentTime = DateTime.Now;
-                TimeRange appointmentrange = new TimeRange(item.StartTime, item.EndTime);
+                TimeRange appointmentrange = new TimeRange(appointment.StartTime, appointment.EndTime);
                 TimeRange nowrange = new TimeRange(currentTime, currentTime);
 
                 if (appointmentrange.IntersectsWith(nowrange))
                 {
                     CurrentBirthRoom.Occupied = true;
                     Occupied = true;
-                    Parents = CurrentBirthRoom.Parents;
-                    Clinicians = CurrentBirthRoom.Clinicians;
+                    Parents = appointment.Parents;
+                    Clinicians = appointment.Clinicians;
                 }
                 else
                 {

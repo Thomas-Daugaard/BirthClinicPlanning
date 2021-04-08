@@ -12,7 +12,7 @@ namespace BirthClinicPlanningDB.Repositories.RepositoryInterfaces
     {
         public ObservableCollection<BirthRoom> GetAllBirthsRooms();
 
-        public ObservableCollection<BirthRoom> GetAllBirthRoomsWithSpecificNumber(int no);
+        public BirthRoom GetBirthRoomWithSpecificNumber(int no);
         public BirthRoom GetSingleBirthRoom(int id);
 
         public void AddBirthRoom(BirthRoom room);

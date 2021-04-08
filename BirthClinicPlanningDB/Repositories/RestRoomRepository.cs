@@ -19,9 +19,6 @@ namespace BirthClinicPlanningDB.Repositories
         public ObservableCollection<RestRoom> GetAllRestRoom()
         {
             return new ObservableCollection<RestRoom>(context.Restrooms
-                .Include(p => p.Parents)
-                .Include(c => c.Child)
-                .Include(cl => cl.Clinicians)
                 .Include(j=>j.Appointments)
                 .ToList());
         }
@@ -29,10 +26,7 @@ namespace BirthClinicPlanningDB.Repositories
         public RestRoom GetRestRoomWithSpecificNumber(int no)
         {
             return context.Restrooms
-                .Include(p => p.Parents)
-                .Include(c => c.Child)
-                .Include(cl => cl.Clinicians)
-                .Include(j => j.Appointments)
+                .Include(a => a.Appointments)
                 .Where(r => r.RoomNumber == no)
                 .SingleOrDefault();
         }
@@ -41,9 +35,6 @@ namespace BirthClinicPlanningDB.Repositories
         {
             return context.Restrooms
                 .Include(r => r.Appointments)
-                .Include(s=>s.Clinicians)
-                .Include(p=>p.Child)
-                .Include(i=>i.Parents)
                 .SingleOrDefault(a=>a.RoomID==id);
         }
 

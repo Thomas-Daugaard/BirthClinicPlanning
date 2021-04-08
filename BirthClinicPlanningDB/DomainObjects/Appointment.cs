@@ -31,8 +31,6 @@ namespace BirthClinicPlanningDB.DomainObjects
 
         public DateTime EndTime { get; set; }
 
-        public bool BirthInProgess { get; set; }
-
         [NotMapped]
         public string DisplayStartDateTime
         {
