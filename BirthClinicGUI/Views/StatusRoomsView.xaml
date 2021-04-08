@@ -63,7 +63,7 @@
         </DataGrid>
 
         <DataGrid Grid.Row="1" Grid.Column="1" MinHeight="100" Margin="10" MaxWidth="90"
-                  ItemsSource="{Binding AllBirthRooms}"
+                  ItemsSource="{Binding BirthRooms}"
                   AutoGenerateColumns="False"
                   SelectedIndex="{Binding BirthRoomIndex}"
                   IsSynchronizedWithCurrentItem="True">
