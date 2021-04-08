@@ -13,7 +13,7 @@ Step A:
 
 5) Go to your "Package Manager Console" and set "Package source" to "All", AND "Default Project" as "BirthClinicPlanningDB".
 
-6) In the package manager console, type: "update-database", to apply the included migration files to the database. (The DB will be created on its own) 
+6) In the package manager console, type: "update-database", to apply the included migration files to the database. (The DB will be created on its own with seeded data) 
 
 7) Ensure that the tables has been created in your local database. 
 
