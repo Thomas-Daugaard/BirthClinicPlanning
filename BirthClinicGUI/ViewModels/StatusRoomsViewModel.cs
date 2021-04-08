@@ -16,16 +16,7 @@ namespace BirthClinicGUI.ViewModels
 {
     public class StatusRoomsViewModel : BindableBase, IDialogAware
     {
-        //public ObservableCollection<RestRoom> AllRestRooms { get; set; }
-
-        //private ObservableCollection<BirthRoom> _allBirthRooms;
-
-        //public ObservableCollection<BirthRoom> AllBirthRooms
-        //{
-        //    get=>_allBirthRooms; 
-        //    set=>SetProperty(ref _allBirthRooms, value);
-        //}
-        //fpublic ObservableCollection<MaternityRoom> AllMaternityRooms { get; set; }
+        
         private IDataAccessActions access = new DataAccessActions(new Context());
         private IDialogService _dialog;
 
@@ -97,6 +88,11 @@ namespace BirthClinicGUI.ViewModels
         }
         public BirthRoom CurrentBirthRoom { get; set; }
 
+        public string CurrentBirthRoomId
+        {
+            get => CurrentBirthRoom.RoomID.ToString();
+        }
+
 
         private ObservableCollection<MaternityRoom> _maternityrooms; //MaternityRoom
 
@@ -106,7 +102,18 @@ namespace BirthClinicGUI.ViewModels
             set => SetProperty(ref _maternityrooms, value);
         }
 
-        public MaternityRoom CurrentMaternityRoom { get; set; }
+        private MaternityRoom _currentMaternityRoom;
+
+        public MaternityRoom CurrentMaternityRoom
+        {
+            get => _currentMaternityRoom;
+            set => SetProperty(ref _currentMaternityRoom, value);
+        }
+
+        public string CurrentMaternityRoomId
+        {
+            get => CurrentMaternityRoom.RoomID.ToString();
+        }
         #endregion
 
         #region Select Room Command
@@ -147,9 +154,9 @@ namespace BirthClinicGUI.ViewModels
             {
                 CurrentMaternityRoom = MaternityRooms[MaternityIndex];
 
-                if (CurrentBirthRoom != null)
+                if (CurrentMaternityRoom != null)
                 {
-                    _dialog.ShowDialog("MaternityRoomView", r => { });
+                    _dialog.ShowDialog("MaternityRoomView", new DialogParameters($"Message={CurrentMaternityRoom.RoomID}"), r => { });
                 }
                 else
                 {
@@ -163,7 +170,6 @@ namespace BirthClinicGUI.ViewModels
 
         #region Room indexes
         private int _restRoomIndex;
-
         public int RestRoomIndex
         {
             get => _restRoomIndex;

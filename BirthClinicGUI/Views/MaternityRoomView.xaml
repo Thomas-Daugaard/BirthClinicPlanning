@@ -38,64 +38,21 @@
                            Text="{Binding CurrentMaternityRoom.RoomID}"
                            Margin="5"
                            VerticalAlignment="Center"/>
+
+                <Label Grid.Row="1" Grid.Column="0" 
+                       Content="Occupied:" 
+                       Margin="5"
+                />
+
+                <TextBlock Grid.Row="1" Grid.Column="1" MinWidth="50" MinHeight="20"
+                           Text="{Binding CurrentMaternityRoom.Occupied}"
+                           Margin="5"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center"
+                />
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Row="0" Grid.Column="1" Header="Child information" Margin="5" MinWidth="180">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <Label Grid.Row="0" Grid.Column="0" 
-                       Content="First name:" 
-                       Margin="5"/>
-                <TextBlock Grid.Row="0" Grid.Column="1"
-                           Text="{Binding CurrentMaternityRoom.Child.FirstName}"
-                           Margin="5"
-                           VerticalAlignment="Center"/>
-
-                <Label Grid.Row="1" Grid.Column="0"
-                       Content="Last name:"
-                       Margin="5"/>
-                <TextBlock Grid.Row="1" Grid.Column="1"
-                           Text="{Binding CurrentMaternityRoom.Child.LastName}"
-                           Margin="5"
-                           VerticalAlignment="Center"/>
-
-                <Label Grid.Row="2" Grid.Column="0"
-                       Content="Weight:"
-                       Margin="5"/>
-                <TextBlock Grid.Row="2" Grid.Column="1"
-                           Text="{Binding CurrentMaternityRoom.Child.Weight}"
-                           Margin="5"
-                           VerticalAlignment="Center"/>
-
-                <Label Grid.Row="3" Grid.Column="0"
-                       Content="Length:"
-                       Margin="5"/>
-                <TextBlock Grid.Row="3" Grid.Column="1"
-                           Text="{Binding CurrentMaternityRoom.Child.Length}"
-                           Margin="5"
-                           VerticalAlignment="Center"/>
-
-                <Label Grid.Row="4" Grid.Column="0"
-                       Content="Birth date:"
-                       Margin="5"/>
-                <TextBlock Grid.Row="4" Grid.Column="1"
-                           Text="{Binding CurrentMaternityRoom.Child.DisplayDate}"
-                           Margin="5"
-                           VerticalAlignment="Center"/>
-            </Grid>
-        </GroupBox>
 
         <GroupBox Grid.Row="1" Grid.Column="0" Header="Father information" Margin="5" MinWidth="180">
             <Grid>
@@ -113,7 +70,7 @@
                        Content="CPR"
                        Margin="5"/>
                 <TextBlock Grid.Row="0" Grid.Column="1"
-                           Text="{Binding CurrentMaternityRoom.Parents.DadCPR}"
+                           Text="{Binding Parents.DadCPR}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
@@ -121,7 +78,7 @@
                        Content="First name"
                        Margin="5"/>
                 <TextBlock Grid.Row="1" Grid.Column="1"
-                           Text="{Binding CurrentMaternityRoom.Parents.DadFirstName}"
+                           Text="{Binding Parents.DadFirstName}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
@@ -129,7 +86,7 @@
                        Content="Last name"
                        Margin="5"/>
                 <TextBlock Grid.Row="2" Grid.Column="1"
-                           Text="{Binding CurrentMaternityRoom.Parents.DadLastName}"
+                           Text="{Binding Parents.DadLastName}"
                            Margin="5"
                            VerticalAlignment="Center"/>
             </Grid>
@@ -151,7 +108,7 @@
                        Content="CPR"
                        Margin="5"/>
                 <TextBlock Grid.Row="0" Grid.Column="1"
-                           Text="{Binding CurrentMaternityRoom.Parents.MomCPR}"
+                           Text="{Binding Parents.MomCPR}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
@@ -159,7 +116,7 @@
                        Content="First name"
                        Margin="5"/>
                 <TextBlock Grid.Row="1" Grid.Column="1"
-                           Text="{Binding CurrentMaternityRoom.Parents.MomFirstName}"
+                           Text="{Binding Parents.MomFirstName}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
@@ -167,7 +124,7 @@
                        Content="Last name"
                        Margin="5"/>
                 <TextBlock Grid.Row="2" Grid.Column="1"
-                           Text="{Binding CurrentMaternityRoom.Parents.MomLastName}"
+                           Text="{Binding Parents.MomLastName}"
                            Margin="5"
                            VerticalAlignment="Center"/>
             </Grid>
@@ -175,7 +132,7 @@
 
         <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="Clinicians information" Margin="5">
             <Grid>
-                <ListBox ItemsSource="{Binding CurrentMaternityRoom.Clinicians}"
+                <ListBox ItemsSource="{Binding Clinicians}"
                          DisplayMemberPath="Display"
                          Background="Gainsboro"/>
 
