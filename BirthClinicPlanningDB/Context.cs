@@ -31,6 +31,47 @@ namespace BirthClinicPlanningDB
 
         private static void Seed(ModelBuilder modelBuilder)
         {
+            SeedClinicians(modelBuilder);
+
+            SeedChilds(modelBuilder);
+
+            SeedParents(modelBuilder);
+
+            SeedRooms(modelBuilder);
+
+            SeedAppointments(modelBuilder);
+        }
+
+        private static void SeedAppointments(ModelBuilder modelBuilder)
+        {
+            var appointments = new ObservableCollection<Appointment>
+            {
+                new Appointment
+                {
+                    AppointmentID = 1,
+                    StartTime = new DateTime(2021,06,07),
+                    EndTime = new DateTime(2021,06,08),
+                    BirthInProgess = false
+                },
+
+                new Appointment
+                {
+                    AppointmentID = 2,
+                    StartTime = new DateTime(2021,07,08),
+                    EndTime = new DateTime(2021,07,09),
+                    BirthInProgess = false
+                }
+
+            };
+
+            foreach (var app in appointments)
+            {
+                modelBuilder.Entity<Appointment>().HasData(app);
+            }
+        }
+
+        private static void SeedClinicians(ModelBuilder modelBuilder)
+        {
             var clinicians = new ObservableCollection<Clinician>
             {
                 new Clinician
@@ -50,6 +91,60 @@ namespace BirthClinicPlanningDB
                     ClinicianID = 3,
                     FirstName = "Emil",
                     LastName = "Garder"
+                },
+                new Clinician
+                {
+                    ClinicianID = 4,
+                    FirstName = "Camilla",
+                    LastName = "Boesen"
+                },
+                new Clinician
+                {
+                    ClinicianID = 5,
+                    FirstName = "Thomas",
+                    LastName = "Boesen"
+                },
+                new Clinician
+                {
+                  ClinicianID = 6,
+                  FirstName = "Emil",
+                  LastName = "Boesen"
+                },
+                new Clinician
+                {
+                    ClinicianID = 7,
+                    FirstName = "Camilla",
+                    LastName = "Mikkelsen"
+                },
+                new Clinician
+                {
+                    ClinicianID = 8,
+                    FirstName = "Thomas",
+                    LastName = "Mikkelsen"
+                },
+                new Clinician
+                {
+                    ClinicianID = 9,
+                    FirstName = "Emil",
+                    LastName = "Mikkelsen"
+                },
+                new Clinician
+                {
+                    ClinicianID = 10,
+                    FirstName = "Camilla",
+                    LastName = "Overgaard"
+                },
+                new Clinician
+                {
+                    ClinicianID = 11,
+                    FirstName = "Thomas",
+                    LastName = "Overgaard"
+                },
+                new Clinician
+                {
+                    ClinicianID = 12,
+                    FirstName = "Emil",
+                    LastName = "Overgaard"
                 }
             };
 
@@ -57,7 +152,10 @@ namespace BirthClinicPlanningDB
             {
                 modelBuilder.Entity<Clinician>().HasData(clin);
             }
+        }
 
+        private static void SeedChilds(ModelBuilder modelBuilder)
+        {
             var childs = new List<Child>
             {
                 new Child
@@ -93,7 +191,10 @@ namespace BirthClinicPlanningDB
             {
                 modelBuilder.Entity<Child>().HasData(kid);
             }
+        }
 
+        private static void SeedParents(ModelBuilder modelBuilder)
+        {
             var parents = new List<Parents>
             {
                 new Parents
@@ -128,12 +229,15 @@ namespace BirthClinicPlanningDB
                 }
             };
 
-            
+
             foreach (var parent in parents)
             {
                 modelBuilder.Entity<Parents>().HasData(parent);
             }
+        }
 
+        private static void SeedRooms(ModelBuilder modelBuilder)
+        {
             var rooms = new ObservableCollection<RestRoom>
             {
                 new RestRoom()
@@ -414,34 +518,6 @@ namespace BirthClinicPlanningDB
             {
                 modelBuilder.Entity<BirthRoom>().HasData(room);
             }
-
-
-            var appointments = new ObservableCollection<Appointment>
-            {
-                new Appointment
-                {
-                    AppointmentID = 1,
-                    StartTime = new DateTime(2021,06,07),
-                    EndTime = new DateTime(2021,06,08),
-                    BirthInProgess = false
-                },
-
-                new Appointment
-                {
-                AppointmentID = 2,
-                StartTime = new DateTime(2021,07,08),
-                EndTime = new DateTime(2021,07,09),
-                BirthInProgess = false
-                }
-
-            };
-
-            foreach (var app in appointments)
-            {
-                modelBuilder.Entity<Appointment>().HasData(app);
-            }
-
-            
         }
 
         public DbSet<Appointment> Appointments { get; set; }
