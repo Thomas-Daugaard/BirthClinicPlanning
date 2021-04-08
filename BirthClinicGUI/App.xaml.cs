@@ -37,7 +37,5 @@ namespace BirthClinicGUI
         }
 
         public Child Child { get; set; }
-
-        public IDataAccessActions access = new DataAccessActions(new Context());
     }
 }

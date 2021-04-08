@@ -23,6 +23,8 @@ namespace BirthClinicGUI.ViewModels
     class AddAppointmentViewModel : BindableBase, IDialogAware
     {
         #region Properties
+
+        private IDataAccessActions access = IDataAccessActions.Access();
         public int ClinicianIndex { get; set; }
         public ObservableCollection<Clinician> AllClinicians { get; set; }
         public ObservableCollection<string> RoomType { get; set; }
@@ -100,7 +102,7 @@ namespace BirthClinicGUI.ViewModels
         {
             RestRoom roomToInsert = null;
             ObservableCollection<RestRoom> restRoomsToCheck =
-            ((App)Application.Current).access.RestRooms.GetAllRestRoomsWithSpecificNumber(Room.RoomNumber);
+            access.RestRooms.GetAllRestRoomsWithSpecificNumber(Room.RoomNumber);
 
             foreach (var room in restRoomsToCheck)
             {
@@ -123,7 +125,7 @@ namespace BirthClinicGUI.ViewModels
 
             if (roomToInsert == null)
             {
-                roomToInsert = new RestRoom() {Appointments = new ObservableCollection<Appointment>()};
+                roomToInsert = new RestRoom() { Appointments = new ObservableCollection<Appointment>() };
             }
 
             roomToInsert.Clinicians = Clinicians;
@@ -139,13 +141,13 @@ namespace BirthClinicGUI.ViewModels
                 EndTime = EndTime
             });
 
-            ((App)Application.Current).access.Complete();
+            access.Complete();
         }
         public void AddAppointmentToBirthRoom()
         {
             BirthRoom roomToInsert = null;
             ObservableCollection<BirthRoom> birthRoomsToCheck =
-                ((App)Application.Current).access.BirthRooms.GetAllBirthRoomsWithSpecificNumber(Room.RoomNumber);
+                access.BirthRooms.GetAllBirthRoomsWithSpecificNumber(Room.RoomNumber);
 
             foreach (var room in birthRoomsToCheck)
             {
@@ -187,13 +189,13 @@ namespace BirthClinicGUI.ViewModels
                 EndTime = EndTime
             });
 
-            ((App)Application.Current).access.Complete();
+            access.Complete();
         }
         public void AddAppointmentToMaternityRoom()
         {
             MaternityRoom roomToInsert = null;
             ObservableCollection<MaternityRoom> maternityRoomsToCheck =
-                ((App)Application.Current).access.MaternityRooms.GetAllMaternityRoomsWithSpecificNumber(Room.RoomNumber);
+                access.MaternityRooms.GetAllMaternityRoomsWithSpecificNumber(Room.RoomNumber);
 
             foreach (var room in maternityRoomsToCheck)
             {
@@ -232,7 +234,8 @@ namespace BirthClinicGUI.ViewModels
                 EndTime = EndTime
             });
 
-            ((App)Application.Current).access.Complete();
+            access.MaternityRooms.AddMaternity(roomToInsert);
+            access.Complete();
         }
         #endregion
 
@@ -240,11 +243,11 @@ namespace BirthClinicGUI.ViewModels
         {
             CanClose = true;
 
-            AllClinicians = ((App)Application.Current).access.Clinicians.GetAllClinicians();
+            AllClinicians = access.Clinicians.GetAllClinicians();
 
             RoomType = new ObservableCollection<string>() {"Birth Room", "Maternity Room", "Rest Room"};
-            StartTime = DateTime.Now;
-            EndTime = DateTime.Now.AddHours(4);
+            StartTime = DateTime.Now.AddHours(1);
+            EndTime = DateTime.Now.AddHours(5);
 
             Room = new Room();
             Child = new Child();

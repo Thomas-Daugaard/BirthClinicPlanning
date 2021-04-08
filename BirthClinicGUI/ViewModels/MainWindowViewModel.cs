@@ -21,6 +21,7 @@ namespace BirthClinicGUI.ViewModels
         private ObservableCollection<Appointment> _appointments;
         private string _clinicianFirstName;
         private string _clinicianLastName;
+        private IDataAccessActions access = IDataAccessActions.Access();
         public string ClinicianFirstName 
         { 
             get => _clinicianFirstName;
@@ -51,7 +52,7 @@ namespace BirthClinicGUI.ViewModels
 
             SetUpRoomsAppointmentsListInDb(); //Setting up relation between seeded rooms and appointments
             
-            Appointments = ((App)Application.Current).access.Appointments.getAllAppointments();
+            Appointments = access.Appointments.getAllAppointments();
             
             AppointmentIndex = 0;
 
@@ -59,18 +60,18 @@ namespace BirthClinicGUI.ViewModels
 
         internal void SetUpRoomsAppointmentsListInDb() 
         {
-            var room1 = ((App)Application.Current).access.RestRooms.GetSingleRestRoom(1);
+            var room1 = access.RestRooms.GetSingleRestRoom(1);
 
-            var appoint1 = ((App)Application.Current).access.Appointments.getSingleAppointment(1);
+            var appoint1 = access.Appointments.getSingleAppointment(1);
 
             room1.Appointments.Add(appoint1);
 
-            var room2 = ((App)Application.Current).access.RestRooms.GetSingleRestRoom(2);
+            var room2 = access.RestRooms.GetSingleRestRoom(2);
 
-            var appoint2 = ((App)Application.Current).access.Appointments.getSingleAppointment(2);
+            var appoint2 = access.Appointments.getSingleAppointment(2);
 
             room2.Appointments.Add(appoint2);
-            ((App)Application.Current).access.Complete();
+            access.Complete();
         }
 
         private ICommand _addAppointmentCommand;
@@ -88,7 +89,7 @@ namespace BirthClinicGUI.ViewModels
         {
             _dialog.ShowDialog("AddAppointmentView", r =>
             {
-                Appointments = ((App)Application.Current).access.Appointments.getAllAppointments();
+                Appointments = access.Appointments.getAllAppointments();
             });
         }
 
@@ -105,10 +106,10 @@ namespace BirthClinicGUI.ViewModels
 
         private void DelAppointmentCommandExecute()
         {
-            ((App)Application.Current).access.Appointments.DelAppointment(Appointments[AppointmentIndex]);
-            ((App)Application.Current).access.Complete();
+            access.Appointments.DelAppointment(Appointments[AppointmentIndex]);
+            access.Complete();
 
-            Appointments = ((App)Application.Current).access.Appointments.getAllAppointments();
+            Appointments = access.Appointments.getAllAppointments();
         }
 
 
@@ -137,7 +138,7 @@ namespace BirthClinicGUI.ViewModels
                 _dialog.ShowDialog("SpecificAppointmentView", new DialogParameters($"Message={id}"), r =>
                 {
                 });
-                Appointments = ((App)Application.Current).access.Appointments.getAllAppointments();
+                Appointments = access.Appointments.getAllAppointments();
             }
         }
 
@@ -160,7 +161,7 @@ namespace BirthClinicGUI.ViewModels
                 {
                     if (r.Result == ButtonResult.OK)
                     {
-                        Appointments = ((App)Application.Current).access.Appointments.getAllAppointments();
+                        Appointments = access.Appointments.getAllAppointments();
                     }
                 }
             });
@@ -186,8 +187,8 @@ namespace BirthClinicGUI.ViewModels
             else
             {
                 Clinician newClinician = new Clinician() { FirstName = ClinicianFirstName, LastName = ClinicianLastName };
-                ((App)Application.Current).access.Clinicians.AddClinician(newClinician);
-                ((App)Application.Current).access.Complete();
+                access.Clinicians.AddClinician(newClinician);
+                access.Complete();
 
                 MessageBox.Show("Clinician " + ClinicianFirstName + " " + ClinicianLastName + " added", "Clinician added", MessageBoxButton.OK);
 

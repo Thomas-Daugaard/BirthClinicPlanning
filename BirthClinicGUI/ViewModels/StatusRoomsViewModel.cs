@@ -16,8 +16,7 @@ namespace BirthClinicGUI.ViewModels
 {
     public class StatusRoomsViewModel : BindableBase, IDialogAware
     {
-        
-        private IDataAccessActions access = new DataAccessActions(new Context());
+        private IDataAccessActions access = IDataAccessActions.Access();
         private IDialogService _dialog;
 
         public StatusRoomsViewModel(IDialogService dialog)
@@ -38,13 +37,13 @@ namespace BirthClinicGUI.ViewModels
         public void OnDialogOpened(IDialogParameters parameters)
         {
             RestRooms = new ObservableCollection<RestRoom>();
-            RestRooms = ((App)Application.Current).access.RestRooms.GetAllRestRoom();
+            RestRooms = access.RestRooms.GetAllRestRoom();
 
             BirthRooms = new ObservableCollection<BirthRoom>();
-            BirthRooms = ((App)Application.Current).access.BirthRooms.GetAllBirthsRooms();
+            BirthRooms = access.BirthRooms.GetAllBirthsRooms();
 
             MaternityRooms = new ObservableCollection<MaternityRoom>();
-            MaternityRooms = ((App)Application.Current).access.MaternityRooms.GetAllMaternityRooms();
+            MaternityRooms = access.MaternityRooms.GetAllMaternityRooms();
         }
 
         private string title = "StatusRoomsViewModel";
