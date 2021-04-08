@@ -42,7 +42,7 @@
                 MinWidth="110"/>
 
         <DataGrid Grid.Row="1" Grid.Column="0" MinHeight="100" Margin="10" MaxWidth="90"
-                  ItemsSource="{Binding AllRestRooms}"
+                  ItemsSource="{Binding RestRooms}"
                   AutoGenerateColumns="False"
                   SelectedIndex="{Binding RestRoomIndex}"
                   IsSynchronizedWithCurrentItem="True">
@@ -82,7 +82,7 @@
 
 
         <DataGrid Grid.Row="1" Grid.Column="2" MinHeight="100" Margin="10" MaxWidth="90"
-                  ItemsSource="{Binding AllMaternityRooms}"
+                  ItemsSource="{Binding MaternityRooms}"
                   AutoGenerateColumns="False"
                   SelectedIndex="{Binding MaternityIndex}"
                   IsSynchronizedWithCurrentItem="True">

@@ -49,14 +49,14 @@ namespace BirthClinicGUI.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            AllRestRooms = new ObservableCollection<RestRoom>();
-            AllRestRooms = access.RestRooms.GetAllRestRoom();
+            RestRooms = new ObservableCollection<RestRoom>();
+            RestRooms = access.RestRooms.GetAllRestRoom();
 
             AllBirthRooms = new ObservableCollection<BirthRoom>();
             AllBirthRooms = access.BirthRooms.GetAllBirthsRooms();
 
-            AllMaternityRooms = new ObservableCollection<MaternityRoom>();
-            AllMaternityRooms = access.MaternityRooms.GetAllMaternityRooms();
+            MaternityRooms = new ObservableCollection<MaternityRoom>();
+            MaternityRooms = access.MaternityRooms.GetAllMaternityRooms();
         }
 
         public string Title { get; }
