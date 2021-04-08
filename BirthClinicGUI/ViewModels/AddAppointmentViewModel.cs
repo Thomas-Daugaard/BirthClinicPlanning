@@ -30,8 +30,13 @@ namespace BirthClinicGUI.ViewModels
         public bool CanClose { get; set; }
         public int CurrentAppointmentID { get; set; }
         private bool _okButtonPressed;
-
+        private IDialogService _dialog;
         private IDataAccessActions access = new DataAccessActions(new Context());
+
+        public AddAppointmentViewModel(IDialogService dialog)
+        {
+            _dialog = dialog;
+        }
 
         public bool CanCloseDialog()
         {
@@ -161,11 +166,16 @@ namespace BirthClinicGUI.ViewModels
                 roomToInsert = new MaternityRoom() { Appointments = new ObservableCollection<Appointment>() };
             }
 
+            _dialog.ShowDialog("BabyInformationView");
+
+            Appointment.Room.Child = ((App) Application.Current).Child;
+
             Appointment.RoomID = roomToInsert.RoomID;
             Appointment.Room = roomToInsert;
+            access.Appointments.AddAppointment(Appointment);
+            access.Complete();
 
             roomToInsert.Appointments.Add(Appointment);
-
             access.MaternityRooms.AddMaternity(roomToInsert);
             access.Complete();
         }
