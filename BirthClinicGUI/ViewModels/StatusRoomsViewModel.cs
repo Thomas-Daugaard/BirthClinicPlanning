@@ -28,9 +28,6 @@ namespace BirthClinicGUI.ViewModels
         //fpublic ObservableCollection<MaternityRoom> AllMaternityRooms { get; set; }
         private IDataAccessActions access = new DataAccessActions(new Context());
         private IDialogService _dialog;
-        public StatusRoomsViewModel()
-        {
-        }
 
         public StatusRoomsViewModel(IDialogService dialog)
         {
@@ -131,7 +128,7 @@ namespace BirthClinicGUI.ViewModels
 
                 if (CurrentRestRoom != null)
                 {
-                    _dialog.ShowDialog("RestRoomView", r=>{ });
+                    _dialog.ShowDialog("RestRoomView",new DialogParameters($"Message={CurrentRestRoom.RoomID}"), r=>{ });
                 }
                 else
                 {

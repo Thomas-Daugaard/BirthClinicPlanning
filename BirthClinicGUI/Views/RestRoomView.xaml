@@ -4,13 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BirthClinicGUI.Views"
+             xmlns:prism="http://prismlibrary.com/"
              xmlns:viewModels="clr-namespace:BirthClinicGUI.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="Gainsboro">
 
-    <UserControl.DataContext>
-    <viewModels:StatusRoomsViewModel/>
-</UserControl.DataContext>
+ 
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -41,69 +40,27 @@
                 />
 
                 <TextBlock Grid.Row="0" Grid.Column="1" MinWidth="50" MinHeight="20"
-                           Text="{Binding CurrentRestRoomId}"
+                           Text="{Binding CurrentRestRoom.RoomID}"
                            Margin="5"
                            VerticalAlignment="Center" 
                            HorizontalAlignment="Center"
                 />
+
+                <Label Grid.Row="1" Grid.Column="0" 
+                       Content="Occupied:" 
+                       Margin="5"
+                />
+
+                <TextBlock Grid.Row="1" Grid.Column="1" MinWidth="50" MinHeight="20"
+                           Text="{Binding CurrentRestRoom.Occupied}"
+                           Margin="5"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center"
+                />
+
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Row="0" Grid.Column="1" Header="Child information" Margin="5" MinWidth="180">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <Label Grid.Row="0" Grid.Column="0" 
-                       Content="First name:" 
-                       Margin="5"/>
-                <TextBlock Grid.Row="0" Grid.Column="1"
-                           Text="{Binding CurrentRestRoom.Child.FirstName}"
-                           Margin="5"
-                           VerticalAlignment="Center"/>
-
-                <Label Grid.Row="1" Grid.Column="0"
-                       Content="Last name:"
-                       Margin="5"/>
-                <TextBlock Grid.Row="1" Grid.Column="1"
-                           Text="{Binding CurrentRestRoom.Child.LastName}"
-                           Margin="5"
-                           VerticalAlignment="Center"/>
-
-                <Label Grid.Row="2" Grid.Column="0"
-                       Content="Weight:"
-                       Margin="5"/>
-                <TextBlock Grid.Row="2" Grid.Column="1"
-                           Text="{Binding CurrentRestRoom.Child.Weight}"
-                           Margin="5"
-                           VerticalAlignment="Center"/>
-
-                <Label Grid.Row="3" Grid.Column="0"
-                       Content="Length:"
-                       Margin="5"/>
-                <TextBlock Grid.Row="3" Grid.Column="1"
-                           Text="{Binding CurrentRestRoom.Child.Length}"
-                           Margin="5"
-                           VerticalAlignment="Center"/>
-
-                <Label Grid.Row="4" Grid.Column="0"
-                       Content="Birth date:"
-                       Margin="5"/>
-                <TextBlock Grid.Row="4" Grid.Column="1"
-                           Text="{Binding CurrentRestRoom.Child.DisplayDate}"
-                           Margin="5"
-                           VerticalAlignment="Center"/>
-            </Grid>
-        </GroupBox>
 
         <GroupBox Grid.Row="1" Grid.Column="0" Header="Father information" Margin="5" MinWidth="180">
             <Grid>
@@ -121,7 +78,7 @@
                        Content="CPR"
                        Margin="5"/>
                 <TextBlock Grid.Row="0" Grid.Column="1"
-                           Text="{Binding CurrentRestRoom.Parents.DadCPR}"
+                           Text="{Binding Parents.DadCPR}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
@@ -129,7 +86,7 @@
                        Content="First name"
                        Margin="5"/>
                 <TextBlock Grid.Row="1" Grid.Column="1"
-                           Text="{Binding CurrentRestRoom.Parents.DadFirstName}"
+                           Text="{Binding Parents.DadFirstName}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
@@ -137,7 +94,7 @@
                        Content="Last name"
                        Margin="5"/>
                 <TextBlock Grid.Row="2" Grid.Column="1"
-                           Text="{Binding CurrentRestRoom.Parents.DadLastName}"
+                           Text="{Binding Parents.DadLastName}"
                            Margin="5"
                            VerticalAlignment="Center"/>
             </Grid>
@@ -159,7 +116,7 @@
                        Content="CPR"
                        Margin="5"/>
                 <TextBlock Grid.Row="0" Grid.Column="1"
-                           Text="{Binding CurrentRestRoom.Parents.MomCPR}"
+                           Text="{Binding Parents.MomCPR}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
@@ -167,7 +124,7 @@
                        Content="First name"
                        Margin="5"/>
                 <TextBlock Grid.Row="1" Grid.Column="1"
-                           Text="{Binding CurrentRestRoom.Parents.MomFirstName}"
+                           Text="{Binding Parents.MomFirstName}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
@@ -175,7 +132,7 @@
                        Content="Last name"
                        Margin="5"/>
                 <TextBlock Grid.Row="2" Grid.Column="1"
-                           Text="{Binding CurrentRestRoom.Parents.MomLastName}"
+                           Text="{Binding Parents.MomLastName}"
                            Margin="5"
                            VerticalAlignment="Center"/>
             </Grid>
