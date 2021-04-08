@@ -70,7 +70,7 @@ namespace BirthClinicPlanningDB.Migrations
                 name: "Appointments",
                 columns: table => new
                 {
-                    AppointmentID = table.Column<int>(type: "int", nullable: false),
+                    AppointmentID = table.Column<int>(type: "int", nullable: false), 
                     RoomID = table.Column<int>(type: "int", nullable: false),
                     ParentsID = table.Column<int>(type: "int", nullable: true),
                     ChildID = table.Column<int>(type: "int", nullable: true),
