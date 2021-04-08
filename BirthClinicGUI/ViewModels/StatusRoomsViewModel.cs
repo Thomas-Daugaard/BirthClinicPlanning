@@ -17,7 +17,14 @@ namespace BirthClinicGUI.ViewModels
     public class StatusRoomsViewModel : BindableBase, IDialogAware
     {
         public ObservableCollection<RestRoom> AllRestRooms { get; set; }
-        public ObservableCollection<BirthRoom> AllBirthRooms { get; set; }
+
+        private ObservableCollection<BirthRoom> _allBirthRooms;
+
+        public ObservableCollection<BirthRoom> AllBirthRooms
+        {
+            get=>_allBirthRooms; 
+            set=>SetProperty(ref _allBirthRooms, value);
+        }
         public ObservableCollection<MaternityRoom> AllMaternityRooms { get; set; }
         private IDataAccessActions access = new DataAccessActions(new Context());
         private IDialogService _dialog;

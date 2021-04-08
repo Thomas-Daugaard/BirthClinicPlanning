@@ -44,8 +44,7 @@
                            Text="{Binding CurrentRestRoomId}"
                            Margin="5"
                            VerticalAlignment="Center" 
-                           HorizontalAlignment="Center" 
-                           Background="White"
+                           HorizontalAlignment="Center"
                 />
             </Grid>
         </GroupBox>
