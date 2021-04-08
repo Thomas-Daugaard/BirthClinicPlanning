@@ -18,6 +18,7 @@ namespace BirthClinicPlanningDB.Repositories.RepositoryInterfaces
 
         public void DelRestRoom(RestRoom restRoom);
 
+        public void AddAppointmentToRoom(int roomid, Appointment appointment);
 
         public void AddRestRoom(RestRoom restRoom);
     }
