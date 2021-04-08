@@ -28,7 +28,7 @@ namespace BirthClinicGUI.ViewModels
         public ObservableCollection<string> RoomType { get; set; }
         public int RoomTypeIndex { get; set; }
         public bool CanClose { get; set; }
-
+        public int CurrentAppointmentID { get; set; }
         private bool _okButtonPressed;
 
         private IDataAccessActions access = new DataAccessActions(new Context());
@@ -69,16 +69,14 @@ namespace BirthClinicGUI.ViewModels
         }
 
         public void OnDialogClosed()
-        {
-            
-        }
+        { }
 
         #region Helper methods
         public void AddAppointmentToRestRoom()
         {
-            Room roomToCopy = Appointment.Room;
-            ObservableCollection<RestRoom> restRoomsToCheck = access.RestRooms.GetAllRestRoom();
-            access.Complete();
+            RestRoom roomToInsert = null;
+            ObservableCollection<RestRoom> restRoomsToCheck =
+                access.RestRooms.GetAllRestRoomsWithSpecificNumber(Appointment.Room.RoomNumber);
 
             foreach (var room in restRoomsToCheck)
             {
@@ -93,23 +91,23 @@ namespace BirthClinicGUI.ViewModels
                         }
                     }
                 }
-                Appointment.Room = room;
+                roomToInsert = room;
             }
-            Appointment.Room.Child = roomToCopy.Child;
-            Appointment.Room.Clinicians = roomToCopy.Clinicians;
-            Appointment.Room.Parents = roomToCopy.Parents;
-            Appointment.Room.Occupied = roomToCopy.Occupied;
-            Appointment.Room.RoomNumber = roomToCopy.RoomNumber;
 
-            Appointment.Room.Occupied = true;
-            access.Appointments.AddAppointment(Appointment);
+            if (roomToInsert == null)
+            {
+                roomToInsert = new RestRoom() {Appointments = new ObservableCollection<Appointment>()};
+            }
+
+            roomToInsert.Appointments.Add(Appointment);
+            access.RestRooms.AddRestRoom(roomToInsert);
             access.Complete();
         }
         public void AddAppointmentToBirthRoom()
         {
-            Room roomToCopy = Appointment.Room;
-            ObservableCollection<BirthRoom> birthRoomsToCheck = access.BirthRooms.GetAllBirthsRooms();
-            access.Complete();
+            BirthRoom roomToInsert = null;
+            ObservableCollection<BirthRoom> birthRoomsToCheck =
+                access.BirthRooms.GetAllBirthRoomsWithSpecificNumber(Appointment.Room.RoomNumber);
 
             foreach (var room in birthRoomsToCheck)
             {
@@ -124,23 +122,23 @@ namespace BirthClinicGUI.ViewModels
                         }
                     }
                 }
-                Appointment.Room = room;
+                roomToInsert = room;
             }
-            Appointment.Room.Child = roomToCopy.Child;
-            Appointment.Room.Clinicians = roomToCopy.Clinicians;
-            Appointment.Room.Parents = roomToCopy.Parents;
-            Appointment.Room.Occupied = roomToCopy.Occupied;
-            Appointment.Room.RoomNumber = roomToCopy.RoomNumber;
 
-            Appointment.Room.Occupied = true;
-            access.Appointments.AddAppointment(Appointment);
+            if (roomToInsert == null)
+            {
+                roomToInsert = new BirthRoom() { Appointments = new ObservableCollection<Appointment>() };
+            }
+
+            roomToInsert.Appointments.Add(Appointment);
+            access.BirthRooms.AddBirthRoom(roomToInsert);
             access.Complete();
         }
         public void AddAppointmentToMaternityRoom()
         {
-            Room roomToCopy = Appointment.Room;
-            ObservableCollection<MaternityRoom> maternityRoomsToCheck = access.MaternityRooms.GetAllMaternityRooms();
-            access.Complete();
+            MaternityRoom roomToInsert = null;
+            ObservableCollection<MaternityRoom> maternityRoomsToCheck =
+                access.MaternityRooms.GetAllMaternityRoomsWithSpecificNumber(Appointment.Room.RoomNumber);
 
             foreach (var room in maternityRoomsToCheck)
             {
@@ -155,16 +153,20 @@ namespace BirthClinicGUI.ViewModels
                         }
                     }
                 }
-                Appointment.Room = room;
+                roomToInsert = room;
             }
-            Appointment.Room.Child = roomToCopy.Child;
-            Appointment.Room.Clinicians = roomToCopy.Clinicians;
-            Appointment.Room.Parents = roomToCopy.Parents;
-            Appointment.Room.Occupied = roomToCopy.Occupied;
-            Appointment.Room.RoomNumber = roomToCopy.RoomNumber;
 
-            Appointment.Room.Occupied = true;
-            access.Appointments.AddAppointment(Appointment);
+            if (roomToInsert == null)
+            {
+                roomToInsert = new MaternityRoom() { Appointments = new ObservableCollection<Appointment>() };
+            }
+
+            Appointment.RoomID = roomToInsert.RoomID;
+            Appointment.Room = roomToInsert;
+
+            roomToInsert.Appointments.Add(Appointment);
+
+            access.MaternityRooms.AddMaternity(roomToInsert);
             access.Complete();
         }
         #endregion
@@ -172,7 +174,7 @@ namespace BirthClinicGUI.ViewModels
         public void OnDialogOpened(IDialogParameters parameters)
         {
             CanClose = true;
-            Appointment = new Appointment() {BirthInProgess = false, StartTime = DateTime.Now.Date, Room = new BirthRoom() {Parents = new Parents(), Child = new Child(), Clinicians = new ObservableCollection<Clinician>()}};
+            Appointment = new Appointment() {AppointmentID = 0, BirthInProgess = false, StartTime = DateTime.Now.Date, Room = new BirthRoom() {Parents = new Parents() {MomCPR = "", DadCPR = ""}, Child = new Child(), Clinicians = new ObservableCollection<Clinician>()}};
             AllClinicians = access.Clinicians.GetAllClinicians();
             access.Complete();
 
@@ -198,11 +200,11 @@ namespace BirthClinicGUI.ViewModels
                 if (DateTime.Compare(Appointment.StartTime, DateTime.Now) < 0)
                 {
                     CanClose = false;
-                    MessageBox.Show("Invalid Date");
+                    MessageBox.Show("Date/time cannot be earlier than current date/time");
                     return;
                 }
 
-                else if (Appointment.StartTime > Appointment.EndTime)
+                if (Appointment.StartTime > Appointment.EndTime)
                 {
                     CanClose = false;
                     MessageBox.Show("Start date/time cannot be greater than end date/time");
@@ -236,29 +238,59 @@ namespace BirthClinicGUI.ViewModels
                 result = ButtonResult.Cancel;
 
             if (Appointment.Room.Parents.MomCPR == "" || Appointment.Room.RoomNumber == 0)
-                MessageBox.Show("Please fill out all required fields", "Error", MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                MessageBox.Show("Please fill out all required fields", "CPR-error");
 
-            if (!CheckFormat(Appointment.Room.Parents.MomCPR) || !CheckFormat(Appointment.Room.Parents.DadCPR))
+            cpr = Appointment.Room.Parents.MomCPR;
+
+            if (!CheckFormat())
             {
-                MessageBox.Show("Venligst angiv 10 tegn", "Ugyldigt antal tegn", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please input a CPR with 10 digits (mother)", "CPR digits error");
+                CanClose = false;
                 return;
             }
 
-            if (!CheckDate(Appointment.Room.Parents.MomCPR) || !CheckFormat(Appointment.Room.Parents.DadCPR))
+            if (!CheckDate())
             {
-                MessageBox.Show("Venligst angiv en gyldig dato", "Ugyldig dato", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please input a CPR with a valid date (mother)", "CPR date error");
+                CanClose = false;
                 return;
             }
 
-            if (!Check11Test(Appointment.Room.Parents.MomCPR) || !CheckFormat(Appointment.Room.Parents.DadCPR))
+            if (!Check11Test())
             {
-                MessageBox.Show("Venligst angiv et gyldigt CPR-nummer", "Ugyldigt CPR-nummer", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please input a valid CPR (mother)", "CPR-invalid error");
+                CanClose = false;
                 return;
             }
 
+            if (Appointment.Room.Parents.DadCPR != "")
+            {
+                cpr = Appointment.Room.Parents.DadCPR;
 
-            else if (CanClose)
+                if (!CheckFormat())
+                {
+                    MessageBox.Show("Please input a CPR with 10 digits (father)", "CPR digits error");
+                    CanClose = false;
+                    return;
+                }
+
+                if (!CheckDate())
+                {
+                    MessageBox.Show("Please input a CPR with a valid date (father)", "CPR date error");
+                    CanClose = false;
+                    return;
+                }
+
+                if (!Check11Test())
+                {
+                    MessageBox.Show("Please input a valid CPR (father)", "CPR-invalid error");
+                    CanClose = false;
+                    return;
+                }
+
+            }
+
+            if (CanClose)
                 RequestClose(new DialogResult(result));
         }
 
@@ -291,17 +323,15 @@ namespace BirthClinicGUI.ViewModels
 
         #region CPR-validation
 
-        public bool CheckFormat(string cpr)
+        public bool CheckFormat()
         {
-            Cpr = cpr;
-
             if (cpr.Length == 10)
                 return true;
 
             return false;
         }
 
-        public bool CheckDate(string cpr)
+        public bool CheckDate()
         {
             string daystring = cpr.Substring(0, 2);
             string monthstring = cpr.Substring(2, 2);
@@ -324,10 +354,8 @@ namespace BirthClinicGUI.ViewModels
             return true;
         }
 
-        private bool Check11Test(string cpr)
+        private bool Check11Test()
         {
-            Cpr = cpr;
-
             int sum = 0;
             for (int i = 0; i < 3; i++)
             {

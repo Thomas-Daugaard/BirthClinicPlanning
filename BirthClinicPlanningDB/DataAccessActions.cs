@@ -17,7 +17,7 @@ namespace BirthClinicPlanningDB
         public IClinicianRepository Clinicians { get; private set; }
         public IBirthRoomRepository BirthRooms { get; private set; }
 
-        //public repository object (by interface) decleration as property
+        //public repository object (by interface) declaration as property
 
         public DataAccessActions(Context context)
         {

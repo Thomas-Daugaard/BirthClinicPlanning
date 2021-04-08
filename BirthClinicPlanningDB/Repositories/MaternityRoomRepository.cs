@@ -22,6 +22,18 @@ namespace BirthClinicPlanningDB.Repositories
                 .Include(p => p.Parents)
                 .Include(c => c.Child)
                 .Include(cl => cl.Clinicians)
+                .Include(a => a.Appointments)
+                .ToList());
+        }
+
+        public ObservableCollection<MaternityRoom> GetAllMaternityRoomsWithSpecificNumber(int no)
+        {
+            return new ObservableCollection<MaternityRoom>(context.maternityrooms
+                .Include(p => p.Parents)
+                .Include(c => c.Child)
+                .Include(cl => cl.Clinicians)
+                .Include(a => a.Appointments)
+                .Where(r => r.RoomNumber == no)
                 .ToList());
         }
 
