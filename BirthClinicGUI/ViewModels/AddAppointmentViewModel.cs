@@ -148,7 +148,7 @@ namespace BirthClinicGUI.ViewModels
             RoomType = new ObservableCollection<string>() {"Birth Room", "Maternity Room", "Rest Room"};
 
             Appointment = new Appointment()
-                {Room = new Room(), Child = new Child(), Parents = new Parents(), Clinicians = new ObservableCollection<Clinician>()};
+                {Room = new Room(), Child = new Child(), Parents = new Parents() {MomCPR = "", DadCPR = ""}, Clinicians = new ObservableCollection<Clinician>()};
 
             Appointment.StartTime = DateTime.Now.AddHours(1);
             Appointment.EndTime = DateTime.Now.AddHours(5);
@@ -247,7 +247,7 @@ namespace BirthClinicGUI.ViewModels
 
             foreach (var staff in Appointment.Clinicians)
             {
-                message += string.Join(", ", $"\n{staff.FirstName} {staff.LastName}");
+                message += string.Join(", ", $"\n{staff.Type} {staff.FirstName} {staff.LastName}");
             }
 
             MessageBox.Show($"Currently added Clinicians:\n {message}", "Clinician added to appointment", MessageBoxButton.OK);
