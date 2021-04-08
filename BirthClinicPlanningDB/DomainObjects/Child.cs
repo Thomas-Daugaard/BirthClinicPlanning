@@ -12,10 +12,15 @@ namespace BirthClinicPlanningDB.DomainObjects
     {
         [Key]
         public int ChildID { get; set; }
+
         public string FirstName { get; set; }
+
         public string LastName { get; set; }
+
         public int Weight { get; set; }
+
         public int Length { get; set; }
+
         public DateTime BirthDate { get; set; }
 
 

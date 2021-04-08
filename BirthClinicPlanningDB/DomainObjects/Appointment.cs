@@ -14,10 +14,21 @@ namespace BirthClinicPlanningDB.DomainObjects
         [Key] 
         public int AppointmentID { get; set; }
 
-        [ForeignKey ("RoomID")]
-        public int RoomID { get; set;}
+        [ForeignKey("RoomID")]
+        public int RoomID { get; set; }
+
         public Room Room { get; set; }
+
+        [ForeignKey("ParentsID")]
+        public Parents Parents { get; set; }
+
+        [ForeignKey("ChildID")]
+        public Child Child { get; set; }
+
+        public ObservableCollection<Clinician> Clinicians { get; set; }
+
         public DateTime StartTime { get; set; }
+
         public DateTime EndTime { get; set; }
 
         public bool BirthInProgess { get; set; }
