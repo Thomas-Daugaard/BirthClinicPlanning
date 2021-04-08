@@ -16,20 +16,9 @@ namespace BirthClinicGUI.ViewModels
 {
     public class StatusRoomsViewModel : BindableBase, IDialogAware
     {
-        //public ObservableCollection<RestRoom> AllRestRooms { get; set; }
-
-        //private ObservableCollection<BirthRoom> _allBirthRooms;
-
-        //public ObservableCollection<BirthRoom> AllBirthRooms
-        //{
-        //    get=>_allBirthRooms; 
-        //    set=>SetProperty(ref _allBirthRooms, value);
-        //}
-        //fpublic ObservableCollection<MaternityRoom> AllMaternityRooms { get; set; }
+        
+        private IDataAccessActions access = new DataAccessActions(new Context());
         private IDialogService _dialog;
-        public StatusRoomsViewModel()
-        {
-        }
 
         public StatusRoomsViewModel(IDialogService dialog)
         {
@@ -58,7 +47,13 @@ namespace BirthClinicGUI.ViewModels
             MaternityRooms = ((App)Application.Current).access.MaternityRooms.GetAllMaternityRooms();
         }
 
-        public string Title { get; }
+        private string title = "StatusRoomsViewModel";
+
+        public string Title
+        {
+            get=>title;
+            set => SetProperty(ref title, value);
+        }
         public event Action<IDialogResult> RequestClose;
 
         #region Rooms collections + CurrentRoom properties
@@ -93,6 +88,11 @@ namespace BirthClinicGUI.ViewModels
         }
         public BirthRoom CurrentBirthRoom { get; set; }
 
+        public string CurrentBirthRoomId
+        {
+            get => CurrentBirthRoom.RoomID.ToString();
+        }
+
 
         private ObservableCollection<MaternityRoom> _maternityrooms; //MaternityRoom
 
@@ -102,7 +102,18 @@ namespace BirthClinicGUI.ViewModels
             set => SetProperty(ref _maternityrooms, value);
         }
 
-        public MaternityRoom CurrentMaternityRoom { get; set; }
+        private MaternityRoom _currentMaternityRoom;
+
+        public MaternityRoom CurrentMaternityRoom
+        {
+            get => _currentMaternityRoom;
+            set => SetProperty(ref _currentMaternityRoom, value);
+        }
+
+        public string CurrentMaternityRoomId
+        {
+            get => CurrentMaternityRoom.RoomID.ToString();
+        }
         #endregion
 
         #region Select Room Command
@@ -124,7 +135,7 @@ namespace BirthClinicGUI.ViewModels
 
                 if (CurrentRestRoom != null)
                 {
-                    _dialog.ShowDialog("RestRoomView", r => { CurrentRestRoom = CurrentRestRoom; });
+                    _dialog.ShowDialog("RestRoomView",new DialogParameters($"Message={CurrentRestRoom.RoomID}"), r=>{ });
                 }
                 else
                 {
@@ -132,24 +143,41 @@ namespace BirthClinicGUI.ViewModels
                     return;
                 }
             }
-            //
             else if (roomType == "BirthRooms")
             {
                 CurrentBirthRoom = BirthRooms[BirthRoomIndex];
-                _dialog.ShowDialog("BirthRoomView", r => { });
-            }
 
+                if (CurrentBirthRoom != null)
+                {
+                    _dialog.ShowDialog("BirthRoomView", new DialogParameters($"Message={CurrentBirthRoom.RoomID}"), r => { });
+                }
+                else
+                {
+                    MessageBox.Show("CurrentBirthRoom == null / Not set");
+                    return;
+                }
+
+            }
             else if (roomType == "MaternityRooms")
             {
                 CurrentMaternityRoom = MaternityRooms[MaternityIndex];
-                _dialog.ShowDialog("MaternityRoomView", r => { });
+
+                if (CurrentMaternityRoom != null)
+                {
+                    _dialog.ShowDialog("MaternityRoomView", new DialogParameters($"Message={CurrentMaternityRoom.RoomID}"), r => { });
+                }
+                else
+                {
+                    MessageBox.Show("CurrentMaternityRoom == null / Not set");
+                    return;
+                }
+                
             }
         }
         #endregion
 
         #region Room indexes
         private int _restRoomIndex;
-
         public int RestRoomIndex
         {
             get => _restRoomIndex;

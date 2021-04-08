@@ -61,6 +61,16 @@
                Margin="10"
                HorizontalAlignment="Center"/>
 
+        <Label Grid.Row="3" Grid.Column="0"
+               Content="(Double click at appointment for details)"
+               Margin="0,0,0,0"
+               HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="9"/>
+
+        <Label Grid.Row="3" Grid.Column="0"
+               Content="(Double click clinicians field for details)"
+               Margin="10,0,0,0"
+               HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="9"/>
+
         <DataGrid Grid.Row="4"
                   ItemsSource="{Binding Appointments}"
                   SelectedIndex="{Binding AppointmentIndex}"

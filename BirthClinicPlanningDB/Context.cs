@@ -20,7 +20,7 @@ namespace BirthClinicPlanningDB
             ob.LogTo(message => Debug.WriteLine(message));
 
             ob.UseSqlServer(
-                "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BirthClinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                "Data Source=localhost;Initial Catalog=BirthClinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
             //Example: Data Source=localhost;Initial Catalog=BirthClinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
             // Thomas Conn string: Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BirthClinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
@@ -34,6 +34,47 @@ namespace BirthClinicPlanningDB
         }
 
         private static void Seed(ModelBuilder modelBuilder)
+        {
+            SeedClinicians(modelBuilder);
+
+            SeedChilds(modelBuilder);
+
+            SeedParents(modelBuilder);
+
+            SeedRooms(modelBuilder);
+
+            SeedAppointments(modelBuilder);
+        }
+
+        private static void SeedAppointments(ModelBuilder modelBuilder)
+        {
+            var appointments = new ObservableCollection<Appointment>
+            {
+                new Appointment
+                {
+                    AppointmentID = 1,
+                    StartTime = new DateTime(2021,06,07),
+                    EndTime = new DateTime(2021,06,08),
+                    BirthInProgess = false
+                },
+
+                new Appointment
+                {
+                    AppointmentID = 2,
+                    StartTime = new DateTime(2021,07,08),
+                    EndTime = new DateTime(2021,07,09),
+                    BirthInProgess = false
+                }
+
+            };
+
+            foreach (var app in appointments)
+            {
+                modelBuilder.Entity<Appointment>().HasData(app);
+            }
+        }
+
+        private static void SeedClinicians(ModelBuilder modelBuilder)
         {
             var clinicians = new ObservableCollection<Clinician>
             {
@@ -54,6 +95,60 @@ namespace BirthClinicPlanningDB
                     ClinicianID = 3,
                     FirstName = "Emil",
                     LastName = "Garder"
+                },
+                new Clinician
+                {
+                    ClinicianID = 4,
+                    FirstName = "Camilla",
+                    LastName = "Boesen"
+                },
+                new Clinician
+                {
+                    ClinicianID = 5,
+                    FirstName = "Thomas",
+                    LastName = "Boesen"
+                },
+                new Clinician
+                {
+                  ClinicianID = 6,
+                  FirstName = "Emil",
+                  LastName = "Boesen"
+                },
+                new Clinician
+                {
+                    ClinicianID = 7,
+                    FirstName = "Camilla",
+                    LastName = "Mikkelsen"
+                },
+                new Clinician
+                {
+                    ClinicianID = 8,
+                    FirstName = "Thomas",
+                    LastName = "Mikkelsen"
+                },
+                new Clinician
+                {
+                    ClinicianID = 9,
+                    FirstName = "Emil",
+                    LastName = "Mikkelsen"
+                },
+                new Clinician
+                {
+                    ClinicianID = 10,
+                    FirstName = "Camilla",
+                    LastName = "Overgaard"
+                },
+                new Clinician
+                {
+                    ClinicianID = 11,
+                    FirstName = "Thomas",
+                    LastName = "Overgaard"
+                },
+                new Clinician
+                {
+                    ClinicianID = 12,
+                    FirstName = "Emil",
+                    LastName = "Overgaard"
                 }
             };
 
@@ -61,7 +156,10 @@ namespace BirthClinicPlanningDB
             {
                 modelBuilder.Entity<Clinician>().HasData(clin);
             }
+        }
 
+        private static void SeedChilds(ModelBuilder modelBuilder)
+        {
             var childs = new List<Child>
             {
                 new Child
@@ -97,7 +195,10 @@ namespace BirthClinicPlanningDB
             {
                 modelBuilder.Entity<Child>().HasData(kid);
             }
+        }
 
+        private static void SeedParents(ModelBuilder modelBuilder)
+        {
             var parents = new List<Parents>
             {
                 new Parents
@@ -132,12 +233,15 @@ namespace BirthClinicPlanningDB
                 }
             };
 
-            
+
             foreach (var parent in parents)
             {
                 modelBuilder.Entity<Parents>().HasData(parent);
             }
+        }
 
+        private static void SeedRooms(ModelBuilder modelBuilder)
+        {
             var rooms = new ObservableCollection<RestRoom>
             {
                 new RestRoom()
@@ -152,6 +256,24 @@ namespace BirthClinicPlanningDB
                     RoomID = 2,
                     RoomNumber = 2,
                     Occupied = false
+                },
+                new RestRoom()
+                {
+                    RoomID = 5,
+                    RoomNumber = 5,
+                    Occupied = false
+                },
+                new RestRoom()
+                {
+                    RoomID = 6,
+                    RoomNumber = 6,
+                    Occupied = false
+                },
+                new RestRoom()
+                {
+                    RoomID = 7,
+                    RoomNumber = 7,
+                    Occupied = false
                 }
             };
 
@@ -160,44 +282,245 @@ namespace BirthClinicPlanningDB
                 modelBuilder.Entity<RestRoom>().HasData(room);
             }
 
-            modelBuilder.Entity<MaternityRoom>().HasData(new MaternityRoom()
+            var matrooms = new ObservableCollection<MaternityRoom>
             {
-                RoomID = 3,
-                RoomNumber = 3,
-                Occupied = false
-            });
-
-            modelBuilder.Entity<BirthRoom>().HasData(new BirthRoom()
-            {
-                RoomID = 4,
-                RoomNumber = 5,
-                Occupied = true
-            });
-
-
-            var appointments = new ObservableCollection<Appointment>
-            {
-                new Appointment
+                new MaternityRoom()
                 {
-                    AppointmentID = 1,
-                    StartTime = new DateTime(2021,06,07),
-                    EndTime = new DateTime(2021,06,08),
-                    BirthInProgess = false
+                    RoomID = 3,
+                    RoomNumber = 3,
+                    Occupied = false
                 },
-
-                new Appointment
+                new MaternityRoom()
                 {
-                AppointmentID = 2,
-                StartTime = new DateTime(2021,07,08),
-                EndTime = new DateTime(2021,07,09),
-                BirthInProgess = false
+                    RoomID = 8,
+                    RoomNumber = 8,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 9,
+                    RoomNumber = 9,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 10,
+                    RoomNumber = 10,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 11,
+                    RoomNumber = 11,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 12,
+                    RoomNumber = 12,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 13,
+                    RoomNumber = 13,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 14,
+                    RoomNumber = 14,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 15,
+                    RoomNumber = 15,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 16,
+                    RoomNumber = 16,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 17,
+                    RoomNumber = 17,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 18,
+                    RoomNumber = 18,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 19,
+                    RoomNumber = 19,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 20,
+                    RoomNumber = 20,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 21,
+                    RoomNumber = 21,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 22,
+                    RoomNumber = 22,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 23,
+                    RoomNumber = 23,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 24,
+                    RoomNumber = 24,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 25,
+                    RoomNumber = 25,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 27,
+                    RoomNumber = 27,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 28,
+                    RoomNumber = 28,
+                    Occupied = false
+                },
+                new MaternityRoom()
+                {
+                    RoomID = 29,
+                    RoomNumber = 29,
+                    Occupied = false
                 }
-
             };
 
-            foreach (var app in appointments)
+            foreach (var room in matrooms)
             {
-                modelBuilder.Entity<Appointment>().HasData(app);
+                modelBuilder.Entity<MaternityRoom>().HasData(room);
+            }
+
+
+            var birthrooms = new ObservableCollection<BirthRoom>
+            {
+                new BirthRoom()
+                {
+                    RoomID = 4,
+                    RoomNumber = 4,
+                    Occupied = false
+                },
+                new BirthRoom()
+                {
+                    RoomID = 30,
+                    RoomNumber = 30,
+                    Occupied = false
+                },
+                new BirthRoom()
+                {
+                    RoomID = 31,
+                    RoomNumber = 31,
+                    Occupied = false
+                },
+                new BirthRoom()
+                {
+                    RoomID = 32,
+                    RoomNumber = 32,
+                    Occupied = false
+                },
+                new BirthRoom()
+                {
+                    RoomID = 33,
+                    RoomNumber = 33,
+                    Occupied = false
+                },
+                new BirthRoom()
+                {
+                    RoomID = 34,
+                    RoomNumber = 34,
+                    Occupied = false
+                },
+                new BirthRoom()
+                {
+                    RoomID = 35,
+                    RoomNumber = 35,
+                    Occupied = false
+                },
+                new BirthRoom()
+                {
+                    RoomID = 36,
+                    RoomNumber = 36,
+                    Occupied = false
+                },
+                new BirthRoom()
+                {
+                    RoomID = 37,
+                    RoomNumber = 37,
+                    Occupied = false
+                },
+                new BirthRoom()
+                {
+                    RoomID = 38,
+                    RoomNumber = 38,
+                    Occupied = false
+                },
+                new BirthRoom()
+                {
+                    RoomID = 39,
+                    RoomNumber = 39,
+                    Occupied = false
+                },
+                new BirthRoom()
+                {
+                    RoomID = 40,
+                    RoomNumber = 40,
+                    Occupied = false
+                },
+                new BirthRoom()
+                {
+                    RoomID = 41,
+                    RoomNumber = 41,
+                    Occupied = false
+                },
+                new BirthRoom()
+                {
+                    RoomID = 42,
+                    RoomNumber = 42,
+                    Occupied = false
+                },
+                new BirthRoom()
+                {
+                    RoomID = 43,
+                    RoomNumber = 43,
+                    Occupied = false
+                }
+            };
+
+            foreach (var room in birthrooms)
+            {
+                modelBuilder.Entity<BirthRoom>().HasData(room);
             }
         }
 

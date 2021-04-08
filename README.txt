@@ -6,18 +6,16 @@ Step A:
 
 2) Open the "BirthClinicPlanningDB" project, and open the "Context.cs" file. 
 
-3) Replace the connection string with you own connection string in the "OnConfiguring()" method, AND correct the "Catalog" assignment to a name of your choice. 
+3) Replace the connection string with you own connection string in the "OnConfiguring()" method, AND edit the "Catalog" assignment to a name of your choice. 
    Press save. 
 
 4) Set the "BirthClinicPlanningDB" project as your startup project. 
 
-5) Right click at the "BirthClinicGUI" project and choose "Unload project".
+5) Go to your "Package Manager Console" and set "Package source" to "All", AND "Default Project" as "BirthClinicPlanningDB".
 
-6) In the package manager console, type: "update-database", to apply the included migration file to the database. (The DB will be created on its own) 
+6) In the package manager console, type: "update-database", to apply the included migration files to the database. (The DB will be created on its own with seeded data) 
 
 7) Ensure that the tables has been created in your local database. 
-
-8) Right click at the unloaded "BirthClinicGUI" Project, and choose "Reload project with dependencies".
 
 
 ======================================   Now you are ready to run the application  =========================================
@@ -30,3 +28,13 @@ Step B:
 2) Run the application by pushing the "F5" button. The WPF application will now start. 
 
 3) 
+
+
+======================================   Clean up  =========================================
+
+
+Step C:
+
+1) Right click at the database at your local sql server, and delete the database. 
+
+Now you are ready to start over from step A. 

@@ -4,14 +4,16 @@ using BirthClinicPlanningDB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BirthClinicPlanningDB.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20210408133850_addedAllDemandedEmptyRoomsToSeeding")]
+    partial class addedAllDemandedEmptyRoomsToSeeding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,60 +163,6 @@ namespace BirthClinicPlanningDB.Migrations
                             ClinicianID = 3,
                             FirstName = "Emil",
                             LastName = "Garder"
-                        },
-                        new
-                        {
-                            ClinicianID = 4,
-                            FirstName = "Camilla",
-                            LastName = "Boesen"
-                        },
-                        new
-                        {
-                            ClinicianID = 5,
-                            FirstName = "Thomas",
-                            LastName = "Boesen"
-                        },
-                        new
-                        {
-                            ClinicianID = 6,
-                            FirstName = "Emil",
-                            LastName = "Boesen"
-                        },
-                        new
-                        {
-                            ClinicianID = 7,
-                            FirstName = "Camilla",
-                            LastName = "Mikkelsen"
-                        },
-                        new
-                        {
-                            ClinicianID = 8,
-                            FirstName = "Thomas",
-                            LastName = "Mikkelsen"
-                        },
-                        new
-                        {
-                            ClinicianID = 9,
-                            FirstName = "Emil",
-                            LastName = "Mikkelsen"
-                        },
-                        new
-                        {
-                            ClinicianID = 10,
-                            FirstName = "Camilla",
-                            LastName = "Overgaard"
-                        },
-                        new
-                        {
-                            ClinicianID = 11,
-                            FirstName = "Thomas",
-                            LastName = "Overgaard"
-                        },
-                        new
-                        {
-                            ClinicianID = 12,
-                            FirstName = "Emil",
-                            LastName = "Overgaard"
                         });
                 });
 
@@ -647,7 +595,7 @@ namespace BirthClinicPlanningDB.Migrations
                 {
                     b.HasOne("BirthClinicPlanningDB.DomainObjects.Room", "Room")
                         .WithMany("Appointments")
-                        .HasForeignKey("RoomID")
+                        .HasForeignKey("AppointmentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
