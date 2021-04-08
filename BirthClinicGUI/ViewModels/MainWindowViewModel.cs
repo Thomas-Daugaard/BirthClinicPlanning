@@ -63,14 +63,13 @@ namespace BirthClinicGUI.ViewModels
             var room1 = access.RestRooms.GetSingleRestRoom(1);
 
             var appoint1 = access.Appointments.getSingleAppointment(1);
-
-            //add parent/child
+            
             room1.Appointments.Add(appoint1);
 
             var room2 = access.RestRooms.GetSingleRestRoom(2);
 
             var appoint2 = access.Appointments.getSingleAppointment(2);
-            //add parent/child
+           
             room2.Appointments.Add(appoint2);
             access.Complete();
         }
