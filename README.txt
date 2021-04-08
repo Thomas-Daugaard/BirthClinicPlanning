@@ -28,3 +28,13 @@ Step B:
 2) Run the application by pushing the "F5" button. The WPF application will now start. 
 
 3) 
+
+
+======================================   Clean up  =========================================
+
+
+Step C:
+
+1) Right click at the database at your local sql server, and delete the database. 
+
+Now you are ready to start over from step A. 
