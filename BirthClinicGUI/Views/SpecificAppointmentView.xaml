@@ -99,7 +99,7 @@
                        Content="First name:" 
                        Margin="5"/>
                 <TextBlock Grid.Row="0" Grid.Column="1"
-                           Text="{Binding Appointment.Room.Child.FirstName}"
+                           Text="{Binding Appointment.Child.FirstName}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
@@ -107,7 +107,7 @@
                        Content="Last name:"
                        Margin="5"/>
                 <TextBlock Grid.Row="1" Grid.Column="1"
-                           Text="{Binding Appointment.Room.Child.LastName}"
+                           Text="{Binding Appointment.Child.LastName}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
@@ -115,7 +115,7 @@
                        Content="Weight:"
                        Margin="5"/>
                 <TextBlock Grid.Row="2" Grid.Column="1"
-                           Text="{Binding Appointment.Room.Child.Weight}"
+                           Text="{Binding Appointment.Child.Weight}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
@@ -123,7 +123,7 @@
                        Content="Length:"
                        Margin="5"/>
                 <TextBlock Grid.Row="3" Grid.Column="1"
-                           Text="{Binding Appointment.Room.Child.Length}"
+                           Text="{Binding Appointment.Child.Length}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
@@ -131,7 +131,7 @@
                        Content="Birth date:"
                        Margin="5"/>
                 <TextBlock Grid.Row="4" Grid.Column="1"
-                           Text="{Binding Appointment.Room.Child.BirthDate}"
+                           Text="{Binding Appointment.Child.BirthDate}"
                            Margin="5"
                            VerticalAlignment="Center"/>
             </Grid>
@@ -153,7 +153,7 @@
                        Content="CPR"
                        Margin="5"/>
                 <TextBlock Grid.Row="0" Grid.Column="1"
-                           Text="{Binding Appointment.Room.Parents.DadCPR}"
+                           Text="{Binding Appointment.Parents.DadCPR}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
@@ -161,7 +161,7 @@
                        Content="First name"
                        Margin="5"/>
                 <TextBlock Grid.Row="1" Grid.Column="1"
-                           Text="{Binding Appointment.Room.Parents.DadFirstName}"
+                           Text="{Binding Appointment.Parents.DadFirstName}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
@@ -169,7 +169,7 @@
                        Content="Last name"
                        Margin="5"/>
                 <TextBlock Grid.Row="2" Grid.Column="1"
-                           Text="{Binding Appointment.Room.Parents.DadLastName}"
+                           Text="{Binding Appointment.Parents.DadLastName}"
                            Margin="5"
                            VerticalAlignment="Center"/>
             </Grid>
@@ -191,7 +191,7 @@
                        Content="CPR"
                        Margin="5"/>
                 <TextBlock Grid.Row="0" Grid.Column="1"
-                           Text="{Binding Appointment.Room.Parents.MomCPR}"
+                           Text="{Binding Appointment.Parents.MomCPR}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
@@ -199,7 +199,7 @@
                        Content="First name"
                        Margin="5"/>
                 <TextBlock Grid.Row="1" Grid.Column="1"
-                           Text="{Binding Appointment.Room.Parents.MomFirstName}"
+                           Text="{Binding Appointment.Parents.MomFirstName}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
@@ -207,7 +207,7 @@
                        Content="Last name"
                        Margin="5"/>
                 <TextBlock Grid.Row="2" Grid.Column="1"
-                           Text="{Binding Appointment.Room.Parents.MomLastName}"
+                           Text="{Binding Appointment.Parents.MomLastName}"
                            Margin="5"
                            VerticalAlignment="Center"/>
             </Grid>
@@ -215,7 +215,7 @@
 
         <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="Clinicians information" Margin="5">
             <Grid>
-                <ListBox ItemsSource="{Binding Appointment.Room.Clinicians}"
+                <ListBox ItemsSource="{Binding Appointment.Clinicians}"
                          DisplayMemberPath="Display"
                          IsSynchronizedWithCurrentItem="True"
                          Background="Gainsboro"/>

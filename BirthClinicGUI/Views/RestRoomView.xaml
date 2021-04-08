@@ -35,12 +35,12 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" 
-                       Content="Room ID:" 
+                       Content="Room No:" 
                        Margin="5"
                 />
 
                 <TextBlock Grid.Row="0" Grid.Column="1" MinWidth="50" MinHeight="20"
-                           Text="{Binding CurrentRestRoom.RoomID}"
+                           Text="{Binding CurrentRestRoom.RoomNumber}"
                            Margin="5"
                            VerticalAlignment="Center" 
                            HorizontalAlignment="Center"

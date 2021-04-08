@@ -15,7 +15,7 @@ namespace BirthClinicPlanningDB.Migrations
 
             migrationBuilder.InsertData(
                 table: "Room",
-                columns: new[] { "RoomID", "ChildID", "Discriminator", "Occupied", "ParentsID", "RoomNumber", "RoomType" },
+                columns: new[] { "RoomID", "Discriminator", "Occupied", "RoomNumber", "RoomType" },
                 values: new object[,]
                 {
                     { 15, null, "MaternityRoom", false, null, 15, "Maternity Room" },

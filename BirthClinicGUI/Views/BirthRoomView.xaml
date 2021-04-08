@@ -35,7 +35,7 @@
                        Content="Room ID:" 
                        Margin="5"/>
                 <TextBlock Grid.Row="0" Grid.Column="1"
-                           Text="{Binding CurrentBirthRoom.RoomID}"
+                           Text="{Binding CurrentBirthRoom.RoomNumber}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
