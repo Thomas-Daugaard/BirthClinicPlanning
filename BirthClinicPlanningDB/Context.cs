@@ -20,7 +20,7 @@ namespace BirthClinicPlanningDB
             ob.LogTo(message => Debug.WriteLine(message));
 
             ob.UseSqlServer(
-                "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BirthClinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                "Data Source=localhost;Initial Catalog=BirthClinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
             //Example: Data Source=localhost;Initial Catalog=BirthClinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
             // Thomas Conn string: Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BirthClinic;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
@@ -52,14 +52,14 @@ namespace BirthClinicPlanningDB
             {
                 new Appointment
                 {
-                    AppointmentID = -1,
+                    AppointmentID = 1,
                     StartTime = new DateTime(2021,06,07),
                     EndTime = new DateTime(2021,06,08),
                 },
 
                 new Appointment
                 {
-                    AppointmentID = -2,
+                    AppointmentID = 2,
                     StartTime = new DateTime(2021,07,08),
                     EndTime = new DateTime(2021,07,09),
                 }
