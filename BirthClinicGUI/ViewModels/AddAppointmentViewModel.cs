@@ -161,7 +161,7 @@ namespace BirthClinicGUI.ViewModels
                 roomToInsert = new MaternityRoom() { Appointments = new ObservableCollection<Appointment>() };
             }
 
-            //Appointment.RoomID = roomToInsert.RoomID;
+            Appointment.RoomID = roomToInsert.RoomID;
             Appointment.Room = roomToInsert;
 
             roomToInsert.Appointments.Add(Appointment);
