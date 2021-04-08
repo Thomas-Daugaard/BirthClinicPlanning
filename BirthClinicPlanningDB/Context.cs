@@ -80,73 +80,85 @@ namespace BirthClinicPlanningDB
                 {
                     ClinicianID = 1,
                     FirstName = "Camilla",
-                    LastName = "Holmstoel"
+                    LastName = "Holmstoel",
+                    Type = "Doctor"
                 },
                 new Clinician
                 {
                     ClinicianID = 2,
                     FirstName = "Thomas",
-                    LastName = "Daugaard"
+                    LastName = "Daugaard",
+                    Type = "Doctor"
                 },
                 new Clinician
                 {
                     ClinicianID = 3,
                     FirstName = "Emil",
-                    LastName = "Garder"
+                    LastName = "Garder",
+                    Type = "Doctor"
                 },
                 new Clinician
                 {
                     ClinicianID = 4,
                     FirstName = "Camilla",
-                    LastName = "Boesen"
+                    LastName = "Boesen",
+                    Type = "Doctor"
                 },
                 new Clinician
                 {
                     ClinicianID = 5,
                     FirstName = "Thomas",
-                    LastName = "Boesen"
+                    LastName = "Boesen",
+                    Type = "Doctor"
                 },
                 new Clinician
                 {
                   ClinicianID = 6,
                   FirstName = "Emil",
-                  LastName = "Boesen"
+                  LastName = "Boesen",
+                  Type = "Secretary"
                 },
                 new Clinician
                 {
                     ClinicianID = 7,
                     FirstName = "Camilla",
-                    LastName = "Mikkelsen"
+                    LastName = "Mikkelsen",
+                    Type = "Secretary"
                 },
                 new Clinician
                 {
                     ClinicianID = 8,
                     FirstName = "Thomas",
-                    LastName = "Mikkelsen"
+                    LastName = "Mikkelsen",
+                    Type = "Secretary"
                 },
                 new Clinician
                 {
                     ClinicianID = 9,
                     FirstName = "Emil",
-                    LastName = "Mikkelsen"
+                    LastName = "Mikkelsen",
+                    Type = "Secretary"
                 },
                 new Clinician
                 {
                     ClinicianID = 10,
                     FirstName = "Camilla",
-                    LastName = "Overgaard"
+                    LastName = "Overgaard",
+                    Type = "SOSU Assistant"
                 },
                 new Clinician
                 {
                     ClinicianID = 11,
                     FirstName = "Thomas",
-                    LastName = "Overgaard"
+                    LastName = "Overgaard",
+                    Type = "SOSU Assistant"
                 },
                 new Clinician
                 {
                     ClinicianID = 12,
                     FirstName = "Emil",
-                    LastName = "Overgaard"
+                    LastName = "Overgaard",
+                    Type = "SOSU Assistant"
                 }
             };
 
