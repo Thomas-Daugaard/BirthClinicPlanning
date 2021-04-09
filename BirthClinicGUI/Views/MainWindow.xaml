@@ -9,7 +9,7 @@
         xmlns:birthClinicGui="clr-namespace:BirthClinicGUI"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Title="Birth Clinic App" Height="500" Width="680">
+        Title="Birth Clinic App" Height="500" Width="680" Background="LemonChiffon">
 
     <Window.Resources>
         <ImageBrush x:Key="redx" ImageSource="../Images/redx.png"/>
