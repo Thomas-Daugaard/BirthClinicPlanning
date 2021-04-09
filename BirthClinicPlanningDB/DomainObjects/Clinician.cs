@@ -20,8 +20,6 @@ namespace BirthClinicPlanningDB.DomainObjects
 
         public string Type { get; set; }
 
-        public ObservableCollection<Appointment> Appointments { get; set; }
-
         [NotMapped]
         public string Display
         {
