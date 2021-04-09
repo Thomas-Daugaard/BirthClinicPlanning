@@ -599,19 +599,19 @@ namespace BirthClinicPlanningDB
                 new RestRoom()
                 {
                     RoomID = 5,
-                    RoomNumber = 5,
+                    RoomNumber = 3,
                     Occupied = false
                 },
                 new RestRoom()
                 {
                     RoomID = 6,
-                    RoomNumber = 6,
+                    RoomNumber = 4,
                     Occupied = false
                 },
                 new RestRoom()
                 {
                     RoomID = 7,
-                    RoomNumber = 7,
+                    RoomNumber = 5,
                     Occupied = false
                 }
             };
