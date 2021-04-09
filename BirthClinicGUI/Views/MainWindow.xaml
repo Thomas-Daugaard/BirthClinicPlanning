@@ -153,6 +153,6 @@
 
         </Expander>
 
-        <Image Grid.Row="6" Grid.Column="0" Source="../Images/CTElogo.png"></Image>
+        <Image Grid.Row="6" Grid.Column="0" Source="/Views/CTElogo.png" Stretch="Uniform" Opacity="0.7" MaxWidth="120" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10"/>
     </Grid>
 </Window>
