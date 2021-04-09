@@ -12,7 +12,6 @@ namespace BirthClinicPlanningDB
     {
         private DataAccessActions()
         {
-            
         }
 
         private readonly Context _context;

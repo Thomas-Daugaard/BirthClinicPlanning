@@ -34,7 +34,7 @@ namespace BirthClinicGUI.ViewModels
 
         #endregion
 
-        private IDataAccessActions access = IDataAccessActions.Access();
+        private IDataAccessActions access = new DataAccessActions(new Context());
         private bool _okButtonPressed;
         private IDialogService _dialog;
 
@@ -235,7 +235,6 @@ namespace BirthClinicGUI.ViewModels
 
 
         private ICommand _addClinicianFromList;
-
 
         public ICommand AddClinicianFromList
         {
