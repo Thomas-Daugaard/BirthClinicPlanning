@@ -152,5 +152,7 @@
             </GroupBox>
 
         </Expander>
+
+        <Image Grid.Row="6" Grid.Column="0" Source="../Images/CTElogo.png"></Image>
     </Grid>
 </Window>
