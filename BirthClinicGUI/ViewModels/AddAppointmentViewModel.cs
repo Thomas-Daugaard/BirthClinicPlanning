@@ -84,6 +84,13 @@ namespace BirthClinicGUI.ViewModels
         #region Helper methods
         public void AddAppointmentToRestRoom()
         {
+            if (Appointment.Room.RoomNumber > 5)
+            {
+                MessageBox.Show("Cannot create appointment for restroom with a room number above 5 \nOnly 5 restrooms exist.", "Invalid room number");
+                CanClose = false;
+                return;
+            }
+
             RestRoom roomToInsert = access.RestRooms.GetRestRoomWithSpecificNumber(Appointment.Room.RoomNumber);
 
             foreach (var appointment in roomToInsert.Appointments)

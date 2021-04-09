@@ -91,6 +91,15 @@
                 <DataGridTextColumn Header="Mothers CPR" Binding="{Binding Parents.MomCPR}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Booked on" Binding="{Binding DisplayStartDateTime}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Booked for" Binding="{Binding BookedFor}" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <Button>
+                                <Image Source=""></Image>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Clinicians" MinWidth="120">
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>

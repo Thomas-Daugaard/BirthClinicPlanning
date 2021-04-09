@@ -75,7 +75,7 @@ namespace BirthClinicGUI.ViewModels
 
         public string CurrentRestRoomId
         {
-            get => CurrentRestRoom.RoomID.ToString();
+            get => CurrentRestRoom.RoomNumber.ToString();
         }
 
 
@@ -89,7 +89,7 @@ namespace BirthClinicGUI.ViewModels
 
         public string CurrentBirthRoomId
         {
-            get => CurrentBirthRoom.RoomID.ToString();
+            get => CurrentBirthRoom.RoomNumber.ToString();
         }
 
 
@@ -111,7 +111,7 @@ namespace BirthClinicGUI.ViewModels
 
         public string CurrentMaternityRoomId
         {
-            get => CurrentMaternityRoom.RoomID.ToString();
+            get => CurrentMaternityRoom.RoomNumber.ToString();
         }
         #endregion
 
@@ -130,47 +130,37 @@ namespace BirthClinicGUI.ViewModels
         {
             if (roomType == "RestRooms")
             {
-                CurrentRestRoom = RestRooms[RestRoomIndex]; 
+                if (RestRoomIndex < 5)
+                {
+                    CurrentRestRoom = RestRooms[RestRoomIndex];
+                    _dialog.ShowDialog("RestRoomView", new DialogParameters($"Message={CurrentRestRoom.RoomNumber}"), r => { });
+                }
 
-                if (CurrentRestRoom != null)
-                {
-                    _dialog.ShowDialog("RestRoomView",new DialogParameters($"Message={CurrentRestRoom.RoomID}"), r=>{ });
-                }
                 else
-                {
-                    MessageBox.Show("CurrentRestRoom == null / Not set");
                     return;
-                }
             }
+
             else if (roomType == "BirthRooms")
             {
-                CurrentBirthRoom = BirthRooms[BirthRoomIndex];
-
-                if (CurrentBirthRoom != null)
+                if (BirthRoomIndex < 15)
                 {
-                    _dialog.ShowDialog("BirthRoomView", new DialogParameters($"Message={CurrentBirthRoom.RoomID}"), r => { });
+                    CurrentBirthRoom = BirthRooms[BirthRoomIndex];
+                    _dialog.ShowDialog("BirthRoomView", new DialogParameters($"Message={CurrentBirthRoom.RoomNumber}"), r => { });
                 }
                 else
-                {
-                    MessageBox.Show("CurrentBirthRoom == null / Not set");
                     return;
-                }
-
             }
+
             else if (roomType == "MaternityRooms")
             {
-                CurrentMaternityRoom = MaternityRooms[MaternityIndex];
+                if (MaternityIndex < 22)
+                {
+                    CurrentMaternityRoom = MaternityRooms[MaternityIndex];
+                    _dialog.ShowDialog("MaternityRoomView", new DialogParameters($"Message={CurrentMaternityRoom.RoomNumber}"), r => { });
+                }
 
-                if (CurrentMaternityRoom != null)
-                {
-                    _dialog.ShowDialog("MaternityRoomView", new DialogParameters($"Message={CurrentMaternityRoom.RoomID}"), r => { });
-                }
                 else
-                {
-                    MessageBox.Show("CurrentMaternityRoom == null / Not set");
                     return;
-                }
-                
             }
         }
         #endregion
