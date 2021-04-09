@@ -64,11 +64,11 @@ UC2 - See rooms status)
 4) Go back, and choose another room. You'll find it empty ;-)
 
 
-UC3 - Delete appointment)
+UC3 - Canel appointment)
 
-1. On the mainwindow - choose the appointment you just created and click on "Delete Appointment" button
+1. On the mainwindow - choose the appointment you just created and click on "Cancel Appointment" button
 
-2. the appointment is now deleted
+2. the appointment is now cancelled
 
 3. If you'd like, you can go to the database table and see that your appointment no longer exists. 
 
