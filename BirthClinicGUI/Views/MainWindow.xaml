@@ -42,7 +42,7 @@
                 Command="{Binding AddAppointmentCommand}"/>
             <Button
                     Name="DelAppointBtn"
-                    Content="Delete Appointment"
+                    Content="Cancel Appointment"
                     Margin="5"
                     Padding="5"
                     Command="{Binding DelAppointmentCommand}"/>
@@ -152,5 +152,7 @@
             </GroupBox>
 
         </Expander>
+
+        <Image Grid.Row="6" Grid.Column="0" Source="/Views/CTElogo.png" Stretch="Uniform" Opacity="0.7" MaxWidth="120" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10"/>
     </Grid>
 </Window>
