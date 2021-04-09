@@ -2,9 +2,9 @@ Our decisions and assumptions while making this project.
 
 MUST:
 - Must be possible to add an appointment
-- In this appointment i must be possible to choose the room number in wich the appointment takes place
+- In this appointment it must be possible to choose the room number in which the appointment takes place
 - It must be possible to put in a time and date for the appointment.
-- There must be validation so that no room is doublebooked.
+- There must be validation so that no room is double booked.
 - It must be possible to choose, what room the appointment takes place in
 - It must be possible to add clinicians to the appointment
 - It must be possible to add first- and last name of both the mother and father of the appointment,
