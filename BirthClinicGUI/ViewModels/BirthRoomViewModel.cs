@@ -76,7 +76,7 @@ namespace BirthClinicGUI.ViewModels
                 TimeRange appointmentrange = new TimeRange(appointment.StartTime, appointment.EndTime);
                 TimeRange nowrange = new TimeRange(currentTime, currentTime);
 
-                if (appointmentrange.IntersectsWith(nowrange))
+                if (appointmentrange.IntersectsWith(nowrange) || appointmentrange.OverlapsWith(nowrange))
                 {
                     CurrentBirthRoom.Occupied = true;
                     Occupied = true;
