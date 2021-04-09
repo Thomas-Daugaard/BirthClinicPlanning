@@ -133,6 +133,9 @@ namespace BirthClinicGUI.ViewModels
                         return;
                     } } }
 
+            _dialog.Show("BabyInformationView");
+            Appointment.Child = ((App) Application.Current).Child;
+
             roomToInsert.Appointments.Add(Appointment);
             //access.Appointments.AddAppointment(Appointment);
             access.Complete();
@@ -182,7 +185,25 @@ namespace BirthClinicGUI.ViewModels
                     MessageBox.Show("Appointment start cannot be later than end date/time");
                 }
 
+                if (Appointment.Parents.MomCPR == "" || Appointment.Room.RoomNumber == 0)
+                {
+                    MessageBox.Show("Please fill out all required fields", "Error");
+                    CanClose = false;
+                }
+
                 else
+                {
+                    Cpr = Appointment.Parents.MomCPR;
+                    CheckCPR("mother");
+
+                    if (Appointment.Parents.DadCPR != "")
+                    {
+                        Cpr = Appointment.Parents.DadCPR;
+                        CheckCPR("father");
+                    }
+                }
+
+                if (CanClose)
                 {
                     switch (RoomType[RoomTypeIndex])
                     {
@@ -209,19 +230,7 @@ namespace BirthClinicGUI.ViewModels
             else if (parameter?.ToLower() == "false")
                 result = ButtonResult.Cancel;
 
-            if (Appointment.Parents.MomCPR == "" || Appointment.Room.RoomNumber == 0)
-            {
-                MessageBox.Show("Please fill out all required fields", "Error");
-                CanClose = false;
-            }
-
-            else
-            {
-                Cpr = Appointment.Parents.MomCPR;
-
-                if (Appointment.Parents.DadCPR != "")
-                    Cpr = Appointment.Parents.DadCPR;
-            }
+            
 
             if (CanClose)
                 RequestClose(new DialogResult(result));
@@ -256,25 +265,25 @@ namespace BirthClinicGUI.ViewModels
 
         #region CPR-validation
 
-        private void CheckCPR()
+        private void CheckCPR(string parent)
         {
             if (!CheckFormat())
             {
-                MessageBox.Show("Please input a CPR with 10 digits (father)", "CPR digits error");
+                MessageBox.Show($"Please input a CPR with 10 digits ({parent})", "CPR digits error");
                 CanClose = false;
                 return;
             }
 
             if (!CheckDate())
             {
-                MessageBox.Show("Please input a CPR with a valid date (father)", "CPR date error");
+                MessageBox.Show("Please input a CPR with a valid date ({parent})", "CPR date error");
                 CanClose = false;
                 return;
             }
 
             if (!Check11Test())
             {
-                MessageBox.Show("Please input a valid CPR (father)", "CPR-invalid error");
+                MessageBox.Show("Please input a valid CPR ({parent})", "CPR-invalid error");
                 CanClose = false;
                 return;
             }
