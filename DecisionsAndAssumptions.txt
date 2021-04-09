@@ -43,4 +43,8 @@ ENTITY DECISIONS:
  - Mother and father is gathered in 1 entity as Parents. 
 
 DATAACCESS DECISIONS:
-
+- To access the database is the Repository pattern used. 
+- For each relevant entity is a repository made with specified methods to be used when performing the CRUD operations. 
+- Only a single unitOfWork is used as the service layer which is in charge of running the busines logic and calling SaveChanges().
+- The unit of work is being used in the WPF application. 
+- All seeding is made in the DBcontext file. 
