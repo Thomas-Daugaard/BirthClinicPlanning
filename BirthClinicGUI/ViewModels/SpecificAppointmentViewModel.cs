@@ -42,7 +42,7 @@ namespace BirthClinicGUI.ViewModels
         {
             int id = int.Parse(parameters.GetValue<string>("Message"));
             Appointment = access.Appointments.getSingleAppointment(id);
-            access.Complete();
+            
             RoomType = new ObservableCollection<string>() { "Birth Room", "Maternity Room", "Rest Room" };
         }
 
@@ -61,8 +61,6 @@ namespace BirthClinicGUI.ViewModels
 
         private void CheckoutExecute()
         {
-            Appointment.Room.Occupied = false;
-
             switch (Appointment.Room.RoomType)
             {
                 case "Rest Room":
@@ -83,32 +81,22 @@ namespace BirthClinicGUI.ViewModels
 
         public bool ValidateDate(Appointment existingAppointment)
         {
-            TimeRange AppointmentToInsert = new TimeRange(DateTime.Now.Date.Add(Appointment.StartTime.TimeOfDay), DateTime.Now.Date.Add(Appointment.EndTime.TimeOfDay));
             TimeRange AppointmentToCompare = new TimeRange(DateTime.Now.Date.Add(existingAppointment.StartTime.TimeOfDay), DateTime.Now.Date.Add(existingAppointment.EndTime.TimeOfDay));
+            TimeRange AppointmentToInsert = new TimeRange(DateTime.Now.Date.Add(Appointment.StartTime.TimeOfDay), DateTime.Now.Date.Add(Appointment.EndTime.TimeOfDay));
 
-            if (AppointmentToCompare.IsSamePeriod(AppointmentToInsert))
-            {
-                MessageBox.Show("TimeRange is occupied");
-                return AppointmentToCompare.IsSamePeriod(AppointmentToInsert);
-            }
-            else if (AppointmentToCompare.HasInside(AppointmentToInsert))
-            {
-                MessageBox.Show("TimeRange overlaps another Timerange");
-                return AppointmentToCompare.HasInside(AppointmentToInsert);
-            }
-            else if (AppointmentToCompare.OverlapsWith(AppointmentToInsert))
+            if (AppointmentToCompare.OverlapsWith(AppointmentToInsert))
             {
                 MessageBox.Show("TimeRange overlaps another Timerange");
                 return AppointmentToCompare.OverlapsWith(AppointmentToInsert);
             }
-            else if (AppointmentToCompare.IntersectsWith(AppointmentToInsert))
+
+            if (AppointmentToCompare.IntersectsWith(AppointmentToInsert))
             {
                 MessageBox.Show("Timerange intersects with another Timerange");
                 return AppointmentToCompare.IntersectsWith(AppointmentToInsert);
             }
 
-            else
-                return false;
+            return false;
         }
 
         private void ChangeToBirthRoom()
@@ -117,15 +105,32 @@ namespace BirthClinicGUI.ViewModels
 
             foreach (var room in birthRooms)
             {
-                foreach (var appointment in room.Appointments)
+                if (room.Appointments.Count == 0)
                 {
-                    if (!ValidateDate(appointment))
+                    room.Appointments.Add(Appointment);
+                    Appointment.Room.Appointments.Remove(Appointment);
+                    access.Complete();
+
+                    return;
+                }
+
+                else
+                {
+                    foreach (var appointment in room.Appointments)
                     {
-                        room.Appointments.Add(Appointment);
-                        access.Complete();
+                        if (!ValidateDate(appointment))
+                        {
+                            room.Appointments.Add(Appointment);
+                            Appointment.Room.Appointments.Remove(Appointment);
+                            access.Complete();
+
+                            return;
+                        }
                     }
                 }
             }
+
+            MessageBox.Show("No Birth rooms available");
         }
 
         private void ChangeToMaternityRoom()
