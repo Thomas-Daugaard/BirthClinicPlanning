@@ -53,7 +53,7 @@
             </DataGrid.InputBindings>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Room ID" 
+                <DataGridTextColumn Header="Room No." 
                                     Binding="{Binding RoomNumber}" 
                                     MinWidth="80" 
                                     IsReadOnly="True"/>
@@ -74,7 +74,7 @@
             </DataGrid.InputBindings>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Room ID" Binding="{Binding RoomNumber}" MinWidth="80" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Room No" Binding="{Binding RoomNumber}" MinWidth="80" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -93,7 +93,7 @@
             </DataGrid.InputBindings>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Room ID" Binding="{Binding RoomNumber}" MinWidth="80" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Room No" Binding="{Binding RoomNumber}" MinWidth="80" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 

@@ -156,7 +156,7 @@ namespace BirthClinicPlanningDB.Migrations
                     { 22, "MaternityRoom", false, 16, "Maternity Room" },
                     { 16, "MaternityRoom", false, 10, "Maternity Room" },
                     { 18, "MaternityRoom", false, 12, "Maternity Room" },
-                    { 5, "RestRoom", false, 5, "Rest Room" },
+                    { 5, "RestRoom", false, 3, "Rest Room" },
                     { 29, "MaternityRoom", false, 22, "Maternity Room" },
                     { 24, "MaternityRoom", false, 18, "Maternity Room" },
                     { 25, "MaternityRoom", false, 19, "Maternity Room" },
@@ -176,7 +176,7 @@ namespace BirthClinicPlanningDB.Migrations
                     { 14, "MaternityRoom", false, 8, "Maternity Room" },
                     { 32, "BirthRoom", false, 4, "Birth Room" },
                     { 12, "MaternityRoom", false, 6, "Maternity Room" },
-                    { 6, "RestRoom", false, 6, "Rest Room" },
+                    { 6, "RestRoom", false, 4, "Rest Room" },
                     { 43, "BirthRoom", false, 15, "Birth Room" },
                     { 42, "BirthRoom", false, 14, "Birth Room" },
                     { 41, "BirthRoom", false, 13, "Birth Room" },
@@ -197,7 +197,7 @@ namespace BirthClinicPlanningDB.Migrations
                     { 10, "MaternityRoom", false, 4, "Maternity Room" },
                     { 11, "MaternityRoom", false, 5, "Maternity Room" },
                     { 34, "BirthRoom", false, 6, "Birth Room" },
-                    { 7, "RestRoom", false, 7, "Rest Room" }
+                    { 7, "RestRoom", false, 5, "Rest Room" }
                 });
 
             migrationBuilder.InsertData(

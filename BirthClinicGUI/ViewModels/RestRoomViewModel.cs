@@ -61,17 +61,17 @@ namespace BirthClinicGUI.ViewModels
         public bool Occupied { get; set; }
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            int roomid = int.Parse(parameters.GetValue<string>("Message"));
+            int roomNumber = int.Parse(parameters.GetValue<string>("Message"));
 
-            CurrentRestRoom = access.RestRooms.GetSingleRestRoom(roomid);
+            CurrentRestRoom = access.RestRooms.GetRestRoomWithSpecificNumber(roomNumber);
 
             AppointmentsForRoom = CurrentRestRoom.Appointments;
 
             foreach (var appointment in AppointmentsForRoom)
             {
                 DateTime currentTime = DateTime.Now;
-                TimeRange appointmentrange = new TimeRange(appointment.StartTime, appointment.EndTime);
                 TimeRange nowrange = new TimeRange(currentTime, currentTime);
+                TimeRange appointmentrange = new TimeRange(appointment.StartTime, appointment.EndTime);
 
                 if (appointmentrange.IntersectsWith(nowrange) || appointmentrange.OverlapsWith(nowrange))
                 {

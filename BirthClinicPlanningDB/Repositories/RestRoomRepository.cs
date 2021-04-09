@@ -27,6 +27,9 @@ namespace BirthClinicPlanningDB.Repositories
         {
             return context.Restrooms
                 .Include(a => a.Appointments)
+                .ThenInclude(c => c.Child)
+                .Include(a => a.Appointments)
+                .ThenInclude(p => p.Parents)
                 .SingleOrDefault(r => r.RoomNumber == no);
         }
 
