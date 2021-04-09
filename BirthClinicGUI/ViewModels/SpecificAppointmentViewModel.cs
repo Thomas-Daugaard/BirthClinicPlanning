@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using BirthClinicPlanningDB;
 using BirthClinicPlanningDB.DomainObjects;
+using Itenso.TimePeriod;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -48,86 +49,100 @@ namespace BirthClinicGUI.ViewModels
         public string Title { get; }
         public event Action<IDialogResult> RequestClose;
 
-        //private ICommand _checkout;
+        private ICommand _checkout;
 
-        //public ICommand Checkout
-        //{
-        //    get
-        //    {
-        //        return _checkout ?? (_checkout = new DelegateCommand(CheckoutExecute));
-        //    }
-        //}
+        public ICommand Checkout
+        {
+            get
+            {
+                return _checkout ?? (_checkout = new DelegateCommand(CheckoutExecute));
+            }
+        }
 
-        //private void CheckoutExecute()
-        //{
-        //    Appointment.Room.Occupied = false;
+        private void CheckoutExecute()
+        {
+            Appointment.Room.Occupied = false;
 
-        //    switch (Appointment.Room.RoomType)
-        //    {
-        //        case "Rest Room":
-        //            ChangeToBirthRoom();
-        //            break;
+            switch (Appointment.Room.RoomType)
+            {
+                case "Rest Room":
+                    ChangeToBirthRoom();
+                    break;
 
-        //        case "Birth Room":
-        //            ChangeToMaternityRoom();
-        //            break;
+                case "Birth Room":
+                    ChangeToMaternityRoom();
+                    break;
 
-        //        case "Maternity Room":
-        //            access.Appointments.DelAppointment(Appointment);
-        //            access.Complete();
-        //            break;
-        //    }
-        //}
+                case "Maternity Room":
+                    access.Appointments.DelAppointment(Appointment);
+                    access.Complete();
+                    break;
+            }
+        }
 
-        //private void ChangeToBirthRoom()
-        //{
-        //    //Room roomToCopy = Appointment.Room;
-        //    //ObservableCollection<BirthRoom> birthRooms = access.BirthRooms.GetAllBirthsRooms();
-        //    //int index = 0;
 
-        //    //foreach (var birthroom in birthRooms)
-        //    //{
-        //    //    foreach (var appointment in birthroom.Appointments)
-        //    //    {
-        //    //        if (!appointment.Room.Occupied && appointment.Date != DateTime.Today.AddDays(5))
-        //    //        {
-        //    //            Appointment.Room = birthroom;
+        public bool ValidateDate(Appointment existingAppointment)
+        {
+            TimeRange AppointmentToInsert = new TimeRange(DateTime.Now.Date.Add(Appointment.StartTime.TimeOfDay), DateTime.Now.Date.Add(Appointment.EndTime.TimeOfDay));
+            TimeRange AppointmentToCompare = new TimeRange(DateTime.Now.Date.Add(existingAppointment.StartTime.TimeOfDay), DateTime.Now.Date.Add(existingAppointment.EndTime.TimeOfDay));
 
-        //    //            Appointment.Room.Child = roomToCopy.Child;
-        //    //            Appointment.Room.Parents = roomToCopy.Parents;
-        //    //            Appointment.Room.Clinicians = roomToCopy.Clinicians;
-        //    //            Appointment.Room.Occupied = true;
-        //    //            Appointment.BirthInProgess = true;
+            if (AppointmentToCompare.IsSamePeriod(AppointmentToInsert))
+            {
+                MessageBox.Show("TimeRange is occupied");
+                return AppointmentToCompare.IsSamePeriod(AppointmentToInsert);
+            }
+            else if (AppointmentToCompare.HasInside(AppointmentToInsert))
+            {
+                MessageBox.Show("TimeRange overlaps another Timerange");
+                return AppointmentToCompare.HasInside(AppointmentToInsert);
+            }
+            else if (AppointmentToCompare.OverlapsWith(AppointmentToInsert))
+            {
+                MessageBox.Show("TimeRange overlaps another Timerange");
+                return AppointmentToCompare.OverlapsWith(AppointmentToInsert);
+            }
+            else if (AppointmentToCompare.IntersectsWith(AppointmentToInsert))
+            {
+                MessageBox.Show("Timerange intersects with another Timerange");
+                return AppointmentToCompare.IntersectsWith(AppointmentToInsert);
+            }
 
-        //    //            access.Complete();
-        //    //        }
+            else
+                return false;
+        }
 
-        //    //        ++index;
-        //    //    }
+        private void ChangeToBirthRoom()
+        {
+            ObservableCollection<BirthRoom> birthRooms = access.BirthRooms.GetAllBirthsRooms();
 
-        //    //    index = 0;
-        //    //}
-        //}
+            foreach (var room in birthRooms)
+            {
+                foreach (var appointment in room.Appointments)
+                {
+                    if (!ValidateDate(appointment))
+                    {
+                        room.Appointments.Add(Appointment);
+                        access.Complete();
+                    }
+                }
+            }
+        }
 
-        //private void ChangeToMaternityRoom()
-        //{
-        //    //Appointment appointmentToCopy = Appointment;
-        //    //ObservableCollection<MaternityRoom> maternityRooms = access.MaternityRooms.GetAllMaternityRooms();
+        private void ChangeToMaternityRoom()
+        {
+            ObservableCollection<MaternityRoom> maternityRooms = access.MaternityRooms.GetAllMaternityRooms();
 
-        //    //foreach (var maternityRoom in maternityRooms)
-        //    //{
-        //    //    if (!maternityRoom.Occupied)
-        //    //    {
-        //    //        Appointment.Room = maternityRoom;
-        //    //    }
-        //    //}
-
-        //    //Appointment.Child = roomToCopy.Child;
-        //    //Appointment.Parents = roomToCopy.Parents;
-        //    //Appointment.Clinicians.Clear();
-        //    //Appointment.Room.Occupied = true;
-
-        //    //access.Complete();
-        //}
+            foreach (var room in maternityRooms)
+            {
+                foreach (var appointment in room.Appointments)
+                {
+                    if (!ValidateDate(appointment))
+                    {
+                        room.Appointments.Add(Appointment);
+                        access.Complete();
+                    }
+                }
+            }
+        }
     }
 }

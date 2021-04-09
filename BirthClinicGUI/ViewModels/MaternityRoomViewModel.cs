@@ -47,10 +47,12 @@ namespace BirthClinicGUI.ViewModels
             get => _clinicians;
             set => SetProperty(ref _clinicians, value);
         }
+
         public MaternityRoomViewModel(IDialogService dialog)
         {
             _dialog = dialog;
         }
+
         public bool CanCloseDialog()
         {
             return true;
@@ -59,6 +61,7 @@ namespace BirthClinicGUI.ViewModels
         public void OnDialogClosed()
         {
         }
+
         public bool Occupied { get; set; }
 
         public void OnDialogOpened(IDialogParameters parameters)
@@ -91,8 +94,6 @@ namespace BirthClinicGUI.ViewModels
                 }
 
                 access.Complete();
-            
-            
         }
 
         public string Title { get; }

@@ -60,16 +60,19 @@
 
                 <Label Grid.Row="3" Grid.Column="0"
                        Content="End Date:"
-                       Margin="5"/>
+                       Margin="5,5,5,0" Height="26" VerticalAlignment="Top"/>
                 <TextBlock Grid.Row="3" Grid.Column="1"
                            Text="{Binding Appointment.DisplayEndDateTime}"
                            Margin="5"
                            VerticalAlignment="Center"/>
 
-                <TextBlock Grid.Row="4" Grid.Column="0"
-                           Text="{Binding Appointment.BirthStatus}"
-                           Margin="5"
-                           VerticalAlignment="Center"/>
+                <Button Grid.Row="4" Grid.Column="0"
+                        Content="Checkout"
+                        Command="{Binding Checkout}"
+                        Margin="5"
+                        Background="Azure"
+                        Padding="5"
+                        VerticalAlignment="Center"/>
 
             </Grid>
         </GroupBox>
