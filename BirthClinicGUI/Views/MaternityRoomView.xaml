@@ -53,6 +53,54 @@
             </Grid>
         </GroupBox>
 
+        <GroupBox Grid.Row="0" Grid.Column="1" Header="Child information" Margin="5" MinWidth="180">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" 
+                       Grid.Row="0"
+                       Content="Name"
+                       Margin="5"/>
+                <TextBlock Grid.Column="1" 
+                           Grid.Row="0"
+                           Margin="5"
+                           VerticalAlignment="Center"
+                           Text="{Binding Child.Firstname}"/>
+                <TextBlock Grid.Column="2" 
+                           Grid.Row="0"
+                           Margin="5"
+                           VerticalAlignment="Center"
+                           Text="{Binding Child.LastName}"/>
+                <Label Grid.Column="0"
+                       Grid.Row="1"
+                       Margin="5"
+                       Content="Weight"/>
+                <TextBlock Grid.Column="1"
+                           Grid.Row="1"
+                           Grid.ColumnSpan="2"
+                           VerticalAlignment="Center"
+                           Text="{Binding Child.Weight}"/>
+                <Label Grid.Column="0"
+                       Grid.Row="2"
+                       Content="Length"
+                       Margin="5"/>
+                <TextBlock Grid.Column="1"
+                           Grid.Row="2"
+                           Grid.ColumnSpan="2"
+                           VerticalAlignment="Center"
+                           Text="{Binding Child.Length}"/>
+            </Grid>
+        </GroupBox>
+
 
         <GroupBox Grid.Row="1" Grid.Column="0" Header="Father information" Margin="5" MinWidth="180">
             <Grid>
