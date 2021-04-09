@@ -65,7 +65,7 @@ namespace BirthClinicGUI.ViewModels
         {
             int roomid = int.Parse(parameters.GetValue<string>("Message"));
 
-            CurrentMaternityRoom = access.MaternityRooms.GetSingleMaternityRoom(roomid);
+            CurrentMaternityRoom = access.MaternityRooms.GetMaternityRoomWithSpecificNumber(roomid);
 
             
                 AppointmentsForRoom = CurrentMaternityRoom.Appointments;
