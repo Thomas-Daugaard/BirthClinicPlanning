@@ -14,6 +14,8 @@ namespace BirthClinicPlanningDB.DomainObjects
         [Key]
         public int ClinicianID { get; set; }
 
+        public int AppointmentID { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
