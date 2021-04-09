@@ -65,9 +65,9 @@ namespace BirthClinicGUI.ViewModels
 
             var appoint1 = access.Appointments.getSingleAppointment(1);
 
-            var temp= room1.Appointments.FindFirst(a => a.AppointmentID == appoint1.AppointmentID);
+            var temp = room1.Appointments.FindFirst(a => a.AppointmentID == appoint1.AppointmentID);
 
-            if(temp==null)
+            if (temp == null)
                 room1.Appointments.Add(appoint1);
 
             var room2 = access.RestRooms.GetSingleRestRoom(2);
@@ -76,7 +76,7 @@ namespace BirthClinicGUI.ViewModels
 
             var temp2 = room2.Appointments.FindFirst(b => b.AppointmentID == appoint2.AppointmentID);
 
-            if(temp2==null)
+            if (temp2 == null)
                 room2.Appointments.Add(appoint2);
 
             access.Complete();
