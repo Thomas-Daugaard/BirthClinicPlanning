@@ -67,29 +67,32 @@ namespace BirthClinicGUI.ViewModels
 
             CurrentMaternityRoom = access.MaternityRooms.GetSingleMaternityRoom(roomid);
 
-            AppointmentsForRoom = CurrentMaternityRoom.Appointments;
+            
+                AppointmentsForRoom = CurrentMaternityRoom.Appointments;
 
-            foreach (var appointment in AppointmentsForRoom)
-            {
-                DateTime currentTime = DateTime.Now;
-                TimeRange appointmentrange = new TimeRange(appointment.StartTime, appointment.EndTime);
-                TimeRange nowrange = new TimeRange(currentTime, currentTime);
-
-                if (appointmentrange.IntersectsWith(nowrange) || appointmentrange.OverlapsWith(nowrange))
+                foreach (var appointment in AppointmentsForRoom)
                 {
-                    CurrentMaternityRoom.Occupied = true;
-                    Occupied = true;
-                    Parents = appointment.Parents;
-                    Clinicians = appointment.Clinicians;
-                }
-                else
-                {
-                    CurrentMaternityRoom.Occupied = false;
-                    Occupied = false;
-                }
-            }
+                    DateTime currentTime = DateTime.Now;
+                    TimeRange appointmentrange = new TimeRange(appointment.StartTime, appointment.EndTime);
+                    TimeRange nowrange = new TimeRange(currentTime, currentTime);
 
-            access.Complete();
+                    if (appointmentrange.IntersectsWith(nowrange) || appointmentrange.OverlapsWith(nowrange))
+                    {
+                        CurrentMaternityRoom.Occupied = true;
+                        Occupied = true;
+                        Parents = appointment.Parents;
+                        Clinicians = appointment.Clinicians;
+                    }
+                    else
+                    {
+                        CurrentMaternityRoom.Occupied = false;
+                        Occupied = false;
+                    }
+                }
+
+                access.Complete();
+            
+            
         }
 
         public string Title { get; }
