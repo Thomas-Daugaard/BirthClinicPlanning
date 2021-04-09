@@ -97,7 +97,6 @@ namespace BirthClinicGUI.ViewModels
                     } } }
 
             roomToInsert.Appointments.Add(Appointment);
-            //access.Appointments.AddAppointment(Appointment);
             access.Complete();
         }
         public void AddAppointmentToBirthRoom()
@@ -115,7 +114,6 @@ namespace BirthClinicGUI.ViewModels
                     } } }
 
             roomToInsert.Appointments.Add(Appointment);
-            //access.Appointments.AddAppointment(Appointment);
             access.Complete();
         }
 
@@ -137,7 +135,6 @@ namespace BirthClinicGUI.ViewModels
             Appointment.Child = ((App) Application.Current).Child;
 
             roomToInsert.Appointments.Add(Appointment);
-            //access.Appointments.AddAppointment(Appointment);
             access.Complete();
         }
         #endregion
@@ -276,14 +273,14 @@ namespace BirthClinicGUI.ViewModels
 
             if (!CheckDate())
             {
-                MessageBox.Show("Please input a CPR with a valid date ({parent})", "CPR date error");
+                MessageBox.Show($"Please input a CPR with a valid date ({parent})", "CPR date error");
                 CanClose = false;
                 return;
             }
 
             if (!Check11Test())
             {
-                MessageBox.Show("Please input a valid CPR ({parent})", "CPR-invalid error");
+                MessageBox.Show($"Please input a valid CPR ({parent})", "CPR-invalid error");
                 CanClose = false;
                 return;
             }
