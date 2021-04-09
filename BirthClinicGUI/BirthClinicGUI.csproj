@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\CTElogo.png" />
     <None Remove="Images\redx.png" />
     <None Remove="Views\CTElogo.png" />
   </ItemGroup>
@@ -28,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\CTElogo.png" />
     <Resource Include="Images\redx.png" />
   </ItemGroup>
 
