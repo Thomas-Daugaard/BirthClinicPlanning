@@ -40,6 +40,13 @@ namespace BirthClinicGUI.ViewModels
             set => SetProperty(ref _parents, value);
         }
 
+        private Child _child;
+
+        public Child Child
+        {
+            get => _child;
+            set => SetProperty(ref _child, value);
+        }
         private ObservableCollection<Clinician> _clinicians = new ObservableCollection<Clinician>();
 
         public ObservableCollection<Clinician> Clinicians
@@ -85,6 +92,7 @@ namespace BirthClinicGUI.ViewModels
                         Occupied = true;
                         Parents = appointment.Parents;
                         Clinicians = appointment.Clinicians;
+                        Child = appointment.Child;
                     }
                     else
                     {
