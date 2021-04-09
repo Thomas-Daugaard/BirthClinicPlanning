@@ -66,14 +66,6 @@
                            Margin="5"
                            VerticalAlignment="Center"/>
 
-                <Button Grid.Row="4" Grid.Column="0"
-                        Content="Checkout"
-                        Command="{Binding Checkout}"
-                        Margin="5"
-                        Background="Azure"
-                        Padding="5"
-                        VerticalAlignment="Center"/>
-
             </Grid>
         </GroupBox>
 
