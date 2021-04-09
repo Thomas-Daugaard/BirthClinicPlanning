@@ -36,48 +36,48 @@ UC1 - Add an appointment)
 
 1. Press the "Add Appointment"-button. 
 
-2. Put in room number.
+2. Put in room number. Ex: 1
 
 3. Choose what room you want for the appointment - if you choose the maternityroom you will be asked to fill in info for the baby.
 
-4. Change the timeframe or keep the one suggested
+4. Change the timeframe with start time at the current date and time + 1 minute. 
 
 5. Add one or more of the many clinicians.
 
-6. Put in the CPR-number - this must be a real cpr number - the application uses the "check11" to validate cpr numbers
+6. Put in the Moms CPR-number - this must be a real cpr number - the application uses the "check11" to validate cpr numbers
 
-7. Add the nam of the mom.
+7. Add the name of the mom and if you want, you can add the dad aswell - his CPR must be a real one also.
 
-8. If you want, you can add the dad aswell - his CPR must be a real one also.
+8. Press "Ok" and the appointment is added. 
 
-9. Press "Ok" and the appointment added. 
+ - Continue next use case to see your data....
 
 
-UC2 - See room status)
+UC2 - See rooms status)
 
 1. Press the "See room status"-button
 
-2. Choose any room and double-click
+2. Choose the room you just added and appointment to. 
 
-3. If there the room is currently occupied, the info will show.
+3. You will see that the room is occupied and the data for the people who's in it. 
+
+4) Go back, and choose another room. You'll find it empty ;-)
 
 
 UC3 - Delete appointment)
 
-1. On the mainwindow - choose an appointment and click on it
+1. On the mainwindow - choose the appointment you just created and click on "Delete Appointment" button
 
-2. Press the "delete appointment"-button
+2. the appointment is now deleted
 
-3. the appointment is now deleted
+3. If you'd like, you can go to the database table and see that your appointment no longer exists. 
 
 
 UC4 - Explore)
 
-1. After UC1 you can see the appointment you added - You can see all appointments on the mainwindow
+1. Double click at the "Clinicians" grid in the main window to the right for an appointment. (You'll see the clinicians added to the appointment)
 
-2. Try to double-click one. 
-
-3. Here you see all the info on the appointment. 
+2. Double click an appointment at the main window. (Now you'll see all the details for the appointment)
 
 
 
