@@ -44,6 +44,7 @@ namespace BirthClinicPlanningDB.Repositories
         public void DelAppointment(Appointment appointmentToDelete)
         {
             context.Appointments.Remove(appointmentToDelete);
+
         }
 
         public Context context
