@@ -6,12 +6,22 @@
         xmlns:local="clr-namespace:BirthClinicGUI"
         xmlns:prism="http://prismlibrary.com/"
         xmlns:viewModels="clr-namespace:BirthClinicGUI.ViewModels"
+        xmlns:birthClinicGui="clr-namespace:BirthClinicGUI"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
         Title="Birth Clinic App" Height="500" Width="680">
 
-    <Grid HorizontalAlignment="Center">
-        <Grid.ColumnDefinitions>
+    <Window.Resources>
+        <ImageBrush x:Key="redx" ImageSource="../Images/redx.png"/>
+        <Style x:Key="delButton" TargetType="DataGridCell">
+            <Style.Setters>
+                <Setter Property="Background" Value="{DynamicResource redx}"/>
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+
+    <Grid HorizontalAlignment="Center" Name="gridTop" Tag="{Binding DelAppointmentCommand}">
+    <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -45,7 +55,7 @@
                     Content="Cancel Appointment"
                     Margin="5"
                     Padding="5"
-                    Command="{Binding DelAppointmentCommand}"/>
+                    Command="{Binding ElementName=gridTop, Path=DelAppointmentCommand}"/>
         </WrapPanel>
 
         <Button Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"
@@ -78,7 +88,6 @@
                   AutoGenerateColumns="False"
                   IsSynchronizedWithCurrentItem="True"
                   CanUserAddRows="False"
-
         >
 
             <DataGrid.InputBindings>
@@ -86,6 +95,8 @@
                     MouseAction="LeftDoubleClick"
                     Command="{Binding SelectAppointmentCommand}"/>
             </DataGrid.InputBindings>
+
+
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Room No." Binding="{Binding Room.RoomNumber}" MaxWidth="60" IsReadOnly="True"/>
@@ -106,7 +117,24 @@
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
 
+                <DataGridTemplateColumn IsReadOnly="True">
+
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Setters>
+                                <Setter Property="Background" Value="{DynamicResource redx}"/>
+                            </Style.Setters>
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding ElementName=gridTop}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
+
         </DataGrid>
 
         <Expander Grid.Row="5" Header="Add Clinitian" Margin="0,10,0,0">
@@ -153,6 +181,6 @@
 
         </Expander>
 
-        <Image Grid.Row="6" Grid.Column="0" Source="/Views/CTElogo.png" Stretch="Uniform" Opacity="0.7" MaxWidth="120" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10"/>
+        <Image Grid.Row="6" Grid.Column="0" Source="/Images/CTElogo.png" Stretch="Uniform" Opacity="0.7" MaxWidth="120" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10"/>
     </Grid>
 </Window>

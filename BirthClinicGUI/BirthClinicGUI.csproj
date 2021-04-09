@@ -29,7 +29,6 @@
 
   <ItemGroup>
     <Resource Include="Images\redx.png" />
-    <Resource Include="Views\CTElogo.png" />
   </ItemGroup>
 
 </Project>

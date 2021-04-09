@@ -108,6 +108,8 @@ namespace BirthClinicGUI.ViewModels
                 if (room.Appointments.Count == 0)
                 {
                     room.Appointments.Add(Appointment);
+                    access.Complete();
+
                     Appointment.Room.Appointments.Remove(Appointment);
                     access.Complete();
 
