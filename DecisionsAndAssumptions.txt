@@ -33,12 +33,12 @@ ENTITY DECISIONS:
  - Find all associations between the domain objects in the attached diagram "BirthClinic-Diagram.jpg".
  - Every entity has an ID which is used as primary keys. The ID's makes a good sense in the application context, instead of creating composite keys. 
  - Clinicians can hold a collection of appointments.
- - Parents can hold only 1 child. 
+ - Parents can hold only 1 child (the newborn). 
  - The three types of different rooms inherits from a Room base class which holds the basic information that is common for all kind of rooms. 
  - The Rooms can hold a collection of appointments. 
- - The Rooms has a Room number beside the unique Room ID to define what number of room it is of its type. 
- - Appointments holds 1 room, 1 Pair of Parents, 1 child and a collection of clinicians as several clinicians can participate in an appointment.
- - Mother and father is gathered in 1 entity as Parents. 
+ - The Rooms has a Room number besides the unique Room ID to define what number of room it is of its type. 
+ - Appointments holds 1 room, 1 pair of Parents, 1 child and a collection of clinicians as several clinicians can participate in an appointment.
+ - Mother and father is placed in 1 entity as Parents. 
 
 DATAACCESS DECISIONS:
 
