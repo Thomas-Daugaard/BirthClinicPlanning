@@ -115,7 +115,7 @@ namespace BirthClinicGUI.ViewModels
                     } } }
 
             roomToInsert.Appointments.Add(Appointment);
-            access.Appointments.AddAppointment(Appointment);
+            //access.Appointments.AddAppointment(Appointment);
             access.Complete();
         }
 
@@ -134,7 +134,7 @@ namespace BirthClinicGUI.ViewModels
                     } } }
 
             roomToInsert.Appointments.Add(Appointment);
-            access.Appointments.AddAppointment(Appointment);
+            //access.Appointments.AddAppointment(Appointment);
             access.Complete();
         }
         #endregion
