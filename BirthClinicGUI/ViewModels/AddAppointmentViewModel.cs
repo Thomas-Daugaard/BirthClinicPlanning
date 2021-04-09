@@ -131,7 +131,7 @@ namespace BirthClinicGUI.ViewModels
                         return;
                     } } }
 
-            _dialog.Show("BabyInformationView");
+            _dialog.ShowDialog("BabyInformationView");
             Appointment.Child = ((App)Application.Current).Child;
 
             roomToInsert.Appointments.Add(Appointment);

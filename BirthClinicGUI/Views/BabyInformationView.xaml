@@ -61,7 +61,8 @@
                 <Button Grid.Row="4" Grid.Column="0" 
                         Content="Ok" 
                         IsDefault="True" 
-                        Command="{Binding CloseDialogCommand}"/>
+                        Command="{Binding CloseDialogCommand}"
+                        CommandParameter="true"/>
 
             </Grid>
         </GroupBox>
