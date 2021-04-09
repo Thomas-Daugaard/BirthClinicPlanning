@@ -14,6 +14,7 @@ namespace BirthClinicPlanningDB.Repositories
     {
         public RestRoomRepository(DbContext context) : base(context)
         {
+
         }
 
         public ObservableCollection<RestRoom> GetAllRestRoom()
