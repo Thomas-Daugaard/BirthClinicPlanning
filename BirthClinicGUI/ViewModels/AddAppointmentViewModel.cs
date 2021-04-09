@@ -182,7 +182,24 @@ namespace BirthClinicGUI.ViewModels
                     MessageBox.Show("Appointment start cannot be later than end date/time");
                 }
 
+                if (Appointment.Parents.MomCPR == "" || Appointment.Room.RoomNumber == 0)
+                {
+                    MessageBox.Show("Please fill out all required fields", "Error");
+                    CanClose = false;
+                }
+
                 else
+                {
+                    Cpr = Appointment.Parents.MomCPR;
+                    CheckCPR();
+
+                    if (Appointment.Parents.DadCPR != "")
+                    {
+                        Cpr = Appointment.Parents.DadCPR;
+                    }
+                }
+
+                if (CanClose)
                 {
                     switch (RoomType[RoomTypeIndex])
                     {
@@ -209,19 +226,7 @@ namespace BirthClinicGUI.ViewModels
             else if (parameter?.ToLower() == "false")
                 result = ButtonResult.Cancel;
 
-            if (Appointment.Parents.MomCPR == "" || Appointment.Room.RoomNumber == 0)
-            {
-                MessageBox.Show("Please fill out all required fields", "Error");
-                CanClose = false;
-            }
-
-            else
-            {
-                Cpr = Appointment.Parents.MomCPR;
-
-                if (Appointment.Parents.DadCPR != "")
-                    Cpr = Appointment.Parents.DadCPR;
-            }
+            
 
             if (CanClose)
                 RequestClose(new DialogResult(result));
