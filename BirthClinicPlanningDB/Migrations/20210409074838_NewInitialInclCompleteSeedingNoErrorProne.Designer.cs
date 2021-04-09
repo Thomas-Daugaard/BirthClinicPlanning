@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirthClinicPlanningDB.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210408184457_NewInitialANDcorrectedmodelandseeding")]
-    partial class NewInitialANDcorrectedmodelandseeding
+    [Migration("20210409074838_NewInitialInclCompleteSeedingNoErrorProne")]
+    partial class NewInitialInclCompleteSeedingNoErrorProne
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,9 @@ namespace BirthClinicPlanningDB.Migrations
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Appointment", b =>
                 {
                     b.Property<int>("AppointmentID")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("ChildID")
                         .HasColumnType("int");
@@ -46,6 +48,8 @@ namespace BirthClinicPlanningDB.Migrations
                     b.HasIndex("ChildID");
 
                     b.HasIndex("ParentsID");
+
+                    b.HasIndex("RoomID");
 
                     b.ToTable("Appointments");
 
@@ -237,6 +241,335 @@ namespace BirthClinicPlanningDB.Migrations
                             FirstName = "Emil",
                             LastName = "Overgaard",
                             Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 13,
+                            FirstName = "Jørgen",
+                            LastName = "Poulsen",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 14,
+                            FirstName = "Jan",
+                            LastName = "Hellesøe",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 15,
+                            FirstName = "Lonny",
+                            LastName = "Luderhår",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 16,
+                            FirstName = "Sleske",
+                            LastName = "Svend",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 17,
+                            FirstName = "Bo",
+                            LastName = "Bedre",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 18,
+                            FirstName = "Tåløse",
+                            LastName = "Tomme",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 19,
+                            FirstName = "Linée",
+                            LastName = "Havnedronning",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 20,
+                            FirstName = "Kirsten",
+                            LastName = "Nedersø",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 21,
+                            FirstName = "Kathrine",
+                            LastName = "Klit",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 22,
+                            FirstName = "Richard",
+                            LastName = "Rust",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 23,
+                            FirstName = "Garn",
+                            LastName = "Svensker",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 24,
+                            FirstName = "Hans",
+                            LastName = "Haard",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 25,
+                            FirstName = "Benny",
+                            LastName = "Balsam",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 26,
+                            FirstName = "Lone",
+                            LastName = "Large",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 27,
+                            FirstName = "Mads",
+                            LastName = "Middelmådig",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 28,
+                            FirstName = "Knud",
+                            LastName = "Kattekilling",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 29,
+                            FirstName = "Ine",
+                            LastName = "Indelukket",
+                            Type = "SOSU Assistant"
+                        },
+                        new
+                        {
+                            ClinicianID = 30,
+                            FirstName = "Kvart",
+                            LastName = "Palle",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 31,
+                            FirstName = "Yda",
+                            LastName = "Ydermeget",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 32,
+                            FirstName = "Carla",
+                            LastName = "Carletti",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 33,
+                            FirstName = "Inge",
+                            LastName = "Ingenveddet",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 34,
+                            FirstName = "Kim",
+                            LastName = "Karate",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 35,
+                            FirstName = "Ymer",
+                            LastName = "Johansen",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 36,
+                            FirstName = "Uno",
+                            LastName = "Dos Tres",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 37,
+                            FirstName = "Gunnar",
+                            LastName = "Big Gun",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 38,
+                            FirstName = "Keine",
+                            LastName = "Inspiration",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 39,
+                            FirstName = "Heinz",
+                            LastName = "Heino",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 40,
+                            FirstName = "Mogens",
+                            LastName = "Morgensur",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 41,
+                            FirstName = "Bolette",
+                            LastName = "Børnelokker",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 42,
+                            FirstName = "Line",
+                            LastName = "Linedanser",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 43,
+                            FirstName = "Mikkel",
+                            LastName = "Pampers",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 44,
+                            FirstName = "Toke",
+                            LastName = "Son of Loke",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 45,
+                            FirstName = "Svetlana",
+                            LastName = "From Havanna",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 46,
+                            FirstName = "Arne",
+                            LastName = "Analfabet",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 47,
+                            FirstName = "Sir",
+                            LastName = "Elton John",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 48,
+                            FirstName = "Queen",
+                            LastName = "Bee",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 49,
+                            FirstName = "Frank",
+                            LastName = "BodHoldt Jakobsen",
+                            Type = "Nurse"
+                        },
+                        new
+                        {
+                            ClinicianID = 50,
+                            FirstName = "Dine",
+                            LastName = "The deliverer",
+                            Type = "Midwife"
+                        },
+                        new
+                        {
+                            ClinicianID = 51,
+                            FirstName = "Bjørk",
+                            LastName = "Babypuller",
+                            Type = "Midwife"
+                        },
+                        new
+                        {
+                            ClinicianID = 52,
+                            FirstName = "Puk",
+                            LastName = "Push Push",
+                            Type = "MidWife"
+                        },
+                        new
+                        {
+                            ClinicianID = 53,
+                            FirstName = "Palle",
+                            LastName = "Peekaboo",
+                            Type = "Midwife"
+                        },
+                        new
+                        {
+                            ClinicianID = 54,
+                            FirstName = "Ole",
+                            LastName = "Opigen",
+                            Type = "Midwife"
+                        },
+                        new
+                        {
+                            ClinicianID = 55,
+                            FirstName = "Palle",
+                            LastName = "Pres Pres",
+                            Type = "Midwife"
+                        },
+                        new
+                        {
+                            ClinicianID = 56,
+                            FirstName = "Kirsten",
+                            LastName = "CuntWhisperer",
+                            Type = "Midwife"
+                        },
+                        new
+                        {
+                            ClinicianID = 57,
+                            FirstName = "Niels",
+                            LastName = "Nukommerbaby",
+                            Type = "Midwife"
+                        },
+                        new
+                        {
+                            ClinicianID = 58,
+                            FirstName = "Peter",
+                            LastName = "Pop",
+                            Type = "Midwife"
+                        },
+                        new
+                        {
+                            ClinicianID = 59,
+                            FirstName = "Inger",
+                            LastName = "Ikkefler",
+                            Type = "Midwife"
                         });
                 });
 
@@ -657,12 +990,6 @@ namespace BirthClinicPlanningDB.Migrations
 
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Appointment", b =>
                 {
-                    b.HasOne("BirthClinicPlanningDB.DomainObjects.Room", "Room")
-                        .WithMany("Appointments")
-                        .HasForeignKey("AppointmentID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BirthClinicPlanningDB.DomainObjects.Child", "Child")
                         .WithMany()
                         .HasForeignKey("ChildID");
@@ -670,6 +997,12 @@ namespace BirthClinicPlanningDB.Migrations
                     b.HasOne("BirthClinicPlanningDB.DomainObjects.Parents", "Parents")
                         .WithMany()
                         .HasForeignKey("ParentsID");
+
+                    b.HasOne("BirthClinicPlanningDB.DomainObjects.Room", "Room")
+                        .WithMany("Appointments")
+                        .HasForeignKey("RoomID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Child");
 

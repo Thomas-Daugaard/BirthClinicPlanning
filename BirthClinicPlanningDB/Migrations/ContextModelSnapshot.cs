@@ -22,7 +22,9 @@ namespace BirthClinicPlanningDB.Migrations
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Appointment", b =>
                 {
                     b.Property<int>("AppointmentID")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("ChildID")
                         .HasColumnType("int");
@@ -41,12 +43,11 @@ namespace BirthClinicPlanningDB.Migrations
 
                     b.HasKey("AppointmentID");
 
-                    b.HasIndex("AppointmentID")
-                        .HasDatabaseName("AppointmentID");
-
                     b.HasIndex("ChildID");
 
                     b.HasIndex("ParentsID");
+
+                    b.HasIndex("RoomID");
 
                     b.ToTable("Appointments");
 
@@ -987,12 +988,6 @@ namespace BirthClinicPlanningDB.Migrations
 
             modelBuilder.Entity("BirthClinicPlanningDB.DomainObjects.Appointment", b =>
                 {
-                    b.HasOne("BirthClinicPlanningDB.DomainObjects.Room", "Room")
-                        .WithMany("Appointments")
-                        .HasForeignKey("AppointmentID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BirthClinicPlanningDB.DomainObjects.Child", "Child")
                         .WithMany()
                         .HasForeignKey("ChildID");
@@ -1000,6 +995,12 @@ namespace BirthClinicPlanningDB.Migrations
                     b.HasOne("BirthClinicPlanningDB.DomainObjects.Parents", "Parents")
                         .WithMany()
                         .HasForeignKey("ParentsID");
+
+                    b.HasOne("BirthClinicPlanningDB.DomainObjects.Room", "Room")
+                        .WithMany("Appointments")
+                        .HasForeignKey("RoomID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Child");
 
