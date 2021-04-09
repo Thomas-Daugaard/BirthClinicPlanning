@@ -59,9 +59,9 @@ UC2 - See rooms status)
 
 2. Choose the room you just added and appointment to. 
 
-3. You will see that the room is occupied and the data for the people who's in it. 
+3. When the appointment has started, you will see that the room is occupied, and the data for the people who's in it. 
 
-4) Go back, and choose another room. You'll find it empty ;-)
+4) Go back, and choose another room without a current appointment. You'll find it empty ;-)
 
 
 UC3 - Delete appointment)
