@@ -97,7 +97,7 @@ namespace BirthClinicGUI.ViewModels
                     } } }
 
             roomToInsert.Appointments.Add(Appointment);
-            access.Appointments.AddAppointment(Appointment);
+            //access.Appointments.AddAppointment(Appointment);
             access.Complete();
         }
         public void AddAppointmentToBirthRoom()
@@ -143,7 +143,7 @@ namespace BirthClinicGUI.ViewModels
         {
             CanClose = true;
 
-            AllClinicians = access.Clinicians.GetAllClinicians();
+            AllClinicians = access.Clinicians.GetAllClinicians(); 
 
             RoomType = new ObservableCollection<string>() {"Birth Room", "Maternity Room", "Rest Room"};
 
@@ -152,6 +152,7 @@ namespace BirthClinicGUI.ViewModels
 
             Appointment.StartTime = DateTime.Now.AddHours(1);
             Appointment.EndTime = DateTime.Now.AddHours(5);
+
         }
 
         public string Title => "Add Appointment";

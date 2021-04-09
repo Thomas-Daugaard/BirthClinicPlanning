@@ -9,6 +9,7 @@ using System.Windows.Automation;
 using System.Windows.Input;
 using BirthClinicPlanningDB;
 using BirthClinicPlanningDB.DomainObjects;
+using ImTools;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -63,14 +64,21 @@ namespace BirthClinicGUI.ViewModels
             var room1 = access.RestRooms.GetSingleRestRoom(1);
 
             var appoint1 = access.Appointments.getSingleAppointment(1);
-            
-            room1.Appointments.Add(appoint1);
+
+            var temp= room1.Appointments.FindFirst(a => a.AppointmentID == appoint1.AppointmentID);
+
+            if(temp==null)
+                room1.Appointments.Add(appoint1);
 
             var room2 = access.RestRooms.GetSingleRestRoom(2);
 
             var appoint2 = access.Appointments.getSingleAppointment(2);
-           
-            room2.Appointments.Add(appoint2);
+
+            var temp2 = room2.Appointments.FindFirst(b => b.AppointmentID == appoint2.AppointmentID);
+
+            if(temp2==null)
+                room2.Appointments.Add(appoint2);
+
             access.Complete();
         }
 

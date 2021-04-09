@@ -30,8 +30,6 @@ namespace BirthClinicPlanningDB
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Appointment>().HasIndex(d => d.AppointmentID).HasDatabaseName("AppointmentID");
-
             Seed(modelBuilder);
         }
 

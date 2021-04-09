@@ -14,7 +14,7 @@ namespace BirthClinicPlanningDB.DomainObjects
 
         public bool Occupied { get; set; }
 
-        [ForeignKey("AppointmentID")]
+        //[ForeignKey("AppointmentID")]
         public ObservableCollection<Appointment> Appointments { get; set; }
     }
 }

@@ -70,7 +70,8 @@ namespace BirthClinicPlanningDB.Migrations
                 name: "Appointments",
                 columns: table => new
                 {
-                    AppointmentID = table.Column<int>(type: "int", nullable: false), 
+                    AppointmentID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"), 
                     RoomID = table.Column<int>(type: "int", nullable: false),
                     ParentsID = table.Column<int>(type: "int", nullable: true),
                     ChildID = table.Column<int>(type: "int", nullable: true),
@@ -94,7 +95,7 @@ namespace BirthClinicPlanningDB.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Appointments_Room_AppointmentID",
-                        column: x => x.AppointmentID,
+                        column: x => x.RoomID,
                         principalTable: "Room",
                         principalColumn: "RoomID",
                         onDelete: ReferentialAction.Cascade);
