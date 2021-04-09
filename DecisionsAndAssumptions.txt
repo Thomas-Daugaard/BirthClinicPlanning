@@ -8,7 +8,7 @@ MUST:
 - It must be possible to chose, what room the appointment takes place in
 - I must be possible to add clinicians too the appointment
 - It must be possible to add First- and last name of both the mother and father of the appointment,
-however it must not be a requirement that the dad is known
+  however it must not be a requirement that the dad is known
 - It should be possible to cancel an appointemt 
 - ***It must be possible to check patient out of a room
 - It must be possible to see all appointments schedueled for at least three days in advance
@@ -30,3 +30,9 @@ DECISIONS:
 - When the appointment is then removed at then added as new appoint in birthroom this means that the birth is ongoing
 - When the appointment then is removed again and added as a new appointment to maternityroom, this is marked as the birth is finished and it is 
 possible to add the infomation of the child
+
+ENTITY DECISIONS:
+ - Find all associations between the domain objects in the attached diagram. 
+
+DATAACCESS DECISIONS:
+
