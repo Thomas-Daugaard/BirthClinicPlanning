@@ -114,6 +114,7 @@ namespace BirthClinicGUI.ViewModels
 
         private void DelAppointmentCommandExecute()
         {
+            Appointments[AppointmentIndex].Clinicians = null;
             access.Appointments.DelAppointment(Appointments[AppointmentIndex]);
             access.Complete();
 
