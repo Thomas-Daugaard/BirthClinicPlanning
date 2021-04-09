@@ -14,15 +14,11 @@ namespace BirthClinicPlanningDB.DomainObjects
         [Key]
         public int ClinicianID { get; set; }
 
-        public int AppointmentID { get; set; }
-
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
 
         public string Type { get; set; }
-
-        public ObservableCollection<Appointment> Appointments { get; set; }
 
         [NotMapped]
         public string Display
