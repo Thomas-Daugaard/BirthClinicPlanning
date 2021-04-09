@@ -133,6 +133,9 @@ namespace BirthClinicGUI.ViewModels
                         return;
                     } } }
 
+            _dialog.Show("BabyInformationView");
+            Appointment.Child = ((App) Application.Current).Child;
+
             roomToInsert.Appointments.Add(Appointment);
             //access.Appointments.AddAppointment(Appointment);
             access.Complete();
@@ -191,11 +194,12 @@ namespace BirthClinicGUI.ViewModels
                 else
                 {
                     Cpr = Appointment.Parents.MomCPR;
-                    CheckCPR();
+                    CheckCPR("mother");
 
                     if (Appointment.Parents.DadCPR != "")
                     {
                         Cpr = Appointment.Parents.DadCPR;
+                        CheckCPR("father");
                     }
                 }
 
@@ -261,25 +265,25 @@ namespace BirthClinicGUI.ViewModels
 
         #region CPR-validation
 
-        private void CheckCPR()
+        private void CheckCPR(string parent)
         {
             if (!CheckFormat())
             {
-                MessageBox.Show("Please input a CPR with 10 digits (father)", "CPR digits error");
+                MessageBox.Show($"Please input a CPR with 10 digits ({parent})", "CPR digits error");
                 CanClose = false;
                 return;
             }
 
             if (!CheckDate())
             {
-                MessageBox.Show("Please input a CPR with a valid date (father)", "CPR date error");
+                MessageBox.Show("Please input a CPR with a valid date ({parent})", "CPR date error");
                 CanClose = false;
                 return;
             }
 
             if (!Check11Test())
             {
-                MessageBox.Show("Please input a valid CPR (father)", "CPR-invalid error");
+                MessageBox.Show("Please input a valid CPR ({parent})", "CPR-invalid error");
                 CanClose = false;
                 return;
             }
