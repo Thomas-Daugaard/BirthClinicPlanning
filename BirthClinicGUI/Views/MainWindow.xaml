@@ -42,7 +42,7 @@
                 Command="{Binding AddAppointmentCommand}"/>
             <Button
                     Name="DelAppointBtn"
-                    Content="Delete Appointment"
+                    Content="Cancel Appointment"
                     Margin="5"
                     Padding="5"
                     Command="{Binding DelAppointmentCommand}"/>
