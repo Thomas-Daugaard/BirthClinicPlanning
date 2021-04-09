@@ -22,7 +22,7 @@ namespace BirthClinicGUI.ViewModels
         private ObservableCollection<Appointment> _appointments;
         private string _clinicianFirstName;
         private string _clinicianLastName;
-        private IDataAccessActions access = IDataAccessActions.Access();
+        private IDataAccessActions access = new DataAccessActions(new Context());
         public string ClinicianFirstName 
         { 
             get => _clinicianFirstName;

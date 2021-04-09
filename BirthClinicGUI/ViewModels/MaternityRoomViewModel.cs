@@ -14,7 +14,7 @@ namespace BirthClinicGUI.ViewModels
 {
     class MaternityRoomViewModel : BindableBase, IDialogAware
     {
-        private IDataAccessActions access = IDataAccessActions.Access();
+        private IDataAccessActions access = new DataAccessActions(new Context());
         private IDialogService _dialog;
 
         private MaternityRoom _currentMaternityRoom;

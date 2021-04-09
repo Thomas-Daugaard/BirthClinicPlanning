@@ -16,7 +16,7 @@ namespace BirthClinicGUI.ViewModels
 {
     class SpecificAppointmentViewModel : BindableBase, IDialogAware
     {
-        private IDataAccessActions access = IDataAccessActions.Access();
+        private IDataAccessActions access = new DataAccessActions(new Context());
         private Appointment _appointment;
         public Appointment Appointment { get => _appointment; set => SetProperty(ref _appointment, value); }
         private IDialogService _dialog;
