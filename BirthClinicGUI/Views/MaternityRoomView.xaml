@@ -64,7 +64,6 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Label Grid.Column="0" 
                        Grid.Row="0"
@@ -74,7 +73,7 @@
                            Grid.Row="0"
                            Margin="5"
                            VerticalAlignment="Center"
-                           Text="{Binding Child.Firstname}"/>
+                           Text="{Binding Child.FirstName}"/>
                 <TextBlock Grid.Column="2" 
                            Grid.Row="0"
                            Margin="5"
@@ -88,7 +87,8 @@
                            Grid.Row="1"
                            Grid.ColumnSpan="2"
                            VerticalAlignment="Center"
-                           Text="{Binding Child.Weight}"/>
+                           Text="{Binding Child.Weight}"
+                           Margin="5"/>
                 <Label Grid.Column="0"
                        Grid.Row="2"
                        Content="Length"
@@ -97,6 +97,7 @@
                            Grid.Row="2"
                            Grid.ColumnSpan="2"
                            VerticalAlignment="Center"
+                           Margin="5"
                            Text="{Binding Child.Length}"/>
             </Grid>
         </GroupBox>
