@@ -38,13 +38,16 @@ namespace BirthClinicGUI.ViewModels
 
         protected virtual void CloseDialog(string parameter)
         {
-            ButtonResult result = ButtonResult.OK;
+            if (parameter == "true")
+            {
+                ButtonResult result = ButtonResult.OK;
 
-            if (Child.FirstName == "" || Child.LastName == "" || Child.Weight == 0 || Child.Length == 0)
-                MessageBox.Show("Please fill out all fields", "Error", MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-            else
-                RequestClose(new DialogResult(result));
+                if (Child.FirstName == "" || Child.LastName == "" || Child.Weight == 0 || Child.Length == 0)
+                    MessageBox.Show("Please fill out all fields", "Error", MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                else
+                    RequestClose(new DialogResult(result));
+            }
         }
     }
 }
