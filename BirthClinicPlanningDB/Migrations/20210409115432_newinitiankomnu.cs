@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BirthClinicPlanningDB.Migrations
 {
-    public partial class NewInitialInclCompleteSeedingNoErrorProne : Migration
+    public partial class newinitiankomnu : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,6 +23,21 @@ namespace BirthClinicPlanningDB.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Childs", x => x.ChildID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clinicians",
+                columns: table => new
+                {
+                    ClinicianID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clinicians", x => x.ClinicianID);
                 });
 
             migrationBuilder.CreateTable(
@@ -102,26 +117,29 @@ namespace BirthClinicPlanningDB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Clinicians",
+                name: "AppointmentClinician",
                 columns: table => new
                 {
-                    ClinicianID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AppointmentID = table.Column<int>(type: "int", nullable: true)
+                    AppointmentsAppointmentID = table.Column<int>(type: "int", nullable: false),
+                    CliniciansClinicianID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clinicians", x => x.ClinicianID);
+                    table.PrimaryKey("PK_AppointmentClinician", x => new { x.AppointmentsAppointmentID, x.CliniciansClinicianID });
                     table.ForeignKey(
-                        name: "FK_Clinicians_Appointments_AppointmentID",
-                        column: x => x.AppointmentID,
+                        name: "FK_AppointmentClinician_Appointments_AppointmentsAppointmentID",
+                        column: x => x.AppointmentsAppointmentID,
                         principalTable: "Appointments",
                         principalColumn: "AppointmentID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AppointmentClinician_Clinicians_CliniciansClinicianID",
+                        column: x => x.CliniciansClinicianID,
+                        principalTable: "Clinicians",
+                        principalColumn: "ClinicianID",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
 
             migrationBuilder.InsertData(
                 table: "Childs",
@@ -133,6 +151,78 @@ namespace BirthClinicPlanningDB.Migrations
                     { 1, new DateTime(2020, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "06-06-2020", "Leif", "Knudsen", 56, 3500 }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Clinicians",
+                columns: new[] { "ClinicianID", "FirstName", "LastName", "Type" },
+                values: new object[,]
+                {
+                    { 40, "Mogens", "Morgensur", "Nurse" },
+                    { 39, "Heinz", "Heino", "Nurse" },
+                    { 38, "Keine", "Inspiration", "Nurse" },
+                    { 37, "Gunnar", "Big Gun", "Nurse" },
+                    { 36, "Uno", "Dos Tres", "Nurse" },
+                    { 34, "Kim", "Karate", "Nurse" },
+                    { 33, "Inge", "Ingenveddet", "Nurse" },
+                    { 32, "Carla", "Carletti", "Nurse" },
+                    { 31, "Yda", "Ydermeget", "Nurse" },
+                    { 30, "Kvart", "Palle", "Nurse" },
+                    { 29, "Ine", "Indelukket", "SOSU Assistant" },
+                    { 28, "Knud", "Kattekilling", "SOSU Assistant" },
+                    { 27, "Mads", "Middelmådig", "SOSU Assistant" },
+                    { 26, "Lone", "Large", "SOSU Assistant" },
+                    { 25, "Benny", "Balsam", "SOSU Assistant" },
+                    { 41, "Bolette", "Børnelokker", "Nurse" },
+                    { 42, "Line", "Linedanser", "Nurse" },
+                    { 44, "Toke", "Son of Loke", "Nurse" },
+                    { 24, "Hans", "Haard", "SOSU Assistant" },
+                    { 59, "Inger", "Ikkefler", "Midwife" },
+                    { 58, "Peter", "Pop", "Midwife" },
+                    { 57, "Niels", "Nukommerbaby", "Midwife" },
+                    { 56, "Kirsten", "CuntWhisperer", "Midwife" },
+                    { 55, "Palle", "Pres Pres", "Midwife" },
+                    { 54, "Ole", "Opigen", "Midwife" },
+                    { 53, "Palle", "Peekaboo", "Midwife" },
+                    { 52, "Puk", "Push Push", "MidWife" },
+                    { 51, "Bjørk", "Babypuller", "Midwife" },
+                    { 50, "Dine", "The deliverer", "Midwife" },
+                    { 49, "Frank", "BodHoldt Jakobsen", "Nurse" },
+                    { 48, "Queen", "Bee", "Nurse" },
+                    { 47, "Sir", "Elton John", "Nurse" },
+                    { 46, "Arne", "Analfabet", "Nurse" },
+                    { 45, "Svetlana", "From Havanna", "Nurse" },
+                    { 43, "Mikkel", "Pampers", "Nurse" },
+                    { 23, "Garn", "Svensker", "SOSU Assistant" },
+                    { 35, "Ymer", "Johansen", "Nurse" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Clinicians",
+                columns: new[] { "ClinicianID", "FirstName", "LastName", "Type" },
+                values: new object[,]
+                {
+                    { 21, "Kathrine", "Klit", "SOSU Assistant" },
+                    { 22, "Richard", "Rust", "SOSU Assistant" },
+                    { 2, "Thomas", "Daugaard", "Doctor" },
+                    { 3, "Emil", "Garder", "Doctor" },
+                    { 4, "Camilla", "Boesen", "Doctor" },
+                    { 5, "Thomas", "Boesen", "Doctor" },
+                    { 6, "Emil", "Boesen", "Secretary" },
+                    { 7, "Camilla", "Mikkelsen", "Secretary" },
+                    { 8, "Thomas", "Mikkelsen", "Secretary" },
+                    { 9, "Emil", "Mikkelsen", "Secretary" },
+                    { 10, "Camilla", "Overgaard", "SOSU Assistant" },
+                    { 1, "Camilla", "Holmstoel", "Doctor" },
+                    { 20, "Kirsten", "Nedersø", "SOSU Assistant" },
+                    { 12, "Emil", "Overgaard", "SOSU Assistant" },
+                    { 13, "Jørgen", "Poulsen", "SOSU Assistant" },
+                    { 14, "Jan", "Hellesøe", "SOSU Assistant" },
+                    { 15, "Lonny", "Luderhår", "SOSU Assistant" },
+                    { 16, "Sleske", "Svend", "SOSU Assistant" },
+                    { 17, "Bo", "Bedre", "SOSU Assistant" },
+                    { 18, "Tåløse", "Tomme", "SOSU Assistant" },
+                    { 19, "Linée", "Havnedronning", "SOSU Assistant" },
+                    { 11, "Thomas", "Overgaard", "SOSU Assistant" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Parents",
@@ -210,77 +300,18 @@ namespace BirthClinicPlanningDB.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Clinicians",
-                columns: new[] { "ClinicianID", "AppointmentID", "FirstName", "LastName", "Type" },
+                table: "AppointmentClinician",
+                columns: new[] { "AppointmentsAppointmentID", "CliniciansClinicianID"},
                 values: new object[,]
                 {
-                    { 40, null, "Mogens", "Morgensur", "Nurse" },
-                    { 39, null, "Heinz", "Heino", "Nurse" },
-                    { 38, null, "Keine", "Inspiration", "Nurse" },
-                    { 37, null, "Gunnar", "Big Gun", "Nurse" },
-                    { 36, null, "Uno", "Dos Tres", "Nurse" },
-                    { 34, null, "Kim", "Karate", "Nurse" },
-                    { 33, null, "Inge", "Ingenveddet", "Nurse" },
-                    { 32, null, "Carla", "Carletti", "Nurse" },
-                    { 31, null, "Yda", "Ydermeget", "Nurse" },
-                    { 30, null, "Kvart", "Palle", "Nurse" },
-                    { 29, null, "Ine", "Indelukket", "SOSU Assistant" },
-                    { 28, null, "Knud", "Kattekilling", "SOSU Assistant" },
-                    { 27, null, "Mads", "Middelmådig", "SOSU Assistant" },
-                    { 26, null, "Lone", "Large", "SOSU Assistant" },
-                    { 25, null, "Benny", "Balsam", "SOSU Assistant" },
-                    { 41, null, "Bolette", "Børnelokker", "Nurse" },
-                    { 42, null, "Line", "Linedanser", "Nurse" },
-                    { 44, null, "Toke", "Son of Loke", "Nurse" },
-                    { 24, null, "Hans", "Haard", "SOSU Assistant" },
-                    { 59, null, "Inger", "Ikkefler", "Midwife" },
-                    { 58, null, "Peter", "Pop", "Midwife" },
-                    { 57, null, "Niels", "Nukommerbaby", "Midwife" },
-                    { 56, null, "Kirsten", "CuntWhisperer", "Midwife" },
-                    { 55, null, "Palle", "Pres Pres", "Midwife" },
-                    { 54, null, "Ole", "Opigen", "Midwife" },
-                    { 53, null, "Palle", "Peekaboo", "Midwife" },
-                    { 52, null, "Puk", "Push Push", "MidWife" },
-                    { 51, null, "Bjørk", "Babypuller", "Midwife" },
-                    { 50, null, "Dine", "The deliverer", "Midwife" },
-                    { 49, null, "Frank", "BodHoldt Jakobsen", "Nurse" },
-                    { 48, null, "Queen", "Bee", "Nurse" },
-                    { 47, null, "Sir", "Elton John", "Nurse" },
-                    { 46, null, "Arne", "Analfabet", "Nurse" },
-                    { 45, null, "Svetlana", "From Havanna", "Nurse" },
-                    { 43, null, "Mikkel", "Pampers", "Nurse" },
-                    { 23, null, "Garn", "Svensker", "SOSU Assistant" },
-                    { 35, null, "Ymer", "Johansen", "Nurse" }
-                });
+                    { 1,1 },
+                    {2,2 }
+                }); //Self added
 
-            migrationBuilder.InsertData(
-                table: "Clinicians",
-                columns: new[] { "ClinicianID", "AppointmentID", "FirstName", "LastName", "Type" },
-                values: new object[,]
-                {
-                    { 21, null, "Kathrine", "Klit", "SOSU Assistant" },
-                    { 22, null, "Richard", "Rust", "SOSU Assistant" },
-                    { 2, 2, "Thomas", "Daugaard", "Doctor" },
-                    { 3, 2, "Emil", "Garder", "Doctor" },
-                    { 4, null, "Camilla", "Boesen", "Doctor" },
-                    { 5, null, "Thomas", "Boesen", "Doctor" },
-                    { 6, null, "Emil", "Boesen", "Secretary" },
-                    { 7, 2, "Camilla", "Mikkelsen", "Secretary" },
-                    { 8, null, "Thomas", "Mikkelsen", "Secretary" },
-                    { 9, null, "Emil", "Mikkelsen", "Secretary" },
-                    { 10, null, "Camilla", "Overgaard", "SOSU Assistant" },
-                    { 1, 1, "Camilla", "Holmstoel", "Doctor" },
-                    { 20, null, "Kirsten", "Nedersø", "SOSU Assistant" },
-                    { 12, null, "Emil", "Overgaard", "SOSU Assistant" },
-                    { 13, null, "Jørgen", "Poulsen", "SOSU Assistant" },
-                    { 14, 1, "Jan", "Hellesøe", "SOSU Assistant" },
-                    { 15, null, "Lonny", "Luderhår", "SOSU Assistant" },
-                    { 16, null, "Sleske", "Svend", "SOSU Assistant" },
-                    { 17, null, "Bo", "Bedre", "SOSU Assistant" },
-                    { 18, null, "Tåløse", "Tomme", "SOSU Assistant" },
-                    { 19, null, "Linée", "Havnedronning", "SOSU Assistant" },
-                    { 11, null, "Thomas", "Overgaard", "SOSU Assistant" }
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_AppointmentClinician_CliniciansClinicianID",
+                table: "AppointmentClinician",
+                column: "CliniciansClinicianID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_ChildID",
@@ -298,11 +329,6 @@ namespace BirthClinicPlanningDB.Migrations
                 column: "RoomID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Clinicians_AppointmentID",
-                table: "Clinicians",
-                column: "AppointmentID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Parents_ChildID",
                 table: "Parents",
                 column: "ChildID");
@@ -311,10 +337,13 @@ namespace BirthClinicPlanningDB.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Clinicians");
+                name: "AppointmentClinician");
 
             migrationBuilder.DropTable(
                 name: "Appointments");
+
+            migrationBuilder.DropTable(
+                name: "Clinicians");
 
             migrationBuilder.DropTable(
                 name: "Parents");

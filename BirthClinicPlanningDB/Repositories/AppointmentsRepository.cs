@@ -33,8 +33,7 @@ namespace BirthClinicPlanningDB.Repositories
                 .Include(c => c.Child)
                 .Include(p => p.Parents)
                 .Include(c => c.Clinicians)
-                
-                .SingleOrDefault(k=>k.AppointmentID == id);
+                .SingleOrDefault(k => k.AppointmentID == id);
         }
 
         public void AddAppointment(Appointment appointment)
