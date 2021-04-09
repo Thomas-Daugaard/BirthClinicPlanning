@@ -15,6 +15,7 @@ namespace BirthClinicPlanningDB.Repositories.RepositoryInterfaces
         public BirthRoom GetBirthRoomWithSpecificNumber(int no);
         public BirthRoom GetSingleBirthRoom(int id);
 
+        public void AddAppointmentToRoom(int roomid, Appointment appointment);
         public void AddBirthRoom(BirthRoom room);
     }
 }

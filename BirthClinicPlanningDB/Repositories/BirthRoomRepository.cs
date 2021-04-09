@@ -26,8 +26,7 @@ namespace BirthClinicPlanningDB.Repositories
         {
             return context.BirthRooms
                 .Include(a => a.Appointments)
-                .Where(r => r.RoomNumber == no)
-                .SingleOrDefault();
+                .SingleOrDefault(r=>r.RoomNumber ==no);
         }
 
 
@@ -41,6 +40,17 @@ namespace BirthClinicPlanningDB.Repositories
         public void AddBirthRoom(BirthRoom room)
         {
             context.BirthRooms.Add(room);
+        }
+
+        public void AddAppointmentToRoom(int roomid, Appointment appointment)
+        {
+            var roomloaded = context.Restrooms
+                .Include(r => r.Appointments)
+                .SingleOrDefault(a => a.RoomID == roomid);
+
+            roomloaded?.Appointments.Add(appointment);
+
+            context.SaveChanges();
         }
 
         public Context context
